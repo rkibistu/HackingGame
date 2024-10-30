@@ -28,11 +28,25 @@ public class TerminalManager : MonoBehaviour
     [Tooltip("Cmd line height + all paddings. This is used to rescale the scroll rectangle. It has to be the value of total height of a cmd line.")]
     private float _rectGrowValue = 35.0f;
 
-    private Interpreter _interpreter;
+    private InterpreterExample _interpreter;
 
     private void Start()
     {
-        _interpreter = GetComponent<Interpreter>();
+        _interpreter = new InterpreterExample();
+
+        RefocusInputField();
+    }
+
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
+    private void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -64,8 +78,7 @@ public class TerminalManager : MonoBehaviour
             _userInputLine.transform.SetAsLastSibling();
 
             //Refocus the input field (so the user doesn't have to reselect the field to type)
-            _terminalInput.ActivateInputField();
-            _terminalInput.Select();
+            RefocusInputField();
 
             //Scroll to the bottom of the messages list
             ScrollToBottom(lines);
@@ -138,5 +151,12 @@ public class TerminalManager : MonoBehaviour
 
         // Set the final position to ensure it reaches exactly 0
         _scrollRect.verticalNormalizedPosition = targetPosition;
+    }
+
+    private void RefocusInputField()
+    {
+        //Refocus the input field (so the user doesn't have to reselect the field to type)
+        _terminalInput.ActivateInputField();
+        _terminalInput.Select();
     }
 }

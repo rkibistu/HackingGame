@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class Interpreter : MonoBehaviour
+public class InterpreterExample
 {
     private Dictionary<string, string> _colors = new Dictionary<string, string>()
     {
