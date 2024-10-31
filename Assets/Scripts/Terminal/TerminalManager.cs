@@ -41,7 +41,7 @@ public class TerminalManager : MonoBehaviour
     private List<string> _linesContent = new List<string>();
     private int _linesContentIndex = 0;
 
-    private InterpreterExample _interpreter;
+    private Interpreter _interpreter;
 
     // Used to test for window resize
     private int _windowWidth;
@@ -51,11 +51,12 @@ public class TerminalManager : MonoBehaviour
     private void Awake()
     {
         _linesContainerRectTranform = _linesContainer.GetComponent<RectTransform>();
+        _interpreter = GetComponent<Interpreter>();
     }
 
     private void Start()
     {
-        _interpreter = new InterpreterExample();
+      
 
         RefocusInputField();
 
@@ -128,8 +129,6 @@ public class TerminalManager : MonoBehaviour
             ClearInputField();
 
             //Add input to lines list that must be displayed
-            Debug.Log(userInput);
-            Debug.Log(_directoryPathText.text);
             string a = _directoryPathText + userInput;
             AddContent(_directoryPathText.text + userInput);
 

@@ -6,7 +6,6 @@ public class TurnOnElement : InteractiveElement
     private GameObject _toEnable;
     override public void DoSomething() 
     {
-        Debug.Log("Did soemthing ELSE!");
         _toEnable.SetActive(true);
     }
 }
