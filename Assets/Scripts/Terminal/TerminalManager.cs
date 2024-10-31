@@ -7,19 +7,28 @@ using UnityEngine.UI;
 
 public class TerminalManager : MonoBehaviour
 {
-    [SerializeField]
-    public GameObject _directoryLine;
-    [SerializeField]
-    public GameObject _responseLine;
 
+    [SerializeField]
+    private GameObject _line;
+    [Tooltip("Line used to calculate things like: number of chars per line. It is disabled all time. The script will enable and disable it, the suer can't see it.")]
+    [SerializeField]
+    private GameObject _helperLine;
+    [SerializeField]
+    private TextMeshProUGUI _helperLineText;
+
+    // Only one exist at a tiem on terminal
+    [SerializeField]
+    private GameObject _inputLine;
     [SerializeField]
     private TMP_InputField _terminalInput;
     [SerializeField]
-    private GameObject _userInputLine;
+    private TextMeshProUGUI _directoryPathText;
+
     [SerializeField]
     private ScrollRect _scrollRect;
     [SerializeField]
-    private GameObject _messageList; // container of all messages
+    private GameObject _linesContainer; // container of all lines (including input line)
+    private RectTransform _linesContainerRectTranform;
 
     [SerializeField]
     [Tooltip("When more lines are added to terminal we don't want to snap to last one. We want  asmooth transition. This controls the speed of the scrolling transition.")]
@@ -28,13 +37,32 @@ public class TerminalManager : MonoBehaviour
     [Tooltip("Cmd line height + all paddings. This is used to rescale the scroll rectangle. It has to be the value of total height of a cmd line.")]
     private float _rectGrowValue = 35.0f;
 
+
+    private List<string> _linesContent = new List<string>();
+    private int _linesContentIndex = 0;
+
     private InterpreterExample _interpreter;
+
+    // Used to test for window resize
+    private int _windowWidth;
+    private int _windowHeight;
+    private int _charsPerLine;
+
+    private void Awake()
+    {
+        _linesContainerRectTranform = _linesContainer.GetComponent<RectTransform>();
+    }
 
     private void Start()
     {
         _interpreter = new InterpreterExample();
 
         RefocusInputField();
+
+        _windowWidth = Screen.width;
+        _windowHeight = Screen.height;
+
+        CalculateCharactersPerLine();
     }
 
     private void OnEnable()
@@ -51,16 +79,47 @@ public class TerminalManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ScrollToBottom(1);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            this.gameObject.SetActive(false);
+        }
+
+        if (_windowWidth != Screen.width || _windowHeight != Screen.height)
+        {
+            _windowWidth = Screen.width;
+            _windowHeight = Screen.height;
+
+            //Recalculate how many characters fill the line
+            CalculateCharactersPerLine();
+
+            //test
+            //Instantiate the response line
+            //GameObject responseLineObj = Instantiate(_line, _linesContainer.transform);
+
+            ////Set last in list
+            //responseLineObj.transform.SetAsLastSibling();
+
+            ////Get the size of the message list and resize
+            //Vector2 messageListSize = _linesContainer.GetComponent<RectTransform>().sizeDelta;
+            //_linesContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(messageListSize.x, messageListSize.y + _rectGrowValue);
+
+            ////Set the text of this line
+            //string test = "";
+            //for(int i = 0; i < charPerLine - 1; i++)
+            //{
+            //    test += "_";
+            //}
+            //test += "A";
+            //responseLineObj.GetComponentInChildren<TextMeshProUGUI>().text = test;
         }
     }
 
     private void OnGUI()
     {
         //If user typed text and pressed enter
-        if(_terminalInput.isFocused && _terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return))
+        if (_terminalInput.isFocused && _terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return))
         {
             //Store whatever the user typed
             string userInput = _terminalInput.text;
@@ -68,20 +127,26 @@ public class TerminalManager : MonoBehaviour
             //Clear the input field
             ClearInputField();
 
-            //Instantiate gameobject with directory prefix (the text that shows current directory)
-            AddDirectoryLine(userInput);
+            //Add input to lines list that must be displayed
+            Debug.Log(userInput);
+            Debug.Log(_directoryPathText.text);
+            string a = _directoryPathText + userInput;
+            AddContent(_directoryPathText.text + userInput);
 
-            //Add the interpretation lines (the response of the command)
-            int lines = AddInterpreterLines(_interpreter.Interpret(userInput));
+            //Interpret the input and add the result to lines list that must be displayed
+            Interpret(userInput);
 
-            //Move the userInputLine to the end
-            _userInputLine.transform.SetAsLastSibling();
+            //Display new lines added
+            DisplayLinesContent();
+
+            //Move the inputLine to the end
+            _inputLine.transform.SetAsLastSibling();
 
             //Refocus the input field (so the user doesn't have to reselect the field to type)
             RefocusInputField();
 
             //Scroll to the bottom of the messages list
-            ScrollToBottom(lines);
+            ScrollToBottom(1);
         }
     }
 
@@ -90,42 +155,56 @@ public class TerminalManager : MonoBehaviour
         _terminalInput.text = "";
     }
 
-    private void AddDirectoryLine(string userInput)
+    private void AddContent(string content)
     {
-        //Resizing the command line container, so the scrollRect doesn't throw a fit
-        Vector2 messageListSize = _messageList.GetComponent<RectTransform>().sizeDelta;
-        _messageList.GetComponent<RectTransform>().sizeDelta = new Vector2(messageListSize.x, messageListSize.y + _rectGrowValue);
-
-        //Isntantiate the directory line
-        GameObject directoryLineObj = Instantiate(_directoryLine, _messageList.transform);
-
-        //Set its child index -> so it appears last in the list
-        directoryLineObj.transform.SetAsLastSibling();
-
-        //Set the text of this new gameobject
-        //directory line has 2 childs (directory text and userinput text)
-        directoryLineObj.GetComponentsInChildren<TextMeshProUGUI>()[1].text = userInput;
+        _linesContent.Add(content);
     }
 
-    int AddInterpreterLines(List<string> lines)
+    private int DisplayLinesContent()
     {
-        for(int i = 0; i < lines.Count; i++)
+        int addedLinesCount = 0;
+        for (int i = _linesContentIndex; i < _linesContent.Count; i++)
         {
-            //Instantiate the response line
-            GameObject responseLineObj = Instantiate(_responseLine, _messageList.transform);
+            //Instantiate lines for every content (one content can fill multiple lines)
+            DisplayOneContent(_linesContent[i]);
+            addedLinesCount++;
+        }
+
+        _linesContentIndex += addedLinesCount;
+        return addedLinesCount;
+    }
+
+    private int DisplayOneContent(string text)
+    {
+        int linesNeeded = Mathf.CeilToInt((float)text.Length / _charsPerLine);
+        for (int i = 0; i < linesNeeded; i++)
+        {
+            GameObject responseLineObj = Instantiate(_line, _linesContainer.transform);
 
             //Set last in list
             responseLineObj.transform.SetAsLastSibling();
 
             //Get the size of the message list and resize
-            Vector2 messageListSize = _messageList.GetComponent<RectTransform>().sizeDelta;
-            _messageList.GetComponent<RectTransform>().sizeDelta = new Vector2(messageListSize.x, messageListSize.y + _rectGrowValue);
+            Vector2 messageListSize = _linesContainer.GetComponent<RectTransform>().sizeDelta;
+            _linesContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(messageListSize.x, messageListSize.y + _rectGrowValue);
 
             //Set the text of this line
-            responseLineObj.GetComponentInChildren<TextMeshProUGUI>().text = lines[i];
+            int start = i * _charsPerLine;
+            int length = Mathf.Min(_charsPerLine, text.Length - start);
+            responseLineObj.GetComponentInChildren<TextMeshProUGUI>().text = text.Substring(start, length);
         }
 
-        return lines.Count;
+        return linesNeeded;
+    }
+
+    private void Interpret(string userInput)
+    {
+        List<string> responses = _interpreter.Interpret(userInput);
+
+        for (int i = 0; i < responses.Count; i++)
+        {
+            _linesContent.Add(responses[i]);
+        }
     }
 
     private void ScrollToBottom(int lines)
@@ -158,5 +237,23 @@ public class TerminalManager : MonoBehaviour
         //Refocus the input field (so the user doesn't have to reselect the field to type)
         _terminalInput.ActivateInputField();
         _terminalInput.Select();
+    }
+
+    private int CalculateCharactersPerLine()
+    {
+        _helperLine.SetActive(true);
+
+        string testContent = "";
+        _helperLineText.text = testContent;
+        while (_helperLineText.preferredWidth < _linesContainerRectTranform.rect.width)
+        {
+            testContent += "_";
+            _helperLineText.text = testContent;
+        }
+
+        _helperLine.SetActive(false);
+
+        _charsPerLine = testContent.Length - 2;
+        return _charsPerLine;
     }
 }

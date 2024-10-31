@@ -26,6 +26,10 @@ public class InterpreterExample
             _response.Add("This is a help message to help you! Your welcome!");
             _response.Add("Second line to help youy! Double welcome!");
         }
+        else if (args[0] == "long")
+        {
+            _response.Add("This is a long message to test this. This is a long message to test this. This is a long message to test this. This is a long message to test this. This is a long message to test this. This is a long message to test this. This is a long message to test this. This is a long message to test this. This is a long message to test this. ");
+        } 
         else if (args[0]== "scroll")
         {
             _response.Add("Scrollll");

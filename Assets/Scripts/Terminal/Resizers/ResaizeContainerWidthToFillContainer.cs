@@ -14,21 +14,17 @@ public class ResaizeContainerWidthToFillContainer : MonoBehaviour
     void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
-        _parentRectTransform = _rectTransform.parent.GetComponent<RectTransform>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetWidth();
-        }
+        SetWidth();
     }
 
     private void SetWidth()
     {
-        float width = _parentRectTransform.rect.width - _siblingRectTransform.rect.width - _padding;
+        float siblingWith = _siblingRectTransform ? _siblingRectTransform.rect.width : 0;
+        float width = _parentRectTransform.rect.width - siblingWith - _padding;
         _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
-        Debug.Log(width);
     }
 }
