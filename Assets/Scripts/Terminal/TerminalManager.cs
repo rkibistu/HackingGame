@@ -43,6 +43,8 @@ public class TerminalManager : MonoBehaviour
 
     private Interpreter _interpreter;
 
+    private InterpreterBase _interpreterWifi;
+
     // Used to test for window resize
     private int _windowWidth;
     private int _windowHeight;
@@ -52,6 +54,7 @@ public class TerminalManager : MonoBehaviour
     {
         _linesContainerRectTranform = _linesContainer.GetComponent<RectTransform>();
         _interpreter = GetComponent<Interpreter>();
+        _interpreterWifi = GetComponent<InterpreterWifi>();
     }
 
     private void Start()
@@ -94,26 +97,6 @@ public class TerminalManager : MonoBehaviour
 
             //Recalculate how many characters fill the line
             CalculateCharactersPerLine();
-
-            //test
-            //Instantiate the response line
-            //GameObject responseLineObj = Instantiate(_line, _linesContainer.transform);
-
-            ////Set last in list
-            //responseLineObj.transform.SetAsLastSibling();
-
-            ////Get the size of the message list and resize
-            //Vector2 messageListSize = _linesContainer.GetComponent<RectTransform>().sizeDelta;
-            //_linesContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(messageListSize.x, messageListSize.y + _rectGrowValue);
-
-            ////Set the text of this line
-            //string test = "";
-            //for(int i = 0; i < charPerLine - 1; i++)
-            //{
-            //    test += "_";
-            //}
-            //test += "A";
-            //responseLineObj.GetComponentInChildren<TextMeshProUGUI>().text = test;
         }
     }
 
@@ -198,7 +181,8 @@ public class TerminalManager : MonoBehaviour
 
     private void Interpret(string userInput)
     {
-        List<string> responses = _interpreter.Interpret(userInput);
+        //List<string> responses = _interpreter.Interpret(userInput);
+        List<string> responses = _interpreterWifi.Interpret(userInput);
 
         for (int i = 0; i < responses.Count; i++)
         {
