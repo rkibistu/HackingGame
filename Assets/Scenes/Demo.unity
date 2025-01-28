@@ -131,26 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9657dcf63e13b824e8437430471f7d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCommands: {fileID: 11400000, guid: c68dfce110876d64a97378c7a7026015, type: 2}
-  _phasesCommands:
-  - {fileID: 11400000, guid: 5a3f6fedf5bc1a84c9579fb778ff248d, type: 2}
-  - {fileID: 11400000, guid: 5a3f6fedf5bc1a84c9579fb778ff248d, type: 2}
-  - {fileID: 11400000, guid: 5a3f6fedf5bc1a84c9579fb778ff248d, type: 2}
-  - {fileID: 11400000, guid: 5a3f6fedf5bc1a84c9579fb778ff248d, type: 2}
-  phase: -1
---- !u!114 &230849338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2217309333009468159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 327a93b76e5c95148a9cc8d7dee2b239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _donglePlugged: 0
+  _debug: 0
+  _forcedPhase: 0
+  _scenarioBasePath: Scenario_1
+  _jsonFilenama: scenario.json
 --- !u!1001 &244161612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -312,23 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9657dcf63e13b824e8437430471f7d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCommands: {fileID: 11400000, guid: c68dfce110876d64a97378c7a7026015, type: 2}
-  _phasesCommands:
-  - {fileID: 11400000, guid: 71eb9e71e88019d4c8b259e76275022a, type: 2}
-  phase: 0
---- !u!114 &428622845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9010469734175742061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 327a93b76e5c95148a9cc8d7dee2b239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _donglePlugged: 0
+  _debug: 0
+  _forcedPhase: 0
+  _scenarioBasePath: Scenario_1
+  _jsonFilenama: scenario.json
 --- !u!4 &438861392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 450850, guid: fec0b93bb0c53f443bf3177dd2a03d4c, type: 3}
@@ -1204,7 +1175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hintDescription: Press E to get dongle
-  _interpreter: {fileID: 230849338}
 --- !u!65 &1466735687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1406,9 +1376,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1707160006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8002fcbd460a03d4182e1b3008f9b389, type: 3}
+  m_Script: {fileID: 11500000, guid: 9657dcf63e13b824e8437430471f7d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debug: 0
+  _forcedPhase: 0
   _scenarioBasePath: Scenario_1
   _jsonFilenama: scenario.json
 --- !u!1001 &1709905761
@@ -3568,7 +3540,6 @@ GameObject:
   - component: {fileID: 3301282055910822907}
   - component: {fileID: 4712959935808523315}
   - component: {fileID: 230849334}
-  - component: {fileID: 230849338}
   m_Layer: 5
   m_Name: Terminal
   m_TagString: Untagged
@@ -3694,6 +3665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304ca448a134bc04baf1c5ab5bb60152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _terminalName: 
   _line: {fileID: 5893138513271003533, guid: b501b828c71ceb4498d919c7f9eabe5a, type: 3}
   _helperLine: {fileID: 1558433924}
   _helperLineText: {fileID: 1981122056}
@@ -5343,6 +5315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304ca448a134bc04baf1c5ab5bb60152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _terminalName: main
   _line: {fileID: 5893138513271003533, guid: b501b828c71ceb4498d919c7f9eabe5a, type: 3}
   _helperLine: {fileID: 1397282635}
   _helperLineText: {fileID: 904310963}
@@ -11082,7 +11055,6 @@ GameObject:
   - component: {fileID: 5629055215789113705}
   - component: {fileID: 2497568681337806497}
   - component: {fileID: 428622837}
-  - component: {fileID: 428622845}
   m_Layer: 5
   m_Name: Terminal (1)
   m_TagString: Untagged

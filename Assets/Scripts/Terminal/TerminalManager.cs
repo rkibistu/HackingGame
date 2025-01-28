@@ -43,11 +43,7 @@ public class TerminalManager : MonoBehaviour {
     private List<string> _linesContent = new List<string>();
     private int _linesContentIndex = 0;
 
-    private Interpreter _interpreter;
-
-    private InterpreterBase _interpreterWifi;
-
-    private NewInterpreter _newInterpreter;
+    private Interpreter _newInterpreter;
 
     // Used to test for window resize
     private int _windowWidth;
@@ -56,9 +52,7 @@ public class TerminalManager : MonoBehaviour {
 
     private void Awake() {
         _linesContainerRectTranform = _linesContainer.GetComponent<RectTransform>();
-        _interpreter = GetComponent<Interpreter>();
-        _interpreterWifi = GetComponent<InterpreterWifi>();
-        _newInterpreter = NewInterpreter.Instance;
+        _newInterpreter = Interpreter.Instance;
     }
 
     private void Start() {
@@ -170,8 +164,6 @@ public class TerminalManager : MonoBehaviour {
     }
 
     private void Interpret(string userInput) {
-        //List<string> responses = _interpreter.Interpret(userInput);
-        //List<string> responses = _interpreterWifi.Interpret(userInput);
         List<string> responses = _newInterpreter.Interpret(userInput, _terminalName);
 
         for (int i = 0; i < responses.Count; i++) {

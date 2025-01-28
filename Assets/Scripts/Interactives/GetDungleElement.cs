@@ -1,10 +1,10 @@
 using UnityEngine;
 
 public class GetDungleElement : InteractiveElement {
-    private NewInterpreter _interpreter;
+    private Interpreter _interpreter;
 
     private void Start() {
-        _interpreter = NewInterpreter.Instance;
+        _interpreter = Interpreter.Instance;
     }
     override public void DoSomething() {
         if (_interpreter.AdvanceByAction("plug_dongle")) {
