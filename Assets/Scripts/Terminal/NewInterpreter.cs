@@ -78,6 +78,26 @@ public class NewInterpreter : MonoBehaviour {
         return new List<string> { "Command is partially recongnized.", "OK: " + commonPrefix };
     }
 
+    // Get the actionName identifier (should be the same as in scenario json)
+    // and advance to the next phase if all the requirements are met
+    public bool AdvanceByAction(string actionName) {
+
+        bool result = false;
+        foreach(var terminal in _scenario.terminals) {
+            var action = terminal.phases[terminal.currentPhase];
+            if(action.name == actionName) {
+
+                if (AdvanceRequirementsMet(terminal.phases[terminal.currentPhase])) {
+                    terminal.currentPhase++;
+                    result = true;
+                    //don t break/return because maybe the same action is needed to advance in multiuple terminals/phases
+                }
+            }
+        }
+
+        return result;
+    }
+
     // The output message is wrote in json or separate files.
     // It needs to be processed and converted to a list of strings,
     // every string representing a new line in terminal
@@ -104,25 +124,26 @@ public class NewInterpreter : MonoBehaviour {
         return closerCommand;
     }
 
-
     // If all the reuired comamnds from the specified phase were executed,
     // pass to the new phase of the scenario for the specified terminal
     private void AdvanceScenario(Command completedCommand, Phase phase, Terminal terminal) {
 
         completedCommand.executed = true;
         if(completedCommand.final == true) {
-            bool canAdvance = true;
-            foreach(var cmd in phase.commands) {
-                if(cmd.executed == false && cmd.required == true) {
-                    canAdvance = false;
-                    break;
-                }
-            }
-
-            if(canAdvance == true) {
+            
+            if(AdvanceRequirementsMet(phase) == true) {
                 terminal.currentPhase++;
             }
         }
+    }
+
+    private bool AdvanceRequirementsMet(Phase phase) {
+        foreach (var cmd in phase.commands) {
+            if (cmd.executed == false && cmd.required == true) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
