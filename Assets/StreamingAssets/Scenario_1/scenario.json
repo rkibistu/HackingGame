@@ -22,7 +22,17 @@
                         "description": "Plug wifi dongle",
                         "required": "true",
                         "final": "true"
-                    }
+                    },
+					"commands": [
+                        {
+                            "input": "iwconfig",
+                            "outputType": "inline",
+                            "output": "Output of command:\r\nlo\t\tno wireless extensions.\r\neth0\t\tno wireless extensions.",
+                            "outputFile": "",
+                            "required": "false",
+                            "final": "false"
+                        }
+                    ]
                 },
                 {
                     "name": "2",

@@ -10,8 +10,8 @@ public class Command
     public string outputType;
     public string output;
     public string outputFile;
-    public string required;
-    public string final;
+    public bool required;
+    public bool final;
 
     // Changed/used in execution, not present in json
     public bool executed = false;
@@ -22,8 +22,8 @@ public class Action
 {
     // data from json
     public string description;
-    public string required;
-    public string final;
+    public bool required;
+    public bool final;
 
     // Changed/used in execution, not present in json
     public bool executed = false;

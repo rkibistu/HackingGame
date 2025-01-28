@@ -3,6 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 
+/*
+ * This class is responsible with interpreting the input of all terminals.
+ */
 public class NewInterpreter : MonoBehaviour {
     public enum OutputTypes {
         inline = 0,
@@ -45,16 +48,11 @@ public class NewInterpreter : MonoBehaviour {
         PrepareOutputsFromFiles();
     }
 
-    // Get the output of the input command
+    // Get the output of the input command.
     // The method will look up in the commands list of terminal with the name terminalName
-    // and will keep in mind the current phase of the terminal.
-    // A terminal on phase 1 can't acces commands from phase 2 or higher.
+    // and will keep in mind the current phase of the terminal. Only the commands from
+    // the current phase of the terminal are checked. Not from previous or future phases.
     public List<string> Interpret(string input, string terminalName) {
-        // Parcurge toate comenzile din terminal
-        // Vezi comanda care are cele mai multe caractere in comun cu input-ul
-        // Daca se potriveste perfect -> return output
-        // Altfel intoarce un mesaj sugestiv. Eventual arata partea din comanda care a fost buna si partea care nu ?
-        // Atentie ca comanda sa nu fie dintr-o faza la care suerul inca n are acces
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
@@ -72,6 +70,7 @@ public class NewInterpreter : MonoBehaviour {
         }
         if (commonPrefix.Length == input.Length) {
             // Found the right command
+            AdvanceScenario(closerCommand, phase, terminal);
             return PostProcessOutput(closerCommand.output);
         }
 
@@ -79,11 +78,16 @@ public class NewInterpreter : MonoBehaviour {
         return new List<string> { "Command is partially recongnized.", "OK: " + commonPrefix };
     }
 
+    // The output message is wrote in json or separate files.
+    // It needs to be processed and converted to a list of strings,
+    // every string representing a new line in terminal
     private List<string> PostProcessOutput(string output) {
 
         return new List<string>(output.Split(new string[] { "\r\n" }, StringSplitOptions.None));
     }
 
+    // Choose the closest command from the phase specified by 
+    // comparing the input and the input of every command from that phase
     private Command ChooseClosestCommand(string input, Phase phase, out string commonPrefix) {
         Command closerCommand = null;
         commonPrefix = "";
@@ -100,6 +104,32 @@ public class NewInterpreter : MonoBehaviour {
         return closerCommand;
     }
 
+
+    // If all the reuired comamnds from the specified phase were executed,
+    // pass to the new phase of the scenario for the specified terminal
+    private void AdvanceScenario(Command completedCommand, Phase phase, Terminal terminal) {
+
+        completedCommand.executed = true;
+        if(completedCommand.final == true) {
+            bool canAdvance = true;
+            foreach(var cmd in phase.commands) {
+                if(cmd.executed == false && cmd.required == true) {
+                    canAdvance = false;
+                    break;
+                }
+            }
+
+            if(canAdvance == true) {
+                terminal.currentPhase++;
+            }
+        }
+    }
+
+
+    // The scenario json can specify the ouput directly or can redirect to a file
+    // This method reads all the files and populates the output variable of the command
+    // with the content of the files. This is done so we can use the output variable
+    // whenever we want to acces the output of a command
     private void PrepareOutputsFromFiles() {
         foreach (var terminal in _scenario.terminals) {
             foreach (var phase in terminal.phases) {
