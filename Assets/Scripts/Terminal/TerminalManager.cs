@@ -95,12 +95,14 @@ public class TerminalManager : MonoBehaviour {
         }
 
         if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.UpArrow)) {
-            Debug.Log("Get previous!");
             UsePreviousInput();
         }
         if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.DownArrow)) {
-            Debug.Log("Get next!");
             UseNextInput();
+        }
+        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.Tab)) {
+
+            UseAutoComplete();
         }
     }
 
@@ -255,6 +257,20 @@ public class TerminalManager : MonoBehaviour {
     // This must be called every time the user interpret a new command
     private void ResetHistorySearch() {
         _inputHistoryCurrentNode = null;
+    }
+
+    private void UseAutoComplete() {
+        List<string> options = _newInterpreter.GetPossibleCommands(_terminalInput.text, _terminalName);
+        if (options == null)
+            return;
+
+        if(options.Count == 1) {
+            _terminalInput.text = options[0];
+            _terminalInput.caretPosition = _terminalInput.text.Length;
+        }
+        else {
+            //TODO (optional): treat the case when multiple commands are available with the same prefix
+        }
     }
 
     private int CalculateCharactersPerLine() {

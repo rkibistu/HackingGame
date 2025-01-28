@@ -78,6 +78,33 @@ public class Interpreter : MonoBehaviour {
         return new List<string> { "Command is partially recongnized.", "OK: " + commonPrefix };
     }
 
+    // Returns a list with all accesible commands that begin with
+    // the string inputPrefix
+    public List<string> GetPossibleCommands(string inputPrefix, string terminalName) {
+        if (inputPrefix == null || inputPrefix == "")
+            return null;
+
+        List<string> result = new List<string>();
+
+        Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
+        if (terminal == null) {
+            Debug.LogError("MissConfiguration: tried to itnerpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
+            return new List<string> { "Command is not recongnized." };
+        }
+        int phaseToCheck = (_debug == true) ? _forcedPhase : terminal.currentPhase;
+        Phase phase = terminal.phases[phaseToCheck];
+
+        string aux;
+        foreach(var cmd in phase.commands) {
+            aux = Helper.GetCommonPrefix(inputPrefix, cmd.input);
+            if(aux.Length == inputPrefix.Length) {
+                result.Add(cmd.input);
+            }
+        }
+
+        return result;
+    }
+
     // Get the actionName identifier (should be the same as in scenario json)
     // and advance to the next phase if all the requirements are met
     public bool AdvanceByAction(string actionName) {
