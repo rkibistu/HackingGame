@@ -39,11 +39,14 @@ public class TerminalManager : MonoBehaviour {
     [Tooltip("Cmd line height + all paddings. This is used to rescale the scroll rectangle. It has to be the value of total height of a cmd line.")]
     private float _rectGrowValue = 35.0f;
 
-
     private List<string> _linesContent = new List<string>();
     private int _linesContentIndex = 0;
 
     private Interpreter _newInterpreter;
+
+    // Used for fast acces to previous input by pressing specific keys
+    private LinkedList<string> _inputHistory = new LinkedList<string>();
+    private LinkedListNode<string> _inputHistoryCurrentNode = null;
 
     // Used to test for window resize
     private int _windowWidth;
@@ -90,6 +93,15 @@ public class TerminalManager : MonoBehaviour {
             //Recalculate how many characters fill the line
             CalculateCharactersPerLine();
         }
+
+        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.UpArrow)) {
+            Debug.Log("Get previous!");
+            UsePreviousInput();
+        }
+        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.DownArrow)) {
+            Debug.Log("Get next!");
+            UseNextInput();
+        }
     }
 
     private void OnGUI() {
@@ -97,6 +109,9 @@ public class TerminalManager : MonoBehaviour {
         if (_terminalInput.isFocused && _terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return)) {
             //Store whatever the user typed
             string userInput = _terminalInput.text;
+            ResetHistorySearch();
+            _inputHistory.AddFirst(userInput);
+
 
             //Clear the input field
             ClearInputField();
@@ -120,6 +135,8 @@ public class TerminalManager : MonoBehaviour {
             //Scroll to the bottom of the messages list
             ScrollToBottom(1);
         }
+
+
     }
 
     private void ClearInputField() {
@@ -197,6 +214,47 @@ public class TerminalManager : MonoBehaviour {
         //Refocus the input field (so the user doesn't have to reselect the field to type)
         _terminalInput.ActivateInputField();
         _terminalInput.Select();
+    }
+
+    // Populate the terminal input field with last command interpeted
+    // Can be called recursively to acces even older commands
+    private void UsePreviousInput() {
+
+        if (_inputHistoryCurrentNode == null) {
+            _inputHistoryCurrentNode = _inputHistory.First;
+        }
+        else if (_inputHistoryCurrentNode.Next != null) {
+            _inputHistoryCurrentNode = _inputHistoryCurrentNode.Next;
+        }
+
+        if (_inputHistoryCurrentNode != null) {
+            _terminalInput.text = _inputHistoryCurrentNode.Value;
+            _terminalInput.caretPosition = _terminalInput.text.Length;   
+        }
+    }
+   
+    // Populate the terminal with the next command relative to the current 
+    // command. The current command refers to the one updated by this method
+    // and UsePreviousInput method
+    private void UseNextInput() {
+        if (_inputHistoryCurrentNode == null) {
+            return;
+        }
+
+        if (_inputHistoryCurrentNode.Previous != null) {
+            _inputHistoryCurrentNode = _inputHistoryCurrentNode.Previous;
+        }
+
+        if (_inputHistoryCurrentNode != null) {
+            _terminalInput.text = _inputHistoryCurrentNode.Value;
+            _terminalInput.caretPosition = _terminalInput.text.Length;
+        }
+    }
+
+    // Reset the current command that is used to search trough input history
+    // This must be called every time the user interpret a new command
+    private void ResetHistorySearch() {
+        _inputHistoryCurrentNode = null;
     }
 
     private int CalculateCharactersPerLine() {

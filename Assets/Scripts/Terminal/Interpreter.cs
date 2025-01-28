@@ -64,11 +64,11 @@ public class Interpreter : MonoBehaviour {
 
         string commonPrefix;
         Command closerCommand = ChooseClosestCommand(input, phase, out commonPrefix);
-
+         
         if (closerCommand == null) {
             return new List<string> { "Command is not recongnized." };
         }
-        if (commonPrefix.Length == input.Length) {
+        if (commonPrefix.Length == closerCommand.input.Length) {
             // Found the right command
             AdvanceScenario(closerCommand, phase, terminal);
             return PostProcessOutput(closerCommand.output);
@@ -115,7 +115,7 @@ public class Interpreter : MonoBehaviour {
         string aux;
         foreach (var cmd in phase.commands) {
             aux = Helper.GetCommonPrefix(input, cmd.input);
-            if (aux.Length >= commonPrefix.Length) {
+            if (aux.Length > 0 && aux.Length >= commonPrefix.Length) {
                 commonPrefix = aux;
                 closerCommand = cmd;
             }
