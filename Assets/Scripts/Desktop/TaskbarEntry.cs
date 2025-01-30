@@ -9,7 +9,11 @@ public class TaskbarEntry : MonoBehaviour {
 
     [SerializeField]
     private Image _iconImage;
+    
     private Button _button;
+
+    private Color _focusedColor;
+    private Color _normalColor;
 
     private ApplicationManager _targetApp;
     private DesktopManager _desktop;
@@ -20,13 +24,25 @@ public class TaskbarEntry : MonoBehaviour {
 
         _button = GetComponent<Button>();
         _button.onClick.AddListener(HandleClick);
+
+        _focusedColor = _button.colors.selectedColor;
+        _normalColor = _button.colors.normalColor;
     }
 
     public void Focus() {
-        
+        ColorBlock cb = _button.colors;
+        cb.normalColor = _focusedColor;
+        _button.colors = cb;
+    }
+    public void Defocus() {
+        ColorBlock cb = _button.colors;
+        cb.normalColor = _normalColor;
+        _button.colors = cb;
     }
 
     private void HandleClick() {
         _desktop.Focus(_targetApp);
     }
+
+    
 }

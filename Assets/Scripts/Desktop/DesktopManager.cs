@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class DesktopManager : MonoBehaviour {
     [SerializeField]
-    private Transform _taskbarLeft;
+    private TaskbarManager _taskbar;
 
-    private Stack<ApplicationManager> _focusedStack = new Stack<ApplicationManager>();
+    private Stack<int> _focusedStack = new Stack<int>();
+    private Dictionary<int, ApplicationManager> _runningApps = new Dictionary<int, ApplicationManager>();
     private int _maxDepth = 0;
 
     private void OnEnable() {
@@ -23,10 +24,20 @@ public class DesktopManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (_focusedStack.Count > 0) {
 
-                var focusedApp = GetNextAppInStack();
-                focusedApp?.Close();
+            //Close focused applciation or desktop
+            var focusedApp = GetNextAppInStack();
+            if (focusedApp != null) {
+                //close current focused app
+                _taskbar.RemoveEntry(focusedApp);
+                focusedApp.Close();
+
+                //focus next app
+                focusedApp = GetNextAppInStack();
+                if(focusedApp != null) {
+                    focusedApp.Focus(_maxDepth++);
+                    _taskbar.Focus(focusedApp);
+                }
             }
             else {
                 gameObject.SetActive(false);
@@ -35,31 +46,39 @@ public class DesktopManager : MonoBehaviour {
     }
 
     public void OpenApplication(ApplicationManager app) {
+        // if the applciation was already opened, we want just
+        // to focus it; not to try to open it again
         if (app.gameObject.activeInHierarchy == true) {
             app.Focus(_maxDepth++);
             return;
         }
 
         app.gameObject.SetActive(true);
-        Focus(app);
         app.Init();
+        _taskbar.AddEntry(app);
+        Focus(app);
+        _runningApps.Add(app.ID, app);
     }
+
 
     public void Focus(ApplicationManager app) {
         app.Focus(_maxDepth++);
-        _focusedStack.Push(app);
-    }
-
-    public void AddToTaskbar(TaskbarEntry taskbarEntry) {
-        taskbarEntry.transform.SetParent(_taskbarLeft);
+        _taskbar.Focus(app);
+        _focusedStack.Push(app.ID);
     }
 
     private ApplicationManager GetNextAppInStack() {
+        int id;
         ApplicationManager focusedApp = null;
         do {
             if (_focusedStack.Count <= 0)
                 return null;
-            focusedApp = _focusedStack.Pop();
+
+            id = _focusedStack.Pop();
+            if (_runningApps.ContainsKey(id) == false)
+                continue;
+
+            focusedApp = _runningApps[id];
         } while (focusedApp.gameObject.activeInHierarchy == false);
 
         return focusedApp;
