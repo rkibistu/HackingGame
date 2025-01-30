@@ -12,16 +12,21 @@ public class TaskbarEntry : MonoBehaviour {
     private Button _button;
 
     private ApplicationManager _targetApp;
-
-    public void Init(Sprite icon, ApplicationManager target) {
+    private DesktopManager _desktop;
+    public void Init(Sprite icon, ApplicationManager target, DesktopManager dekstop) {
         _iconImage.sprite = icon;
         _targetApp = target;
+        _desktop = dekstop;
 
         _button = GetComponent<Button>();
         _button.onClick.AddListener(HandleClick);
     }
 
+    public void Focus() {
+        
+    }
+
     private void HandleClick() {
-        _targetApp.Focus();
+        _desktop.Focus(_targetApp);
     }
 }

@@ -15,32 +15,28 @@ public class ApplicationManager : MonoBehaviour
     [SerializeField]
     private GameObject _taskbarEntryPrefab;
   
-
-
     private TaskbarEntry _taskbarEntry;
     private Canvas _canvas;
 
     private void OnEnable() {
         _canvas = GetComponent<Canvas>();
-        Open();
     }
 
     // Called OnEnable. An application is opened by setting the gameobject as active
-    private void Open() {
-        _desktop.BringInFront(_canvas);
-
+    public void Init() {
         _taskbarEntry = Instantiate(_taskbarEntryPrefab).GetComponent<TaskbarEntry>();
-        _taskbarEntry.Init(_iconSprite, this);
+        _taskbarEntry.Init(_iconSprite, this, _desktop);
         _desktop.AddToTaskbar(_taskbarEntry);
     }
 
     public void Close() {
         //remove from taskbar
+        Destroy(_taskbarEntry.gameObject);
         this.gameObject.SetActive(false);
     }
 
-    public void Focus() {
-        _desktop.BringInFront(_canvas);
+    public void Focus(int sortingOrder) {
+        _canvas.sortingOrder = sortingOrder;
     }
     
     public Sprite GetIcon() {

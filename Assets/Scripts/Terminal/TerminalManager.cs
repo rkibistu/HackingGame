@@ -73,9 +73,7 @@ public class TerminalManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            _appManager.Close();
-        }
+
 
         if (_windowWidth != Screen.width || _windowHeight != Screen.height) {
             _windowWidth = Screen.width;

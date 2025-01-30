@@ -8,6 +8,9 @@ using System.Collections;
 
 [RequireComponent(typeof(Button))]
 public class FileEntry : MonoBehaviour {
+    [Tooltip("Parent dekstop")]
+    [SerializeField]
+    private DesktopManager _desktop;
     [SerializeField]
     private ApplicationManager _toOpen;
     [SerializeField]
@@ -43,7 +46,7 @@ public class FileEntry : MonoBehaviour {
     }
 
     void DoubleClickAction() {
-        _toOpen?.gameObject.SetActive(true);
+        _desktop.OpenApplication(_toOpen);
     }
 
     private IEnumerator ClickTimer() {
