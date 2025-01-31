@@ -35,7 +35,7 @@ public class DesktopManager : MonoBehaviour {
                 //focus next app
                 focusedApp = GetNextAppInStack();
                 if(focusedApp != null) {
-                    focusedApp.Focus(_maxDepth++);
+                    Focus(focusedApp);
                     _taskbar.Focus(focusedApp);
                 }
             }
@@ -48,13 +48,12 @@ public class DesktopManager : MonoBehaviour {
     public void OpenApplication(ApplicationManager app) {
         // if the applciation was already opened, we want just
         // to focus it; not to try to open it again
-        if (app.gameObject.activeInHierarchy == true) {
+        if (app.IsOpen == true) {
             app.Focus(_maxDepth++);
             return;
         }
 
-        app.gameObject.SetActive(true);
-        app.Init();
+        app.Open();
         _taskbar.AddEntry(app);
         Focus(app);
         _runningApps.Add(app.ID, app);
@@ -79,7 +78,7 @@ public class DesktopManager : MonoBehaviour {
                 continue;
 
             focusedApp = _runningApps[id];
-        } while (focusedApp.gameObject.activeInHierarchy == false);
+        } while (focusedApp.IsOpen == false);
 
         return focusedApp;
     }
