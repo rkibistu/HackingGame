@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(ApplicationManager))]
 public class TerminalManager : MonoBehaviour {
     [Tooltip("The name of the terminal. It is a uniq identifier. Must be the same as in scenario json so an assosiacion can be made")]
     [SerializeField]
@@ -54,15 +53,12 @@ public class TerminalManager : MonoBehaviour {
     private int _windowHeight;
     private int _charsPerLine;
 
-    private ApplicationManager _appManager;
-
     private void Awake() {
     }
 
     private void Start() {
         _linesContainerRectTranform = _linesContainer.GetComponent<RectTransform>();
         _newInterpreter = Interpreter.Instance;
-        _appManager = GetComponent<ApplicationManager>();
 
         RefocusInputField();
 

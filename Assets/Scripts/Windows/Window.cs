@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class Window : MonoBehaviour
@@ -8,13 +9,33 @@ public class Window : MonoBehaviour
     [Tooltip("Minimum height limit to prevent excessive compression.")]
     [SerializeField] private float minHeight = 400f;
 
+    [System.Serializable]
+    public class ClickEvent : UnityEvent<PointerEventData> { }
+    public ClickEvent OnClickEvent;
+
     private RectTransform _transform;
+
+    // The app that is opened inside this window
+    private ApplicationManager _appAssociated;
 
     private void Start() {
         
         _transform = GetComponent<RectTransform>();
     }
 
+    public void OnClick(PointerEventData eventData) {
+        OnClickEvent?.Invoke(eventData);
+    }
+
+    public void SetAppAssociated(ApplicationManager app) {
+        _appAssociated = app;
+    }
+    public ApplicationManager GetAppAssociated() {
+        return _appAssociated;
+    }
+
+
+    // METHODS TO SUBSCRIBE
     public void Drag(PointerEventData eventData) {
         _transform.position += new Vector3(eventData.delta.x, eventData.delta.y);
     }
@@ -46,7 +67,6 @@ public class Window : MonoBehaviour
         // Apply 
         _transform.sizeDelta = newSize;
         _transform.position = newPosition;
-
     }
     public void ResizeRight(PointerEventData eventData) {
         float dragX = eventData.delta.x;

@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DesktopManager : MonoBehaviour {
     [SerializeField]
     private TaskbarManager _taskbar;
+
+    [SerializeField]
+    private GraphicRaycaster raycaster;
+    [SerializeField]
+    private EventSystem eventSystem;
 
     private Stack<int> _focusedStack = new Stack<int>();
     private Dictionary<int, ApplicationManager> _runningApps = new Dictionary<int, ApplicationManager>();
@@ -43,13 +48,35 @@ public class DesktopManager : MonoBehaviour {
                 gameObject.SetActive(false);
             }
         }
+
+        //Check if any window was clicked
+        if (Input.GetMouseButtonDown(0)) {
+            PointerEventData pointerData = new PointerEventData(eventSystem) {
+                position = Input.mousePosition
+            };
+
+            // Perform a raycast
+            List<RaycastResult> results = new List<RaycastResult>();
+            raycaster.Raycast(pointerData, results);
+            
+
+            // Loop through results and find the first UI element with the specified tag
+            foreach (RaycastResult result in results) {
+                if (result.gameObject.CompareTag("window")) // Check if it has the "Window" tag
+                {
+                    Focus(result.gameObject.GetComponent<Window>().GetAppAssociated());
+                    result.gameObject.GetComponent<Window>().OnClick(pointerData);
+                    break;
+                }
+            }
+        }
     }
 
     public void OpenApplication(ApplicationManager app) {
         // if the applciation was already opened, we want just
         // to focus it; not to try to open it again
         if (app.IsOpen == true) {
-            app.Focus(_maxDepth++);
+            app.Focus();
             return;
         }
 
@@ -59,9 +86,11 @@ public class DesktopManager : MonoBehaviour {
         _runningApps.Add(app.ID, app);
     }
 
-
     public void Focus(ApplicationManager app) {
-        app.Focus(_maxDepth++);
+        if (app == null)
+            return;
+
+        app.Focus();
         _taskbar.Focus(app);
         _focusedStack.Push(app.ID);
     }

@@ -3,16 +3,20 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class CustomWindowEvents : MonoBehaviour, IDragHandler {
+public class CustomWindowEvents : MonoBehaviour, IDragHandler, IPointerClickHandler {
 
-    // Declare a UnityEvent with PointerEventData as the parameter
     [System.Serializable]
     public class DragEvent : UnityEvent<PointerEventData> { }
+    [System.Serializable]
+    public class ClickEvent : UnityEvent<PointerEventData> { }
 
-    // The UnityEvent exposed in the Inspector
     public DragEvent OnDragEvent;
+    public ClickEvent OnClickEvent;
 
     public void OnDrag(PointerEventData eventData) {
         OnDragEvent?.Invoke(eventData);
+    }
+    public void OnPointerClick(PointerEventData eventData) {
+        OnClickEvent?.Invoke(eventData);
     }
 }
