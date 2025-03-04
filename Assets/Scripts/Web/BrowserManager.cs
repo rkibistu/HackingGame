@@ -47,8 +47,14 @@ public class BrowserManager : MonoBehaviour {
     }
 
     private void ChangeSite(string url) {
+        
+        //base url without params
+        //we use this to navigate to other page
+        // and params are just passed to the page
+        string baseUrl = url.Split('?')[0];
+
         foreach (var site in _sites) {
-            if (site.URL == url) {
+            if (site.URL == baseUrl) {
                 _backSites.Push(_activeSite);
                 _forwardSites.Clear();
                 _activeSite.Obj.SetActive(false);

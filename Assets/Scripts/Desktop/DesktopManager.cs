@@ -16,6 +16,13 @@ public class DesktopManager : MonoBehaviour {
     private Dictionary<int, ApplicationManager> _runningApps = new Dictionary<int, ApplicationManager>();
     private int _maxDepth = 0;
 
+    private void Awake() {
+        
+    }
+    private void Start() {
+        
+    }
+
     private void OnEnable() {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
@@ -27,6 +34,9 @@ public class DesktopManager : MonoBehaviour {
         Cursor.visible = false;
     }
 
+    private void OnDestroy() {
+        
+    }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
 
@@ -111,4 +121,8 @@ public class DesktopManager : MonoBehaviour {
 
         return focusedApp;
     }
+
+
+
+
 }
