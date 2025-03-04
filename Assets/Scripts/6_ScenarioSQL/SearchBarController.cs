@@ -57,53 +57,71 @@ namespace ScenarioSQL {
             //update the page content
             Filter(_internalSearchInput.text);
         }
-
-        private void FilterAndCheckSqlInjection(string input) {
-            //case insensitive
-            //remove double spaces
-
-            // Normalize spaces (replace multiple spaces with a single space)
-            string normalizedInput = Regex.Replace(input, @"\s+", " ").Trim();
-
-            string filterQuery = input.Split(";")[0]; // 6090%'
-            Debug.Log("q: " + filterQuery);
-            //apply search
-            string filterValue = filterQuery.Split("%")[0];
-            Filter(filterValue);
-
-
-            string updateQuery = input.Split(";")[1]; //  update products set price=49.99 where name like ' % 6090 % '
-            string commentQuery = input.Split(";")[2]; //  #
-
-            Debug.Log(filterQuery);
-            Debug.Log(updateQuery);
-            Debug.Log(commentQuery);
-
-
-            //6090%'; update products set price=49.99 where name like ' %6090% '; #
-            //6090 '; update products set price=49.99 where name like ' %6090% '; #
-            //6090'; update products set price=49.99 where name like ' %6090% '; #
-        }
         private void Filter(string input) {
 
-            //6090
-            //6090faf
-            //6090;
             string normalizedInput = Regex.Replace(input, @"\s+", " ").Trim();
+
+            // Get text until first ';' and use it to filter
+            //TODO: should we mark it as wrong inejction if % or ' is missing ???
             string filterQuery = normalizedInput.Split(";")[0]; // 6090%'
+            filterQuery = Regex.Replace(filterQuery, @"%", "");
+            filterQuery = Regex.Replace(filterQuery, @"'", "");
 
             foreach (var obj in _purchasableObjects) {
                 PurchasableItem item = obj.GetComponent<PurchasableItem>();
-                if (Regex.IsMatch(item.TitleText, Regex.Escape(filterQuery), RegexOptions.IgnoreCase)) {
+                if (Regex.IsMatch(item.TitleText, Regex.Unescape(filterQuery), RegexOptions.IgnoreCase)) {
                     item.gameObject.SetActive(true);
                 }
                 else {
                     item.gameObject.SetActive(false);
                 }
             }
+
+            // parse and execute sql injection
+            if(normalizedInput.Contains(";"))
+                ParseAndExecuteInjection(normalizedInput.Substring(normalizedInput.IndexOf(";") + 1));
         }
 
-        
+        private void ParseAndExecuteInjection(string injectionInput) {
+
+            if (!injectionInput.Contains(";")) {
+                Debug.Log("Inejction incomplete");
+                return;
+            }
+
+            string updateQuery = injectionInput.Split(";")[0]; //  update products set price=49.99 where name like ' % 6090 % '
+            string commentQuery = injectionInput.Split(";")[1]; //  #
+            //TODO: invalidate ijection if commentQuery is missing??? or something??
+
+            string price, targetName;
+            string pricePattern = @"\s+price\s*=\s*(\d+(\.\d+)?)";
+            string targetNamePattern = @"'([^']*)'";
+
+            Match priceMatch = Regex.Match(updateQuery, pricePattern, RegexOptions.IgnoreCase);
+            Match targetNameatch = Regex.Match(updateQuery, targetNamePattern);
+
+            if (priceMatch.Success && targetNameatch.Success) {
+                price = priceMatch.Groups[1].Value;
+                targetName = targetNameatch.Groups[1].Value;
+                targetName = Regex.Replace(targetName, @"%", "");
+
+                foreach (var obj in _purchasableObjects) {
+                    PurchasableItem item = obj.GetComponent<PurchasableItem>();
+                    if (Regex.IsMatch(item.TitleText, Regex.Unescape(targetName), RegexOptions.IgnoreCase)) {
+                        item.Price = "price: " + price;
+                    }
+                }
+            }
+  
+            //6090%'; update products set price=49.99 where name like '%6090%'; #
+
+
+            //6090 '; update products set price=49.99 where name like ' %6090% '; #
+            //6090'; update products set price=49.99 where name like ' %6090% '; #
+        }
+
+
+
 
     }
 }
