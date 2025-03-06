@@ -1,0 +1,31 @@
+{
+  "terminals": [
+    {
+      "name": "2_ScenarioForkBomb",
+      "phases": [
+        {
+          "name": "0",
+          "commands": [
+            {
+              "input": "cat forkbomb.c",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "forkbomb.txt",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "gcc -v forkbomb.c -o forkbomb",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "gcc_output.txt",
+              "required": "true",
+              "final": "false"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+}
