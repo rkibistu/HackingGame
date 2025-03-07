@@ -1,0 +1,51 @@
+{
+  "terminals": [
+    {
+      "name": "3_scenarioRubberDucky",
+      "phases": [
+        {
+          "name": "0",
+          "commands": [
+            {
+              "input": "cat payload.txt",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "rubber_ducky_payload.txt",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cp -v payload.txt /mnt/ducky",
+              "outputType": "inline",
+              "output": "'payload.txt' -> './mnt/ducky/payload.txt'",
+              "outputFile": "",
+              "required": "true",
+              "final": "true"
+            }
+          ]
+        },
+        {
+          "name": "remove_rubber_ducky",
+          "action": {
+            "description": "Remove the Rubber Ducky from the PC",
+            "required": "true",
+            "final": "true"
+          }
+        },
+        {
+          "name": "2",
+          "commands": [
+            {
+              "input": "./teamserver 127.0.0.1 123456",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "teamserver_output.txt",
+              "required": "true",
+              "final": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
