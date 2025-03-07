@@ -21,7 +21,7 @@ public class Interpreter : MonoBehaviour {
 
     [SerializeField]
     [Tooltip("The path to scenario data folder. The path should be relative to streaming assets folder")]
-    private string _scenarioBasePath = "Scenario_1";
+    private string _scenarioBasePath = "default_scenario_folder_path";
     [Tooltip("The file with scenario json data. The filename should be relative to ScenarioBasePath")]
     [SerializeField]
     private string _jsonFilenama = "scenario.json";
@@ -37,6 +37,7 @@ public class Interpreter : MonoBehaviour {
 
     void Start() {
         string filePath = Path.Combine(Application.streamingAssetsPath, _scenarioBasePath + "/" + _jsonFilenama);
+        Debug.Log("Currently searching for terminal in " + filePath);
         if (File.Exists(filePath)) {
             string jsonContent = File.ReadAllText(filePath);
             _scenario = JsonUtility.FromJson<RootObject>(jsonContent);
@@ -56,7 +57,7 @@ public class Interpreter : MonoBehaviour {
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
-            Debug.LogError("MissConfiguration: tried to itnerpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
+            Debug.LogError("MissConfiguration: tried to interpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
             return new List<string> { "Command is not recongnized." };
         }
         int phaseToCheck = (_debug == true) ? _forcedPhase : terminal.currentPhase;
@@ -124,6 +125,22 @@ public class Interpreter : MonoBehaviour {
 
         return result;
     }
+
+    public int GetPhase(string terminalName)
+    {
+        Debug.Log("Get Phase called terminal name: " + terminalName);
+        foreach (var terminal in _scenario.terminals)
+        {
+            Debug.Log("Terminal name: " + terminal.name);
+            if(terminal.name == terminalName)
+            {
+                return terminal.currentPhase;
+            }
+        }
+
+        return -1;
+    }
+
 
     // The output message is wrote in json or separate files.
     // It needs to be processed and converted to a list of strings,
