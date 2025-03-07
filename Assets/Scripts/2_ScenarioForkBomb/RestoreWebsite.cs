@@ -15,7 +15,7 @@ public class RestoreWebsite : MonoBehaviour
     private string _backupWebServerString = "Download Backup";
     public void OnRecoverButtonClicked()
     {
-        Text buttonText = _recoveryButton.GetComponentInChildren<Text>();
+        TextMeshProUGUI buttonText = _recoveryButton.GetComponentInChildren<TextMeshProUGUI>();
         if (_recoveryState == 0)
         {
             // Download Backup
