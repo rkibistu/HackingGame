@@ -19,6 +19,7 @@ public class RestoreWebsite : MonoBehaviour
         if (_recoveryState == 0)
         {
             // Download Backup
+            Interpreter.Instance.AdvanceByAction("database_downloaded");
             buttonText.text = _restoreWebServerString;
             _recoveryState++;
         }
