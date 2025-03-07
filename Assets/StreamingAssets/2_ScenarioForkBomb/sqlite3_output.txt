@@ -1,0 +1,33 @@
+student_id  question_number  student_input     expected_output  actual_output       test_passed
+----------  ---------------  ----------------  -----------------  ------------------  -----------
+1           1                "5 10"            "15"               "15"                1
+1           2                "0"               "0"                "0"                 1
+1           3                "-3 7"            "4"                "4"                 1
+2           1                "1 1"             "2"                "2"                 1
+2           2                "10"              "10"               "10"                1
+3           1                "2 3"             "5"                "5"                 1
+3           4                "hello world"     "world hello"      "world hello"       1
+4           1                "10 5"            "15"               "14"                0
+4           2                "-1"              "-1"               "-1"                1
+5           1                "0 0"             "0"                "0"                 1
+5           3                "a b"             "b a"              "b a"               1
+6           1                "100 -50"         "50"               "50"                1
+6           4                "test string"     "string test"      "test string"       0
+7           1                "3 3"             "6"                "6"                 1
+7           2                "1000"            "1000"             "1000"              1
+8           1                "1 2 3"           "6"                "6"                 1
+8           3                "one two three"   "three two one"   "three two one"     1
+9           1                "5 6"             "11"               "10"                0
+9           4                "input output"    "output input"    "output input"      1
+10          1                "7 7"             "14"               "14"                1
+10          2                "-10"             "-10"              "-10"              1
+1           4                "test1 test2"     "test2 test1"     "test2 test1"       1
+2           3                "abc def"         "def abc"         "def abc"           1
+3           2                "123"             "123"             "123"               1
+4           3                "word another"    "another word"    "word another"      0
+5           4                "a b c"           "c b a"           "c b a"             1
+6           2                "200"             "200"             "200"               1
+7           3                "string test"     "test string"     "test string"       1
+8           2                "999"             "999"             "999"               1
+9           2                "000"             "000"             "000"               1
+10          3                "hello there"     "there hello"     "hello there"       0

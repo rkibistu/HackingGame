@@ -23,6 +23,51 @@
               "final": "true"
             }
           ]
+        },
+        {
+          "name": "database_downloaded",
+          "action": {
+            "description": "Download backup of database",
+            "required": "true",
+            "final": "true"
+          }
+        },
+        {
+          "name": "2",
+          "commands": [
+            {
+              "input": "sqlite3 backup_database.db",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlite3_entry.txt",
+              "required": "true",
+              "final": "false"
+            },
+            {
+              "input": ".help",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlite3_help.txt",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": ".version",
+              "outputType": "inline",
+              "output": "SQLite version 3.46.0 2024-05-23 13:25:27",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "SELECT * FROM exams;",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlite3_output.txt",
+              "required": "true",
+              "final": "true"
+            }
+          ]
         }
       ]
     }
