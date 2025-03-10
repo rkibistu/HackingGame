@@ -5,7 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TerminalManager : MonoBehaviour {
+public class TerminalManager : MonoBehaviour
+{
     [Tooltip("The name of the terminal. It is a uniq identifier. Must be the same as in scenario json so an assosiacion can be made")]
     [SerializeField]
     private string _terminalName;
@@ -53,10 +54,14 @@ public class TerminalManager : MonoBehaviour {
     private int _windowHeight;
     private int _charsPerLine;
 
-    private void Awake() {
+    public string Name { get => _terminalName; private set { } }
+
+    private void Awake()
+    {
     }
 
-    private void Start() {
+    private void Start()
+    {
         _linesContainerRectTranform = _linesContainer.GetComponent<RectTransform>();
         _newInterpreter = Interpreter.Instance;
 
@@ -68,10 +73,12 @@ public class TerminalManager : MonoBehaviour {
         CalculateCharactersPerLine();
     }
 
-    private void Update() {
+    private void Update()
+    {
 
 
-        if (_windowWidth != Screen.width || _windowHeight != Screen.height) {
+        if (_windowWidth != Screen.width || _windowHeight != Screen.height)
+        {
             _windowWidth = Screen.width;
             _windowHeight = Screen.height;
 
@@ -79,21 +86,26 @@ public class TerminalManager : MonoBehaviour {
             CalculateCharactersPerLine();
         }
 
-        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.UpArrow)) {
+        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.UpArrow))
+        {
             UsePreviousInput();
         }
-        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.DownArrow)) {
+        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.DownArrow))
+        {
             UseNextInput();
         }
-        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.Tab)) {
+        if (_terminalInput.isFocused && Input.GetKeyDown(KeyCode.Tab))
+        {
 
             UseAutoComplete();
         }
     }
 
-    private void OnGUI() {
+    private void OnGUI()
+    {
         //If user typed text and pressed enter
-        if (_terminalInput.isFocused && _terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return)) {
+        if (_terminalInput.isFocused && _terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return))
+        {
             //Store whatever the user typed
             string userInput = _terminalInput.text;
             ResetHistorySearch();
@@ -126,17 +138,21 @@ public class TerminalManager : MonoBehaviour {
 
     }
 
-    private void ClearInputField() {
+    private void ClearInputField()
+    {
         _terminalInput.text = "";
     }
 
-    private void AddContent(string content) {
+    private void AddContent(string content)
+    {
         _linesContent.Add(content);
     }
 
-    private int DisplayLinesContent() {
+    private int DisplayLinesContent()
+    {
         int addedLinesCount = 0;
-        for (int i = _linesContentIndex; i < _linesContent.Count; i++) {
+        for (int i = _linesContentIndex; i < _linesContent.Count; i++)
+        {
             //Instantiate lines for every content (one content can fill multiple lines)
             DisplayOneContent(_linesContent[i]);
             addedLinesCount++;
@@ -146,9 +162,11 @@ public class TerminalManager : MonoBehaviour {
         return addedLinesCount;
     }
 
-    private int DisplayOneContent(string text) {
+    private int DisplayOneContent(string text)
+    {
         int linesNeeded = Mathf.CeilToInt((float)text.Length / _charsPerLine);
-        for (int i = 0; i < linesNeeded; i++) {
+        for (int i = 0; i < linesNeeded; i++)
+        {
             GameObject responseLineObj = Instantiate(_line, _linesContainer.transform);
 
             //Set last in list
@@ -167,27 +185,32 @@ public class TerminalManager : MonoBehaviour {
         return linesNeeded;
     }
 
-    private void Interpret(string userInput) {
+    private void Interpret(string userInput)
+    {
         List<string> responses = _newInterpreter.Interpret(userInput, _terminalName);
 
-        for (int i = 0; i < responses.Count; i++) {
+        for (int i = 0; i < responses.Count; i++)
+        {
             _linesContent.Add(responses[i]);
         }
     }
 
-    private void ScrollToBottom(int lines) {
+    private void ScrollToBottom(int lines)
+    {
         // Ensure the layout updates before starting the scroll
         Canvas.ForceUpdateCanvases();
 
         StartCoroutine(ScrollToBottomSmooth(lines));
     }
 
-    private IEnumerator ScrollToBottomSmooth(int lines) {
+    private IEnumerator ScrollToBottomSmooth(int lines)
+    {
 
         float targetPosition = 0f; // Target is the bottom
 
         // Smooth scroll by updating verticalNormalizedPosition over time
-        while (_scrollRect.verticalNormalizedPosition > targetPosition) {
+        while (_scrollRect.verticalNormalizedPosition > targetPosition)
+        {
             _scrollRect.verticalNormalizedPosition = Mathf.MoveTowards(
                 _scrollRect.verticalNormalizedPosition, targetPosition, _scrollToBottomSpeed * Time.deltaTime);
             yield return null;
@@ -197,7 +220,8 @@ public class TerminalManager : MonoBehaviour {
         _scrollRect.verticalNormalizedPosition = targetPosition;
     }
 
-    private void RefocusInputField() {
+    private void RefocusInputField()
+    {
         //Refocus the input field (so the user doesn't have to reselect the field to type)
         _terminalInput.ActivateInputField();
         _terminalInput.Select();
@@ -205,34 +229,42 @@ public class TerminalManager : MonoBehaviour {
 
     // Populate the terminal input field with last command interpeted
     // Can be called recursively to acces even older commands
-    private void UsePreviousInput() {
+    private void UsePreviousInput()
+    {
 
-        if (_inputHistoryCurrentNode == null) {
+        if (_inputHistoryCurrentNode == null)
+        {
             _inputHistoryCurrentNode = _inputHistory.First;
         }
-        else if (_inputHistoryCurrentNode.Next != null) {
+        else if (_inputHistoryCurrentNode.Next != null)
+        {
             _inputHistoryCurrentNode = _inputHistoryCurrentNode.Next;
         }
 
-        if (_inputHistoryCurrentNode != null) {
+        if (_inputHistoryCurrentNode != null)
+        {
             _terminalInput.text = _inputHistoryCurrentNode.Value;
-            _terminalInput.caretPosition = _terminalInput.text.Length;   
+            _terminalInput.caretPosition = _terminalInput.text.Length;
         }
     }
-   
+
     // Populate the terminal with the next command relative to the current 
     // command. The current command refers to the one updated by this method
     // and UsePreviousInput method
-    private void UseNextInput() {
-        if (_inputHistoryCurrentNode == null) {
+    private void UseNextInput()
+    {
+        if (_inputHistoryCurrentNode == null)
+        {
             return;
         }
 
-        if (_inputHistoryCurrentNode.Previous != null) {
+        if (_inputHistoryCurrentNode.Previous != null)
+        {
             _inputHistoryCurrentNode = _inputHistoryCurrentNode.Previous;
         }
 
-        if (_inputHistoryCurrentNode != null) {
+        if (_inputHistoryCurrentNode != null)
+        {
             _terminalInput.text = _inputHistoryCurrentNode.Value;
             _terminalInput.caretPosition = _terminalInput.text.Length;
         }
@@ -240,30 +272,36 @@ public class TerminalManager : MonoBehaviour {
 
     // Reset the current command that is used to search trough input history
     // This must be called every time the user interpret a new command
-    private void ResetHistorySearch() {
+    private void ResetHistorySearch()
+    {
         _inputHistoryCurrentNode = null;
     }
 
-    private void UseAutoComplete() {
+    private void UseAutoComplete()
+    {
         List<string> options = _newInterpreter.GetPossibleCommands(_terminalInput.text, _terminalName);
         if (options == null)
             return;
 
-        if(options.Count == 1) {
+        if (options.Count == 1)
+        {
             _terminalInput.text = options[0];
             _terminalInput.caretPosition = _terminalInput.text.Length;
         }
-        else {
+        else
+        {
             //TODO (optional): treat the case when multiple commands are available with the same prefix
         }
     }
 
-    private int CalculateCharactersPerLine() {
+    private int CalculateCharactersPerLine()
+    {
         _helperLine.SetActive(true);
 
         string testContent = "";
         _helperLineText.text = testContent;
-        while (_helperLineText.preferredWidth < _linesContainerRectTranform.rect.width) {
+        while (_helperLineText.preferredWidth < _linesContainerRectTranform.rect.width)
+        {
             testContent += "_";
             _helperLineText.text = testContent;
         }
