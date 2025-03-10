@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Windows;
 
 namespace ScenarioSQL {
-    public class SearchBarController : MonoBehaviour {
+    public class ScalperPageController : MonoBehaviour {
 
         [SerializeField]
         private List<GameObject> _purchasableObjects;

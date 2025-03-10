@@ -127,10 +127,8 @@ public class Interpreter : MonoBehaviour {
 
     public int GetPhase(string terminalName)
     {
-        Debug.Log("Get Phase called terminal name: " + terminalName);
         foreach (var terminal in _scenario.terminals)
         {
-            Debug.Log("Terminal name: " + terminal.name);
             if(terminal.name == terminalName)
             {
                 return terminal.currentPhase;
