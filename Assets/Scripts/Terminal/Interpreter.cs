@@ -37,7 +37,6 @@ public class Interpreter : MonoBehaviour {
 
     void Start() {
         string filePath = Path.Combine(Application.streamingAssetsPath, _scenarioBasePath + "/" + _jsonFilenama);
-        Debug.Log("Currently searching for terminal in " + filePath);
         if (File.Exists(filePath)) {
             string jsonContent = File.ReadAllText(filePath);
             _scenario = JsonUtility.FromJson<RootObject>(jsonContent);
