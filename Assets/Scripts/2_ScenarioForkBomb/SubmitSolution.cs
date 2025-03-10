@@ -16,7 +16,6 @@ public class SubmitSolution : MonoBehaviour
     public void OnSubmitButtonClicked()
     {
         int phase = Interpreter.Instance.GetPhase(_terminalManager.Name);
-        Debug.Log("Phase: " + phase);
         if (phase == 1)
         {
             _recoveryWebpage.SetActive(true);
