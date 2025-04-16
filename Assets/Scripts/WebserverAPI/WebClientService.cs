@@ -19,8 +19,6 @@ namespace WebserverAPI
         }
     }
 
-
-
     /// <summary>
     /// Singleton client to interact with a web server
     /// </summary>
@@ -31,6 +29,10 @@ namespace WebserverAPI
         private string _baseUrl = "https://0x67616d65.xyz/";
         private string _accessToken = string.Empty;
         private string _refreshToken = string.Empty;
+
+        // After login, progress level is set according to the response of the webserver
+        // after that, the progress level is incremented by 1 for each game played
+        private int _progressLevel = 0;
 
         public bool IsAuthenticated => !string.IsNullOrEmpty(_accessToken);
 
@@ -51,6 +53,13 @@ namespace WebserverAPI
             get => _refreshToken;
             set => _refreshToken = value;
         }
+
+        public int ProgressLevel
+        {
+            get => _progressLevel;
+            set => _progressLevel = value;
+        }
+
         public static WebClientService Instance
         {
             get
@@ -149,6 +158,13 @@ namespace WebserverAPI
             public string refresh_token;
         }
 
+        [Serializable]
+        public class ProgressLevelResponse
+        {
+            public int progress_level;
+            public int user_id;
+        }
+
         /// <summary>
         /// Register a new user
         /// </summary>
@@ -183,6 +199,82 @@ namespace WebserverAPI
             }
 
             StartCoroutine(PostRequest(route, data, callback, true));
+        }
+
+        /// <summary>
+        /// Get progress level from the webserver using bearer token for user identity
+        /// </summary>
+        /// <param name="callback">Callback to handle the result</param>
+        public void GetProgressLevel(Action<bool, string> callback)
+        {
+            GetData("user/progress", true, (success, response) =>
+            {
+                if (success)
+                {
+                    try
+                    {
+                        // expected response { "user_id": ..., "progress_level": ... }
+                        // parse and store progress level
+                        ProgressLevelResponse progressLevelResponse = JsonUtility.FromJson<ProgressLevelResponse>(response);
+
+                        if (progressLevelResponse.progress_level > 0)
+                        {
+                            _progressLevel = progressLevelResponse.progress_level;
+                            Debug.Log(_progressLevel);
+                            callback(true, "Progress level retrieved.");
+                        }
+                        else
+                        {
+                            _progressLevel = 0;
+                            callback(false, "Progress level is 0.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        callback(false, $"Failed to parse progress level response: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    callback(false, response);
+                }
+            });
+        }
+
+        public void UpdateProgressLevel(int progressLevel, Action<bool, string> callback)
+        {
+            string progressLevelString = progressLevel.ToString();
+            Dictionary<string, string> payload = new Dictionary<string, string>
+            {
+                { "progress", progressLevelString }
+            };
+
+            StartCoroutine(PostRequest("user/progress", payload, (success, response) =>
+            {
+                if (success)
+                {
+                    try
+                    {
+                       if (response.Contains("Progress registered successfully!"))
+                        {
+                            _progressLevel = progressLevel;
+                            callback(true, "Progress level updated.");
+                        }
+                        else
+                        {
+                            callback(false, "Failed to update progress level.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        callback(false, $"Failed to parse progress level response: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    callback(false, response);
+                }
+            }, true));
         }
 
         /// <summary>

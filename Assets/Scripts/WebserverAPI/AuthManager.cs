@@ -10,7 +10,7 @@ namespace WebserverAPI
         public async void Login()
         {
             // implement logic for getting username and password from input fields
-            string username = "admin@cybergame.local";
+            string username = "admin";
             string password = "changeme";
 
 
@@ -35,22 +35,31 @@ namespace WebserverAPI
         public async void Register()
         {
             // implement logic for getting username, password and institution name from input fields
-            string email = "admin@cybergame.local";
+            string email = "admin1";
             string password = "changeme";
+            string institutionName = "My Institution";
 
 
             var webclient = WebClientService.Instance;
-            webclient.Login(email, password, (success, message) =>
+            webclient.Register(email, password, institutionName, (success, message) =>
             {
                 if (success)
                 {
-                    // implement login success logic here -> redirect to first game
-                    Debug.Log("Login successful: " + message);
+                    // implement register success logic here -> redirect to login page
+                    Debug.Log("Registration successful: " + message);
                 }
                 else
                 {
-                    // implement login failed logic here -> remain in login page, display login error message
-                    Debug.LogError("Login failed: " + message);
+
+                    if (message.Contains("Username already exists!")){
+                        // implement logic to inform user that the username already exists
+                        Debug.LogError("Username already exists: " + message);
+                    }
+                    else
+                    {
+                        // implement login failed logic here -> remain in register page, display register error message
+                        Debug.LogError("Registration failed: " + message);
+                    }
                 }
             });
 
