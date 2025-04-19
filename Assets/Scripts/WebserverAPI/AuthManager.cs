@@ -7,10 +7,10 @@ namespace WebserverAPI
 {
     public class AuthManager : MonoBehaviour
     {
-        public async void Login()
+        public void Login()
         {
             // implement logic for getting username and password from input fields
-            string username = "admin";
+            string username = "admin1";
             string password = "changeme";
 
 
@@ -32,10 +32,10 @@ namespace WebserverAPI
             
         }
 
-        public async void Register()
+        public void Register()
         {
             // implement logic for getting username, password and institution name from input fields
-            string email = "admin1";
+            string email = "admin2";
             string password = "changeme";
             string institutionName = "My Institution";
 
@@ -64,6 +64,24 @@ namespace WebserverAPI
             });
 
 
+        }
+
+        public void Logout()
+        {
+            var webclient = WebClientService.Instance;
+            webclient.Logout((success, message) =>
+            {
+                if (success)
+                {
+                    // implement logout success logic here -> redirect to login page
+                    Debug.Log("Logout successful: " + message);
+                }
+                else
+                {
+                    // implement logout failed logic here -> remain in game, display logout error message
+                    Debug.LogError("Logout failed: " + message);
+                }
+            });
         }
     }
 }

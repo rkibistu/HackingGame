@@ -7,7 +7,7 @@ namespace WebserverAPI
 {
     public class GameProgressManager : MonoBehaviour
     {
-        public void GetProgressLevel()
+        public  void GetProgressLevel()
         {
             var webclient = WebClientService.Instance;
             webclient.GetProgressLevel((success, message) =>
@@ -30,7 +30,7 @@ namespace WebserverAPI
 
         }
 
-        public void UpdateProgressLevel()
+        public  void UpdateProgressLevel()
         {
             int progressLevel;
 
@@ -43,7 +43,7 @@ namespace WebserverAPI
                 if (success)
                 {
                     // implement update progress level success logic here -> redirect to next game
-                    Debug.Log("Update progress successful: " + message);
+                    Debug.Log("Update progress successful: " + webclient.ProgressLevel);
                 }
                 else
                 {

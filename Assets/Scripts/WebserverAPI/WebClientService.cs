@@ -26,7 +26,7 @@ namespace WebserverAPI
     {
         private static WebClientService _instance;
 
-        private string _baseUrl = "https://0x67616d65.xyz/";
+        private string _baseUrl = "https://localhost/";
         private string _accessToken = string.Empty;
         private string _refreshToken = string.Empty;
 
@@ -87,11 +87,15 @@ namespace WebserverAPI
             }
         }
 
+        /// <summary>
+        /// Escape special characters in a string for JSON formatting
         private string EscapeString(string s)
         {
             return s.Replace("\\", "\\\\").Replace("\"", "\\\"");
         }
 
+        /// <summary>
+        /// Format form dictionary to json string
         private string DictionaryToJson(Dictionary<string, string> dict)
         {
             List<string> entries = new List<string>();
@@ -188,17 +192,18 @@ namespace WebserverAPI
         /// Post data to the webserver using bearer token authentication
         /// </summary>
         /// <param name="route">API route</param>
+        /// /// <param name="useAuth">Whether to use authentication</param>
         /// <param name="data">Data to post</param>
         /// <param name="callback">Callback to handle the result</param>
-        public void PostData(string route, Dictionary<string, string> data, Action<bool, string> callback)
+        public void PostData(string route, bool useAuth, Dictionary<string, string> data, Action<bool, string> callback)
         {
-            if (string.IsNullOrEmpty(_accessToken))
+            if (useAuth && string.IsNullOrEmpty(_accessToken))
             {
                 callback(false, "Not authenticated. Please login first.");
                 return;
             }
 
-            StartCoroutine(PostRequest(route, data, callback, true));
+            StartCoroutine(PostRequest(route, data, callback, useAuth));
         }
 
         /// <summary>
@@ -241,6 +246,11 @@ namespace WebserverAPI
             });
         }
 
+        /// <summary>
+        /// Set progress level of user  using bearer token for user identity
+        /// </summary>
+        /// <param name="progressLevel">Progress level to set</param>
+        /// <param name="callback">Callback to handle the result</param>
         public void UpdateProgressLevel(int progressLevel, Action<bool, string> callback)
         {
             string progressLevelString = progressLevel.ToString();
@@ -249,7 +259,7 @@ namespace WebserverAPI
                 { "progress", progressLevelString }
             };
 
-            StartCoroutine(PostRequest("user/progress", payload, (success, response) =>
+           PostData("user/progress",true, payload, (success, response) =>
             {
                 if (success)
                 {
@@ -274,7 +284,7 @@ namespace WebserverAPI
                 {
                     callback(false, response);
                 }
-            }, true));
+            });
         }
 
         /// <summary>
@@ -297,10 +307,13 @@ namespace WebserverAPI
         /// <summary>
         /// Logout the current user
         /// </summary>
-        public void Logout()
+        public void Logout(Action<bool, string> callback)
         {
             _accessToken = string.Empty;
             _refreshToken = string.Empty;
+
+            _progressLevel = 0;
+            callback(true, "Logged out successfully.");
         }
 
         #region Private Helper Methods
