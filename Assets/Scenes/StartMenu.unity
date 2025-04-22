@@ -2087,7 +2087,7 @@ GameObject:
   - component: {fileID: 637380080}
   - component: {fileID: 637380079}
   - component: {fileID: 637380078}
-  - component: {fileID: 637380077}
+  - component: {fileID: 637380081}
   m_Layer: 5
   m_Name: Canv_levels
   m_TagString: Untagged
@@ -2120,50 +2120,6 @@ RectTransform:
   m_AnchoredPosition: {x: 26.446497, y: -2.1135802}
   m_SizeDelta: {x: 1980, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &637380077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637380075}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f6aa6586f77764fab668a0a62d8f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platform: 0
-  mobileSFXtext: {fileID: 0}
-  mobileMusictext: {fileID: 0}
-  mobileShadowofftextLINE: {fileID: 0}
-  mobileShadowlowtextLINE: {fileID: 0}
-  mobileShadowhightextLINE: {fileID: 0}
-  fullscreentext: {fileID: 0}
-  ambientocclusiontext: {fileID: 0}
-  shadowofftextLINE: {fileID: 0}
-  shadowlowtextLINE: {fileID: 0}
-  shadowhightextLINE: {fileID: 0}
-  aaofftextLINE: {fileID: 0}
-  aa2xtextLINE: {fileID: 0}
-  aa4xtextLINE: {fileID: 0}
-  aa8xtextLINE: {fileID: 0}
-  vsynctext: {fileID: 0}
-  motionblurtext: {fileID: 0}
-  texturelowtextLINE: {fileID: 0}
-  texturemedtextLINE: {fileID: 0}
-  texturehightextLINE: {fileID: 0}
-  cameraeffectstext: {fileID: 0}
-  showhudtext: {fileID: 0}
-  tooltipstext: {fileID: 0}
-  difficultynormaltext: {fileID: 0}
-  difficultynormaltextLINE: {fileID: 0}
-  difficultyhardcoretext: {fileID: 0}
-  difficultyhardcoretextLINE: {fileID: 0}
-  invertmousetext: {fileID: 0}
-  musicSlider: {fileID: 0}
-  sensitivityXSlider: {fileID: 0}
-  sensitivityYSlider: {fileID: 0}
-  mouseSmoothSlider: {fileID: 0}
 --- !u!114 &637380078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2227,6 +2183,24 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &637380081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637380075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2d5a41db4319a4d8d56796e2f9b621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelButtons:
+  - {fileID: 943570045}
+  - {fileID: 1469273637}
+  - {fileID: 523826161}
+  - {fileID: 792576607}
+  - {fileID: 523314703}
 --- !u!1 &685041808
 GameObject:
   m_ObjectHideFlags: 0
@@ -7635,7 +7609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuContainer: {fileID: 1615679046}
-  _gameCamera: {fileID: 0}
+  _levelsController: {fileID: 637380081}
 --- !u!4 &4113673330039485
 Transform:
   m_ObjectHideFlags: 0

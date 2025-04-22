@@ -4,7 +4,19 @@ using UnityEngine;
 public class GameplayController : MonoBehaviour
 {
     [SerializeField]
+    private int _levelIndex = 0;
+    [SerializeField]
     private List<GameObject> _deactivateWhileMenu;
+
+    public static GameplayController Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+
+        Instance = this;
+    }
 
     void Start()
     {
@@ -14,21 +26,34 @@ public class GameplayController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            foreach (var obj in _deactivateWhileMenu)
+            MenuController.Instance.Toggle();
+            if (MenuController.Instance.IsActive())
             {
-                obj.SetActive(false);
+                foreach (var obj in _deactivateWhileMenu)
+                {
+                    obj.SetActive(false);
+                }
             }
-            MenuController.Instance.Show();
+            else
+            {
+                foreach (var obj in _deactivateWhileMenu)
+                {
+                    obj.SetActive(true);
+                }
+            }
         }
-        if (Input.GetKeyDown(KeyCode.N))
+        
+        // this should be called when the level is finished
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            MenuController.Instance.Hide();
-            foreach (var obj in _deactivateWhileMenu)
-            {
-                obj.SetActive(true);
-            }
+            CompleteLevel();
         }
+    }
+
+    public void CompleteLevel()
+    {
+        MenuController.Instance.CompleteLevel(_levelIndex);
     }
 }
