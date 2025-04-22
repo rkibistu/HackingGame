@@ -1,0 +1,57 @@
+{
+  "terminals": [
+    {
+      "name": "7_scenarioNFC",
+      "phases": [
+        {
+          "name": "0",
+          "commands": [
+            {
+              "input": "pm3",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "proxmark_output.txt",
+              "required": "true",
+              "final": "true"
+            }
+          ]
+        },
+        {
+          "name": "1",
+          "commands": [
+            {
+              "input": "hf search",
+              "outputType": "inline",
+              "output": "",
+              "outputFile": "[*] Mifare Classic 1k card detected",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "hf mf autopwn",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "hf_mf_autopwn.txt",
+              "required": "true",
+              "final": "true"
+            }
+          ]
+        },
+        {
+          "name": "2",
+          "commands": [
+            {
+              "input": "hf mf cload -f hf-mf-04013-dump.bin",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "cobaltstrike_output.txt",
+              "required": "true",
+              "final": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+}
