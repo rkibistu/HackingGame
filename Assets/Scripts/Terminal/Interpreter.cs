@@ -53,6 +53,7 @@ public class Interpreter : MonoBehaviour {
     // and will keep in mind the current phase of the terminal. Only the commands from
     // the current phase of the terminal are checked. Not from previous or future phases.
     public List<string> Interpret(string input, string terminalName) {
+        Debug.Log("Terminal name supplied: " + terminalName);
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
