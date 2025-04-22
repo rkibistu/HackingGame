@@ -201,9 +201,9 @@ namespace SlimUI.ModernMenu{
 
 		public void Update (){
 			//sliderValue = musicSlider.GetComponent<Slider>().value;
-			sliderValueXSensitivity = sensitivityXSlider.GetComponent<Slider>().value;
-			sliderValueYSensitivity = sensitivityYSlider.GetComponent<Slider>().value;
-			sliderValueSmoothing = mouseSmoothSlider.GetComponent<Slider>().value;
+			//sliderValueXSensitivity = sensitivityXSlider.GetComponent<Slider>().value;
+			//sliderValueYSensitivity = sensitivityYSlider.GetComponent<Slider>().value;
+			//sliderValueSmoothing = mouseSmoothSlider.GetComponent<Slider>().value;
 		}
 
 		public void FullScreen (){

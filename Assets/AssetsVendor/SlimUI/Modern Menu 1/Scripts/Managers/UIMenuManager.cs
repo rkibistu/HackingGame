@@ -286,5 +286,12 @@ namespace SlimUI.ModernMenu{
 				yield return null;
 			}
 		}
-	}
+
+        public void LoadSceneByNameDirectly(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+    }
+
+
 }
