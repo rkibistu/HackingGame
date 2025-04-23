@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar-admin">
+        <a href="{{ url_for('admin_users') }}">Users</a>
+        <a href="{{ url_for('admin_view_progress') }}">View Progress</a>
+        <a href="{{ url_for('admin_all_logs') }}">All Logs</a>
+        <a href="{{ url_for('admin_logs_attacks') }}">Log Attacks</a>
+        <a href="{{ url_for('admin_logout') }}" style="float: right;">Logout</a>
+    </nav>
+    <div class="admin-container">
+        <h2>Lista Utilizatori</h2>
+        <p>Total utilizatori: {{ total_users }}</p>
+        <div class="search-bar">
+            <form method="GET" action="{{ url_for('admin_users') }}">
+                <input type="text" name="q" placeholder="Caută utilizator..." value="{{ search_query }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Institution</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.institution_name }}</td>
+                    <td>{{ user.role }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Nu s-au găsit utilizatori.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            {% if pagination %}
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('admin_users', page=pagination.prev_num, q=search_query) }}">Previous</a>
+            {% endif %}
+            <span>Page {{ pagination.page }} of {{ pagination.pages }}</span>
+            {% if pagination.has_next %}
+            <a href="{{ url_for('admin_users', page=pagination.next_num, q=search_query) }}">Next</a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
