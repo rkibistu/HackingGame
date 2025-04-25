@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="60">
+    <title>Admin - Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar-admin">
+        <a href="{{ url_for('admin_users') }}">Users</a>
+        <a href="{{ url_for('admin_view_progress') }}">View Progress</a>
+        <a href="{{ url_for('admin_all_logs') }}">All Logs</a>
+        <a href="{{ url_for('admin_logs_attacks') }}">Log Attacks</a>
+        <a href="{{ url_for('admin_logout') }}" style="float: right;">Logout</a>
+    </nav>
+    <div class="admin-container">
+        <h2>All logs</h2>
+        <form class="form-inline mb-3" method="get" action="{{ url_for('admin_all_logs') }}">
+            <input class="form-control mr-2" type="text" name="ip" placeholder="Search by IP" value="{{ ip_filter }}">
+            <select class="form-control mr-2" name="method">
+                <option value="" {% if not method_filter %}selected{% endif %}>Any method</option>
+                {% for m in ['GET','POST','PUT','DELETE','PATCH'] %}
+                <option value="{{ m }}" {% if method_filter==m %}selected{% endif %}>{{ m }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Transaction ID</th>
+                    <th>IP</th>
+                    <th>Request</th>
+                    <th>User-Agent</th>
+                    <th>Status</th>
+                    <th>Messages</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.transaction.time }}</td>
+                    <td>{{ log.transaction.transaction_id }}</td>
+                    <td>{{ log.transaction.remote_address }}</td>
+                    <td>{{ log.request.request_line }}</td>
+                    <td>
+                        {{ log.request.headers['User-Agent'] if log.request.headers.get('User-Agent') else 'N/A' }}
+                    </td>
+                    <td>{{ log.response.status }}</td>
+                    <td>
+                        {% if log.audit_data and log.audit_data.messages %}
+                        <ul>
+                            {% for message in log.audit_data.messages %}
+                            <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">Nu s-au găsit loguri.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {% if page > 1 %}
+            <a href="{{ url_for('admin_all_logs',
+                                page=page-1,
+                                ip=ip_filter,
+                                method=method_filter) }}">Previous</a>
+            {% endif %}
+
+            <span>{{ page }} / {{ total_pages }}</span>
+
+            {% if page < total_pages %} <a href="{{ url_for('admin_all_logs',
+                                page=page+1,
+                                ip=ip_filter,
+                                method=method_filter) }}">Next</a>
+                {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

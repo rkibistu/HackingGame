@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div id="error" class="error"></div>
+        <form method="POST" action="{{ url_for('admin_login') }}" id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Type your username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Type your password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+
+</html>
