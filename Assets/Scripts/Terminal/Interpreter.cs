@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System;
-
+using static ScenarioJSONStructure;
 /*
  * This class is responsible with interpreting the input of all terminals.
  */
@@ -175,6 +175,8 @@ public class Interpreter : MonoBehaviour {
             
             if(AdvanceRequirementsMet(phase) == true) {
                 terminal.currentPhase++;
+
+                //check for tasl completion using phase name
             }
         }
     }
