@@ -142,7 +142,8 @@ public class TypewriterEffect : MonoBehaviour
             return;
         }
 
-        StopCoroutine(_typewriterCorotuine);
+        if(_typewriterCorotuine != null)
+            StopCoroutine(_typewriterCorotuine);
         _textBox.maxVisibleCharacters = _textBox.textInfo.characterCount;
         _readyForNewText = true;
         CurrentlySkipping = false;
