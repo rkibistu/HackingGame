@@ -122,7 +122,7 @@ public class Interpreter : MonoBehaviour {
             aux = Helper.GetCommonPrefix(inputPrefix, cmd.input);
             if(aux.Length == inputPrefix.Length) {
                 result.Add(cmd.input);
-            }s
+            }
 
             // Check if the command is in the alternatives list
             foreach (var alternative in cmd.alternatives)
