@@ -7,7 +7,64 @@
           "name": "0",
           "commands": [
             {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\nforkbomb.c\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cat [FILE]\r\n\r\nConcatenate FILE to standard output.\r\n\r\nTry 'cat --help' for more information.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cat [FILE]\r\n\r\nConcatenate FILE to standard output.\r\n\r\n--help \t\t: show this help.\r\n--version \t\t: show version.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat --version",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\ncat (GNU coreutils) 9.4\r\nCopyright (C) 2023 Free Software Foundation, Inc.\r\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\r\nThis is free software: you are free to change and redistribute it.\r\nThere is NO WARRANTY, to the extent permitted by law.\r\nWritten by Torbjörn Granlund and Richard M. Stallman.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "cat forkbomb.c",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "forkbomb.txt",
@@ -15,7 +72,44 @@
               "final": "false"
             },
             {
+              "input": "gcc --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: gcc [OPTION]... <source file>...\r\n\r\n-v \t\t: display commands executed (verbose).\r\n-o <file> \t\t: place the output into <file>.\r\n--help \t\t: show this help and exit.\r\n--version \t\t: show version. \r\n\r\nexample:\r\n$ gcc -v forkbomb.c -o forkbomb\r\n$ gcc -o hello hello.c\r\n$ gcc --version\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "gcc",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: gcc [OPTION]... <source file>...\r\nTry 'cat --help' for more information.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "gcc --version",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\ngcc (YUbuntu 13.3.0-6YUbuntu2~27.04) 13.3.0\r\nCopyright (C) 2023 Free Software Foundation, Inc.\r\nThis is free software; see the source for copying conditions.  There is NO\r\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "gcc -v forkbomb.c -o forkbomb",
+              "alternatives": [
+                "gcc -o forkbomb -v forkbomb.c",
+                "gcc -v -o forkbomb forkbomb.c",
+                "gcc -o forkbomb forkbomb.c -v",
+                "gcc forkbomb.c -o forkbomb",
+                "gcc -o forkbomb forkbomb.c",
+                "gcc -v forkbomb.c",
+                "gcc forkbomb.c -v",
+                "gcc forkbomb.c"
+              ],
               "outputType": "file",
               "output": "",
               "outputFile": "gcc_output.txt",
@@ -36,7 +130,64 @@
           "name": "2",
           "commands": [
             {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\nforkbomb.c\tbackup_database.db\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "sqlite3 --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: sqlite3 [OPTION] <database file>\r\n--help \t\t: show this help and exit.\r\n--version \t\t: show version. \r\n\r\nexample:\r\n$ sqlite3 --version\r\n$ sqlite3 <database file>\r\n$ sqlite3 backup_database.db\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "sqlite3",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: sqlite3 [OPTION] <database file>\r\nTry 'sqlite3 --help' for more information.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "sqlite3 --version",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nsqlite3 3.45.1 2024-01-30 16:01:20 e876e33a0ed5c5b3126f52e532044363a014bc594cfefa87ffb5b82257ccalt1 (64-bit)\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "sqlite3 backup_database.db",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlite3_entry.txt",
@@ -45,6 +196,7 @@
             },
             {
               "input": ".help",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlite3_help.txt",
@@ -53,6 +205,7 @@
             },
             {
               "input": ".version",
+              "alternatives": [],
               "outputType": "inline",
               "output": "SQLite version 3.46.0 2024-05-23 13:25:27",
               "outputFile": "",
@@ -61,6 +214,7 @@
             },
             {
               "input": "SELECT * FROM exams;",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlite3_output.txt",
