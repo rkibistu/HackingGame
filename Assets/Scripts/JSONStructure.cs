@@ -11,6 +11,7 @@ public class ScenarioJSONStructure : MonoBehaviour
     {
         // data from json
         public string input;
+        public List<string> alternatives;
         public string outputType;
         public string output;
         public string outputFile;
