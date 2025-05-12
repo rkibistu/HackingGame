@@ -1,55 +1,61 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
-[Serializable]
-public class Command
+public class ScenarioJSONStructure : MonoBehaviour
 {
-    // data from json
-    public string input;
-    public string outputType;
-    public string output;
-    public string outputFile;
-    public bool required;
-    public bool final;
 
-    // Changed/used in execution, not present in json
-    public bool executed = false;
-}
+    [Serializable]
+    public class Command
+    {
+        // data from json
+        public string input;
+        public List<string> alternatives;
+        public string outputType;
+        public string output;
+        public string outputFile;
+        public bool required;
+        public bool final;
 
-[Serializable]
-public class Action
-{
-    // data from json
-    public string description;
-    public bool required;
-    public bool final;
+        // Changed/used in execution, not present in json
+        public bool executed = false;
+    }
 
-    // Changed/used in execution, not present in json
-    public bool executed = false;
-}
+    [Serializable]
+    public class Action
+    {
+        // data from json
+        public string description;
+        public bool required;
+        public bool final;
 
-[Serializable]
-public class Phase
-{
-    public string name;
-    public List<Command> commands;
-    public Action action;
-}
+        // Changed/used in execution, not present in json
+        public bool executed = false;
+    }
 
-[Serializable]
-public class Terminal
-{
-    // data from json
-    public string name;
-    public List<Phase> phases;
+    [Serializable]
+    public class Phase
+    {
+        public string name;
+        public List<Command> commands;
+        public Action action;
+    }
 
-    // Changed/used in execution, not present in json
-    public int currentPhase = 0;
-}
+    [Serializable]
+    public class Terminal
+    {
+        // data from json
+        public string name;
+        public List<Phase> phases;
 
-[Serializable]
-public class RootObject
-{
-    public List<Terminal> terminals;
+        // Changed/used in execution, not present in json
+        public int currentPhase = 0;
+    }
+
+    [Serializable]
+    public class RootObject
+    {
+        public List<Terminal> terminals;
+    }
 }

@@ -2,7 +2,8 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System;
-
+using static ScenarioJSONStructure;
+using UnityEditor.XR;
 /*
  * This class is responsible with interpreting the input of all terminals.
  */
@@ -48,11 +49,32 @@ public class Interpreter : MonoBehaviour {
         PrepareOutputsFromFiles();
     }
 
+
+    // Check if the length of the common prefix is equal to the length of one of the alternatives commands
+    // If it is, return true. Else, return false
+    // This is used to check if the command is a partial match with one of the alternatives
+    public bool CheckCloserPrefixLengthFromAlternatives(string commonPrefix, List<string> alternatives )
+    {
+        bool result = false;
+
+        foreach (var alternative in alternatives)
+        {
+           if(commonPrefix.Length == alternative.Length)
+            {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
     // Get the output of the input command.
     // The method will look up in the commands list of terminal with the name terminalName
     // and will keep in mind the current phase of the terminal. Only the commands from
     // the current phase of the terminal are checked. Not from previous or future phases.
     public List<string> Interpret(string input, string terminalName) {
+        Debug.Log("Terminal name supplied: " + terminalName);
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
@@ -68,7 +90,8 @@ public class Interpreter : MonoBehaviour {
         if (closerCommand == null) {
             return new List<string> { "Command is not recongnized." };
         }
-        if (commonPrefix.Length == closerCommand.input.Length) {
+        if (commonPrefix.Length == closerCommand.input.Length 
+            || CheckCloserPrefixLengthFromAlternatives(commonPrefix, closerCommand.alternatives)) {
             // Found the right command
             AdvanceScenario(closerCommand, phase, terminal);
             return PostProcessOutput(closerCommand.output);
@@ -88,7 +111,7 @@ public class Interpreter : MonoBehaviour {
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
-            Debug.LogError("MissConfiguration: tried to itnerpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
+            Debug.LogError("MissConfiguration: tried to interpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
             return new List<string> { "Command is not recongnized." };
         }
         int phaseToCheck = (_debug == true) ? _forcedPhase : terminal.currentPhase;
@@ -99,6 +122,16 @@ public class Interpreter : MonoBehaviour {
             aux = Helper.GetCommonPrefix(inputPrefix, cmd.input);
             if(aux.Length == inputPrefix.Length) {
                 result.Add(cmd.input);
+            }
+
+            // Check if the command is in the alternatives list
+            foreach (var alternative in cmd.alternatives)
+            {
+                aux = Helper.GetCommonPrefix(inputPrefix, alternative);
+                if (aux.Length == inputPrefix.Length)
+                {
+                    result.Add(alternative);
+                }
             }
         }
 
@@ -160,6 +193,17 @@ public class Interpreter : MonoBehaviour {
                 commonPrefix = aux;
                 closerCommand = cmd;
             }
+
+            // Check if the command is in the alternatives list
+            foreach (var alternative in cmd.alternatives)
+            {
+                aux = Helper.GetCommonPrefix(input, alternative);
+                if (aux.Length > 0 && aux.Length >= commonPrefix.Length)
+                {
+                    commonPrefix = aux;
+                    closerCommand = cmd;
+                }
+            }
         }
 
         return closerCommand;
@@ -174,6 +218,8 @@ public class Interpreter : MonoBehaviour {
             
             if(AdvanceRequirementsMet(phase) == true) {
                 terminal.currentPhase++;
+
+                //check for tasl completion using phase name
             }
         }
     }

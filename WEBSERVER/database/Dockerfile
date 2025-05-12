@@ -1,0 +1,8 @@
+# Dockerfile for mysql database
+ARG MYSQL_VERSION
+
+FROM mysql:${MYSQL_VERSION}
+
+ARG MYSQL_PORT
+
+EXPOSE ${MYSQL_PORT}
