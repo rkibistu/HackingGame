@@ -7,7 +7,64 @@
           "name": "0",
           "commands": [
             {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\npayload.txt\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cat [FILE]\r\n\r\nConcatenate FILE to standard output.\r\n\r\nTry 'cat --help' for more information.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cat [FILE]\r\n\r\nConcatenate FILE to standard output.\r\n\r\n--help \t\t: show this help.\r\n--version \t\t: show version.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat --version",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\ncat (GNU coreutils) 9.4\r\nCopyright (C) 2023 Free Software Foundation, Inc.\r\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\r\nThis is free software: you are free to change and redistribute it.\r\nThere is NO WARRANTY, to the extent permitted by law.\r\nWritten by Torbjörn Granlund and Richard M. Stallman.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "cat payload.txt",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "rubber_ducky_payload.txt",
@@ -15,7 +72,39 @@
               "final": "false"
             },
             {
+              "input": "cp",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cp [OPTION] <source> <destination>\r\n\r\nCopy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.\r\n\r\nTry 'cp --help' for more information.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cp --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cp [OPTION] <source> <destination>\r\n\r\nCopy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.\r\n-v \t\t: explain what is being done.\r\n--help \t\t: show this help.\r\n--version \t\t: show version.\r\nexample:\r\n$ cp payload.txt <directory/path>\r\n$ cp -v <file> <directory>\r\n$ cp -v payload.txt /mnt/ducky\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cp --version",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\ncp (GNU coreutils) 9.4\r\nCopyright (C) 2023 Free Software Foundation, Inc.\r\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\r\nThis is free software: you are free to change and redistribute it.\r\nThere is NO WARRANTY, to the extent permitted by law.\r\nWritten by Torbjörn Granlund, David MacKenzie, and Jim Meyering.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "cp -v payload.txt /mnt/ducky",
+              "alternatives": [
+                "cp payload.txt /mnt/ducky",
+                "cp payload.txt /mnt/ducky -v",
+                "cp payload.txt -v /mnt/ducky"
+              ],
               "outputType": "inline",
               "output": "'payload.txt' -> './mnt/ducky/payload.txt'",
               "outputFile": "",
@@ -37,6 +126,7 @@
           "commands": [
             {
               "input": "./teamserver 127.0.0.1 123456",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "teamserver_output.txt",
@@ -50,6 +140,7 @@
           "commands": [
             {
               "input": "./cobaltstrike",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "cobaltstrike_output.txt",
