@@ -24,7 +24,7 @@ public class GameplayController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void  Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
