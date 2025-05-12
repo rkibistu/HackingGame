@@ -62,36 +62,6 @@ namespace ScenarioSQL {
             
         }
 
-        private void ParseAndExecuteInjection(string injectionInput) {
-
-            if (!injectionInput.Contains(";")) {
-                Debug.Log("Inejction incomplete");
-                return;
-            }
-
-            string updateQuery = injectionInput.Split(";")[0]; //  update products set price=49.99 where name like ' % 6090 % '
-            string commentQuery = injectionInput.Split(";")[1]; //  #
-            //TODO: invalidate ijection if commentQuery is missing??? or something??
-
-            string price, targetName;
-            string pricePattern = @"\s+price\s*=\s*(\d+(\.\d+)?)";
-            string targetNamePattern = @"'([^']*)'";
-
-            Match priceMatch = Regex.Match(updateQuery, pricePattern, RegexOptions.IgnoreCase);
-            Match targetNameatch = Regex.Match(updateQuery, targetNamePattern);
-
-            if (priceMatch.Success && targetNameatch.Success) {
-                price = priceMatch.Groups[1].Value;
-                targetName = targetNameatch.Groups[1].Value;
-                targetName = Regex.Replace(targetName, @"%", "");
-
-                foreach (var obj in _purchasableObjects) {
-                    PurchasableItem item = obj.GetComponent<PurchasableItem>();
-                    if (Regex.IsMatch(item.TitleText, Regex.Unescape(targetName), RegexOptions.IgnoreCase)) {
-                        item.Price = "price: " + price;
-                    }
-                }
-            }
-        }
+       
     }
 }
