@@ -125,6 +125,15 @@
           "name": "2",
           "commands": [
             {
+              "input": "./teamserver",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: teamserver <host ip> <password>\r\n\r\nStart the Cobalt Strike team server.\r\n\r\n",
+              "outputFile": "",
+              "required": "true",
+              "final": "true"
+            },
+            {
               "input": "./teamserver 127.0.0.1 123456",
               "alternatives": [],
               "outputType": "file",
