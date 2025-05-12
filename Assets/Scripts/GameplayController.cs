@@ -18,7 +18,7 @@ public class GameplayController : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    protected virtual void Start()
     {
 
     }
@@ -55,5 +55,9 @@ public class GameplayController : MonoBehaviour
     public void CompleteLevel()
     {
         MenuController.Instance.CompleteLevel(_levelIndex);
+    }
+
+    public virtual void StartLevel() {
+
     }
 }
