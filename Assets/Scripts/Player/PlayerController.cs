@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
         RaycastHit hit;
 
+        Debug.DrawRay(ray.origin, ray.direction * _interactionDistance, Color.red);
+
         // Perform the raycast
         if (Physics.Raycast(ray, out hit, _interactionDistance, _interactiveLayer))
         {
