@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private UIController _uiController;
 
+    private Animator _animator;
+
 #if ENABLE_INPUT_SYSTEM
     private PlayerInput _playerInput;
 #endif
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
         _playerInput = GetComponent<PlayerInput>();
@@ -75,5 +78,9 @@ public class PlayerController : MonoBehaviour
         {
             _uiController.HideHint();
         }
+    }
+
+    public void DisableAnimator() {
+        _animator.enabled = false;
     }
 }
