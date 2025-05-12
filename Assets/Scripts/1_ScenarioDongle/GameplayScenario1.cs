@@ -7,9 +7,6 @@ public class GameplayScenario1 : GameplayController
     protected override void Update() {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.L)) {
-            DialogueController.Instance.PlayStory("intro");
-        }
         if (Input.GetKeyDown(KeyCode.Return)) {
             if (DialogueController.Instance.IsStoryRunning) {
                 DialogueController.Instance.Next();
@@ -21,6 +18,7 @@ public class GameplayScenario1 : GameplayController
     public override void StartLevel() {
 
         AudioControllerBasic.Instance.PlaySound("knock-door");
+        DialogueController.Instance.PlayStory("intro");
     }
     
     
