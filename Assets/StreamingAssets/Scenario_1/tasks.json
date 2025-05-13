@@ -2,8 +2,8 @@
   "tasks": [
     {
       "id": "check-door",
-      "title": "Cine e la usa?",
-      "description": "Mergi si vezi cine e la usa... Serios, ai nevoie de instructiuni la asta?",
+      "title": "Check the door",
+      "description": "Go and check the door, you need special instructions?",
       "reward": 10,
       "steps": [],
       "done": false,
@@ -11,8 +11,17 @@
     },
     {
       "id": "check-desktop",
-      "title": "first command",
-      "description": "Do this and that and that x2",
+      "title": "Scan the networks using iwconfig",
+      "description": "You need to scan the networks using iwconfig. Use iwconfig --help to see the options.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "use-wifi-dongle",
+      "title": "Plug the dongle into PC",
+      "description": "Plug the wifi dongle into the PC to activate the WiFi card.",
       "reward": 10,
       "steps": [],
       "done": false,
