@@ -18,7 +18,7 @@ public class TasksController : MonoBehaviour {
     private TextMeshProUGUI _currentObjectiveText;
 
     private TaskList _tasks;
-    private Dictionary<string, TaskRow> _journalRows = new();
+    private Dictionary<string, Task> _journalRows = new();
 
     private Task _currentTask;
 
@@ -59,10 +59,11 @@ public class TasksController : MonoBehaviour {
 
     public void Mark(string taskId, bool complete = true) {
         if (_journalRows.ContainsKey(taskId)) {
-            _journalRows[taskId].Mark(complete);
+            //_journalRows[taskId].Mark(complete);
+            _journalRows[taskId].done = true;
+            _journalRows[taskId].row.Mark();
 
-            Debug.Log(taskId + "    " + _currentTask.id);
-            if (taskId == _currentTask.id) {
+            if (_currentTask != null && taskId == _currentTask.id) {
                 RenewCurrentObjective();
             }
         }
@@ -80,7 +81,8 @@ public class TasksController : MonoBehaviour {
             var row = Instantiate(_taskRowPrefab, _journalContentContainer);
             TaskRow taskRow = row.GetComponent<TaskRow>();
             taskRow.Init(task);
-            _journalRows[task.id] = taskRow;
+            task.row = taskRow;
+            _journalRows[task.id] = task;
 
             // Change current objective every time you activate a new task
             // This could be changed later. Maybe a dedicated script for the panel so
@@ -91,7 +93,9 @@ public class TasksController : MonoBehaviour {
                 row = Instantiate(_subtaskRowPrefab, _journalContentContainer);
                 taskRow = row.GetComponent<TaskRow>();
                 taskRow.Init(step);
-                _journalRows[task.id] = taskRow;
+
+                //_journalRows[task.id] = taskRow;
+                step.row = taskRow;
             }
         }
     }
@@ -127,13 +131,16 @@ public class TasksController : MonoBehaviour {
             var row = Instantiate(_taskRowPrefab, _journalContentContainer);
             TaskRow taskRow = row.GetComponent<TaskRow>();
             taskRow.Init(task);
-            _journalRows[task.id] = taskRow;
+            _journalRows[task.id] = task;
+            _journalRows[task.id].row = taskRow;
 
             foreach (var step in task.steps) {
                 row = Instantiate(_subtaskRowPrefab, _journalContentContainer);
                 taskRow = row.GetComponent<TaskRow>();
                 taskRow.Init(step);
-                _journalRows[task.id] = taskRow;
+
+                step.row = taskRow;
+                //_journalRows[task.id] = taskRow;
             }
         }
         RenewCurrentObjective();
@@ -142,9 +149,8 @@ public class TasksController : MonoBehaviour {
     // Returns next active task
     private Task GetNextTask() {
         foreach (var activeTask in _journalRows.Values) {
-            Task task = activeTask.GetTask();
-            if (activeTask.GetTask().done == false)
-                return task;
+            if (activeTask.done == false)
+                return activeTask;
         }
         return null;
     }
@@ -157,7 +163,6 @@ public class TasksController : MonoBehaviour {
     //updates the cotnent of the panel
     private void UpdateCurrentObjectivePanel(Task task) {
         _currentTask = task;
-        Debug.Log(task.title);
         if (task == null)
             _currentObjectiveText.text = "";
         else

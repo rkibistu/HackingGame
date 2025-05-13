@@ -9,11 +9,8 @@ public class TaskRow : MonoBehaviour
     [SerializeField]
     private Image _checkmark;
 
-    private TasksJSONStructure.Task _task = null;
-
     public void Init(TasksJSONStructure.Task task, bool complete = false)
     {
-        _task = task;
         _title.text = task.title;
         Mark(complete);
     }
@@ -32,10 +29,5 @@ public class TaskRow : MonoBehaviour
         {
             _checkmark.gameObject.SetActive(false);
         }
-    }
-
-    //returns null if this row is associated with a step, not a task
-    public TasksJSONStructure.Task GetTask() {
-        return _task;
     }
 }
