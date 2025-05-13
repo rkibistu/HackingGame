@@ -21,6 +21,8 @@ public class UIController : MonoBehaviour {
     private GameObject _crosshair;
     [SerializeField]
     TextMeshProUGUI _hintInteractiveText;
+    [SerializeField]
+    private GameObject _currentObjectivePanel;
 
     public static UIController Instance { get; private set; }
 
@@ -66,5 +68,20 @@ public class UIController : MonoBehaviour {
     }
     public bool IsActiveLetterPanel() {
         return _letterPanel.activeInHierarchy;
+    }
+
+    public void SetActiveTaskPanel(bool active) {
+        _taskPanel.SetActive(active);
+    }
+    public bool IsActiveTaskPanel() {
+        return _taskPanel.activeInHierarchy;
+    }
+
+
+    public void SetActiveCurrentObjectivePanel(bool active) {
+        _currentObjectivePanel.SetActive(active);
+    }
+    public bool IsActiveCurrentObjectivePanel() {
+        return _currentObjectivePanel.activeInHierarchy;
     }
 }

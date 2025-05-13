@@ -3,10 +3,7 @@ using System.IO;
 using UnityEngine;
 using static TasksJSONStructure;
 
-public class TasksController : MonoBehaviour
-{
-    [SerializeField]
-    private GameObject _UIPanel;
+public class TasksController : MonoBehaviour {
 
     [SerializeField]
     private string _jsonFilename;
@@ -21,50 +18,65 @@ public class TasksController : MonoBehaviour
     private Dictionary<string, TaskRow> _journalRows = new();
 
     //  Example usage in Start
-    void Start()
-    {
+    void Start() {
         _tasks = LoadTasks();
         PopulateJournal();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.J)) {
+            if (Cursor.lockState == CursorLockMode.Locked) {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                _UIPanel.SetActive(true);
+                UIController.Instance.SetActiveTaskPanel(true);
             }
-            else
-            {
+            else {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                _UIPanel.SetActive(false);
+                UIController.Instance.SetActiveTaskPanel(false);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Mark("check-room");
+        //just for testing
+        if (Input.GetKeyDown(KeyCode.T)) {
+            //Mark("check-room");
+            ActivateTask("check-door");
         }
     }
 
-    public void Mark(string taskId, bool complete = true)
-    {
-        if (_journalRows.ContainsKey(taskId))
-        {
+    public void Mark(string taskId, bool complete = true) {
+        if (_journalRows.ContainsKey(taskId)) {
             _journalRows[taskId].Mark(complete);
         }
     }
 
+    public void ActivateTask(string id) {
+        foreach (var task in _tasks.tasks) {
+            if (task.id != id)
+                continue;
+
+            if (task.active == true)
+                return;
+
+            task.active = true;
+            var row = Instantiate(_taskRowPrefab, _journalContentContainer);
+            TaskRow taskRow = row.GetComponent<TaskRow>();
+            taskRow.Init(task);
+            _journalRows[task.id] = taskRow;
+
+            foreach (var step in task.steps) {
+                row = Instantiate(_subtaskRowPrefab, _journalContentContainer);
+                taskRow = row.GetComponent<TaskRow>();
+                taskRow.Init(step);
+                _journalRows[task.id] = taskRow;
+            }
+        }
+    }
+
     // Load TaskList from file
-    private TaskList LoadTasks()
-    {
+    private TaskList LoadTasks() {
         string path = Path.Combine(Application.streamingAssetsPath, _jsonFilename);
-        if (!File.Exists(path))
-        {
+        if (!File.Exists(path)) {
             Debug.LogWarning("Task file not found at: " + path);
             return new TaskList { tasks = new Task[0] };
         }
@@ -76,25 +88,25 @@ public class TasksController : MonoBehaviour
     }
 
     // Save TaskList to file
-    private void SaveTasks(TaskList taskList)
-    {
+    private void SaveTasks(TaskList taskList) {
         string path = Path.Combine(Application.streamingAssetsPath, _jsonFilename);
         string json = JsonUtility.ToJson(taskList, true); // Pretty print
         File.WriteAllText(path, json);
         Debug.Log("Saved tasks to: " + path);
     }
 
-    private void PopulateJournal()
-    {
-        foreach (var task in _tasks.tasks)
-        {
+    private void PopulateJournal() {
+        foreach (var task in _tasks.tasks) {
+            if (task.active == false) {
+                continue;
+            }
+
             var row = Instantiate(_taskRowPrefab, _journalContentContainer);
             TaskRow taskRow = row.GetComponent<TaskRow>();
             taskRow.Init(task);
             _journalRows[task.id] = taskRow;
 
-            foreach (var step in task.steps)
-            {
+            foreach (var step in task.steps) {
                 row = Instantiate(_subtaskRowPrefab, _journalContentContainer);
                 taskRow = row.GetComponent<TaskRow>();
                 taskRow.Init(step);

@@ -1,9 +1,27 @@
 {
   "tasks": [
     {
-      "id": "check-room",
-      "title": "Check the room",
-      "description": "Do this and that and that",
+      "id": "check-door",
+      "title": "Cine e la usa?",
+      "description": "Mergi si vezi cine e la usa... Serios, ai nevoie de instructiuni la asta?",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "check-terminal",
+      "title": "first command",
+      "description": "Do this and that and that x2",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "example",
+      "title": "Cexample?",
+      "description": "Mergi si vezi cine e la usa... Serios, ai nevoie de isntructiuni la asta?",
       "reward": 10,
       "steps": [
         {
@@ -13,15 +31,8 @@
           "done": false
         }
       ],
-      "done": false
-    },
-    {
-      "id": "main-0",
-      "title": "first command",
-      "description": "Do this and that and that x2",
-      "reward": 10,
-      "steps": [],
-      "done": false
+      "done": false,
+      "active": true
     }
   ]
 }
