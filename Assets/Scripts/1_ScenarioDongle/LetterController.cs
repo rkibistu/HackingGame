@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class LetterController : InteractiveElement
 {
-    [SerializeField]
-    private GameObject _toEnable;
 
     private Animator _animator;
 
@@ -12,8 +10,8 @@ public class LetterController : InteractiveElement
     }
 
     override public void DoSomething() {
-        _toEnable.SetActive(true);
-        Destroy(gameObject);
+        UIController.Instance.SetActiveLetterPanel(true);
+        //Destroy(gameObject);
     }
 
     public void PlaySlideInAniamtion() {

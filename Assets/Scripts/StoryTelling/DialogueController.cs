@@ -13,8 +13,6 @@ public class DialogueController : MonoBehaviour
 
     [Header("UI")]
     [SerializeField]
-    private GameObject _storyPanel;
-    [SerializeField]
     private TextMeshProUGUI _speakerText;
     [SerializeField]
     private GameObject _nextText;
@@ -22,10 +20,7 @@ public class DialogueController : MonoBehaviour
     private TextMeshProUGUI _contentText;
     private TypewriterEffect _typewriter;
 
-    [Header("Settings")]
-    private float _delayTimeBetweenLines = 2.0f;
-
-    public bool IsStoryRunning => _storyPanel.activeInHierarchy;
+    public bool IsStoryRunning => UIController.Instance.IsActiveStoryPanel();
 
     private StoryList _story;
     private string _currentStoryId;
@@ -50,7 +45,8 @@ public class DialogueController : MonoBehaviour
     // Update UI with the next line in specified story
     public void PlayStory(string id) {
 
-        _storyPanel.SetActive(true);
+        //_storyPanel.SetActive(true);
+        UIController.Instance.SetActiveStoryPanel(true);
         ClearState();
 
         Line nextLine = null;
@@ -66,7 +62,8 @@ public class DialogueController : MonoBehaviour
         }
         else {
             _currentStoryId = "";
-            _storyPanel.SetActive(false);
+            //_storyPanel.SetActive(false);
+            UIController.Instance.SetActiveStoryPanel(false);
         }
     }
     private void ContinueStory() {
@@ -93,11 +90,36 @@ public class DialogueController : MonoBehaviour
             _currentLineComplete = true;
             _typewriter.CompleteTextRevealed -= ContinueStory;
 
-            _storyPanel.SetActive(false);
+            //_storyPanel.SetActive(false);
+            UIController.Instance.SetActiveStoryPanel(false);
         }
     }
 
- 
+    //skip story and mark all lines as read
+    public void SkipStoryCompletely(string id) {
+        Story story = GetStory(id);
+        if (story == null)
+            return;
+        if (story.currentLine >= story.lines.Count())
+            return;
+
+        story.currentLine = story.lines.Count();
+    }
+    public void SkipCurrentStoryCompletely() {
+        if (!IsStoryRunning)
+            return;
+
+        Story story = GetStory(_currentStoryId);
+        if (story == null)
+            return;
+        if (story.currentLine >= story.lines.Count())
+            return;
+
+        story.currentLine = story.lines.Count();
+
+        ClearState();
+        UIController.Instance.SetActiveStoryPanel(false);
+    }
 
     private void ClearState() {
         _currentStoryId = "";
