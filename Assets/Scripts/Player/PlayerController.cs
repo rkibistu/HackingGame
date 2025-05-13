@@ -82,6 +82,8 @@ public class PlayerController : MonoBehaviour
 
     public void DisableAnimator() {
         _animator.enabled = false;
+
+
     }
     
     public void StartActions() {
