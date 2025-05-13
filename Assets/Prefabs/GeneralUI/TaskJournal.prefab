@@ -221,19 +221,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060441078918276054}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4195234201652573487}
   - {fileID: 3569895073394919639}
-  m_Father: {fileID: 8515360189618940288}
+  m_Father: {fileID: 6513846943352418890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 442.49}
-  m_SizeDelta: {x: 0, y: -884.99}
+  m_AnchoredPosition: {x: 0, y: 534.63904}
+  m_SizeDelta: {x: 118.079956, y: -700.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1511767116817795124
 CanvasRenderer:
@@ -599,13 +599,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6350959693776804623}
   - component: {fileID: 4801251180492883690}
+  - component: {fileID: 3166517386575309497}
   m_Layer: 5
   m_Name: TaskJournal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6350959693776804623
 RectTransform:
   m_ObjectHideFlags: 0
@@ -634,6 +635,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7894717488090901423}
   m_CullTransparentMesh: 1
+--- !u!114 &3166517386575309497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894717488090901423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d5d4d06a4df6441b60503ec3b41e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jsonFilename: Scenario_1\tasks.json
+  _taskRowPrefab: {fileID: 974559341702589528, guid: 78f6198ff371719428cb739c35f0c191, type: 3}
+  _subtaskRowPrefab: {fileID: 8535055106004880026, guid: 6e430afd45a09c04698107b94a2f4dc5, type: 3}
+  _journalContentContainer: {fileID: 1776164398226060546}
+  _currentObjectiveText: {fileID: 0}
 --- !u!1 &8047911702531524935
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +684,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2453707241232225826}
+  - {fileID: 6995311193023114923}
   m_Father: {fileID: 8515360189618940288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -753,7 +772,7 @@ GameObject:
   - component: {fileID: 3095597472710932237}
   - component: {fileID: 225290549075045378}
   m_Layer: 5
-  m_Name: MainFrame
+  m_Name: TaskJournalContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -773,7 +792,6 @@ RectTransform:
   m_Children:
   - {fileID: 6478036848859141619}
   - {fileID: 6513846943352418890}
-  - {fileID: 6995311193023114923}
   m_Father: {fileID: 6350959693776804623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -796,7 +814,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8356356685756938483}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
