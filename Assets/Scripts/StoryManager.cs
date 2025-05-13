@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class StoryManager : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI _speakerText;
-    [SerializeField]
-    private TextMeshProUGUI _contentText;
+  
 
     public static StoryManager Instance { get; private set; }
 
