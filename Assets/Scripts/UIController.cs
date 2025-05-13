@@ -57,8 +57,8 @@ public class UIController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab)) {
-   
+        
+        if (_menu && Input.GetKeyDown(KeyCode.BackQuote)) {
             _menu.Toggle();
             if (_menu.IsActive()) {
                 //We need to store this ebcause there are other UI
@@ -85,8 +85,6 @@ public class UIController : MonoBehaviour {
                 Cursor.lockState = _lastCursorLockMode;
                 Cursor.visible = _lastCursorVisibility;
             }
-
-
         }
 
         //This is just for test here
