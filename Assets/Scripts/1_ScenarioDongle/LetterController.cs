@@ -11,6 +11,7 @@ public class LetterController : InteractiveElement
 
     override public void DoSomething() {
         UIController.Instance.SetActiveLetterPanel(true);
+        TasksController.Instance.ActivateTask("check-desktop");
         //Destroy(gameObject);
     }
 

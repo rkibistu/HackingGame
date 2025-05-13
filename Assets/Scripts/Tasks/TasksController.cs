@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using static TasksJSONStructure;
 
@@ -13,9 +14,21 @@ public class TasksController : MonoBehaviour {
     private GameObject _subtaskRowPrefab;
     [SerializeField]
     private Transform _journalContentContainer;
+    [SerializeField]
+    private TextMeshProUGUI _currentObjectiveText;
 
     private TaskList _tasks;
     private Dictionary<string, TaskRow> _journalRows = new();
+
+    private Task _currentTask;
+
+    public static TasksController Instance { get; private set; }
+    private void Awake() {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+
+        Instance = this;
+    }
 
     //  Example usage in Start
     void Start() {
@@ -40,13 +53,18 @@ public class TasksController : MonoBehaviour {
         //just for testing
         if (Input.GetKeyDown(KeyCode.T)) {
             //Mark("check-room");
-            ActivateTask("check-door");
+            //ActivateTask("check-door");
         }
     }
 
     public void Mark(string taskId, bool complete = true) {
         if (_journalRows.ContainsKey(taskId)) {
             _journalRows[taskId].Mark(complete);
+
+            Debug.Log(taskId + "    " + _currentTask.id);
+            if (taskId == _currentTask.id) {
+                RenewCurrentObjective();
+            }
         }
     }
 
@@ -63,6 +81,11 @@ public class TasksController : MonoBehaviour {
             TaskRow taskRow = row.GetComponent<TaskRow>();
             taskRow.Init(task);
             _journalRows[task.id] = taskRow;
+
+            // Change current objective every time you activate a new task
+            // This could be changed later. Maybe a dedicated script for the panel so
+            // we add some aniamtions and effects
+            UpdateCurrentObjectivePanel(task);
 
             foreach (var step in task.steps) {
                 row = Instantiate(_subtaskRowPrefab, _journalContentContainer);
@@ -113,5 +136,31 @@ public class TasksController : MonoBehaviour {
                 _journalRows[task.id] = taskRow;
             }
         }
+        RenewCurrentObjective();
+    }
+
+    // Returns next active task
+    private Task GetNextTask() {
+        foreach (var activeTask in _journalRows.Values) {
+            Task task = activeTask.GetTask();
+            if (activeTask.GetTask().done == false)
+                return task;
+        }
+        return null;
+    }
+
+    private void RenewCurrentObjective() {
+        Task task = GetNextTask();
+        UpdateCurrentObjectivePanel(task);
+    }
+
+    //updates the cotnent of the panel
+    private void UpdateCurrentObjectivePanel(Task task) {
+        _currentTask = task;
+        Debug.Log(task.title);
+        if (task == null)
+            _currentObjectiveText.text = "";
+        else
+            _currentObjectiveText.text = task.title;
     }
 }

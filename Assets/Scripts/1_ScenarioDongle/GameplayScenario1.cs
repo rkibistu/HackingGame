@@ -19,6 +19,7 @@ public class GameplayScenario1 : GameplayController
 
         AudioControllerBasic.Instance.PlaySound("knock-door");
         DialogueController.Instance.PlayStory("intro");
+        TasksController.Instance.ActivateTask("check-door"); 
     }
     
     

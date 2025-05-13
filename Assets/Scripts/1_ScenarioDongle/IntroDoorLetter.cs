@@ -13,6 +13,7 @@ public class IntroDoorLetter : MonoBehaviour {
         if (other.tag == "Player") {
 
             _letter.PlaySlideInAniamtion();
+            TasksController.Instance.Mark("check-door");
             Destroy(gameObject);
         }
     }
