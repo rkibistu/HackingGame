@@ -32,8 +32,8 @@ public class TypewriterEffect : MonoBehaviour
     private WaitForSeconds _skipDelay;
     private WaitForSeconds _textboxFullEventDelay;
 
-    public static event Action CompleteTextRevealed;
-    public static event Action<char> CharacterRevealed;
+    public event Action CompleteTextRevealed;
+    public event Action<char> CharacterRevealed;
 
     private void Awake()
     {
@@ -66,15 +66,15 @@ public class TypewriterEffect : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_textBox.maxVisibleCharacters != _textBox.textInfo.characterCount - 1)
-                Skip();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            FeedText("salu pa ce faci bien si eui hdishdihsidis hidhishdihsihd si hidshidhis ihdishi dhih ihdsi hih ishihidh ihdi sh");
-        }
+        // PROBLEM here: skips wokrs. But not toghether with the idea of rpessing the same button
+        // to go to the next line in gameplaymanager.
+        // TODO later; skip is optional behaviour
+
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    if (_textBox.maxVisibleCharacters != _textBox.textInfo.characterCount - 1)
+        //        Skip();
+        //}
     }
 
     public void PrepareForNewText(UnityEngine.Object obj)
@@ -83,6 +83,7 @@ public class TypewriterEffect : MonoBehaviour
             return;
         
         _readyForNewText = false;
+        CurrentlySkipping = false;
 
         if (_typewriterCorotuine != null)
             StopCoroutine(_typewriterCorotuine);
@@ -105,8 +106,8 @@ public class TypewriterEffect : MonoBehaviour
             {
                 _textBox.maxVisibleCharacters++;
                 yield return _textboxFullEventDelay;
-                CompleteTextRevealed?.Invoke();
                 _readyForNewText = true;
+                CompleteTextRevealed?.Invoke();
                 yield break;
             }
 
@@ -142,7 +143,8 @@ public class TypewriterEffect : MonoBehaviour
             return;
         }
 
-        StopCoroutine(_typewriterCorotuine);
+        if(_typewriterCorotuine != null)
+            StopCoroutine(_typewriterCorotuine);
         _textBox.maxVisibleCharacters = _textBox.textInfo.characterCount;
         _readyForNewText = true;
         CurrentlySkipping = false;

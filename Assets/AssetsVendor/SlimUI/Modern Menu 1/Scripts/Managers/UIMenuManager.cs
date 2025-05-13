@@ -289,6 +289,9 @@ namespace SlimUI.ModernMenu{
 
         public void LoadSceneByNameDirectly(string sceneName)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
             SceneManager.LoadScene(sceneName);
         }
     }

@@ -18,13 +18,13 @@ public class GameplayController : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    protected virtual void Start()
     {
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void  Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -55,5 +55,9 @@ public class GameplayController : MonoBehaviour
     public void CompleteLevel()
     {
         MenuController.Instance.CompleteLevel(_levelIndex);
+    }
+
+    public virtual void StartLevel() {
+
     }
 }

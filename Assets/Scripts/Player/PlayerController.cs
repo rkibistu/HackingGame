@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private UIController _uiController;
 
+    private Animator _animator;
+
 #if ENABLE_INPUT_SYSTEM
     private PlayerInput _playerInput;
 #endif
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        _animator = GetComponent<Animator>();
         _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
         _playerInput = GetComponent<PlayerInput>();
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
         RaycastHit hit;
 
+        Debug.DrawRay(ray.origin, ray.direction * _interactionDistance, Color.red);
+
         // Perform the raycast
         if (Physics.Raycast(ray, out hit, _interactionDistance, _interactiveLayer))
         {
@@ -73,5 +78,13 @@ public class PlayerController : MonoBehaviour
         {
             _uiController.HideHint();
         }
+    }
+
+    public void DisableAnimator() {
+        _animator.enabled = false;
+    }
+    
+    public void StartActions() {
+        GameplayController.Instance.StartLevel();
     }
 }
