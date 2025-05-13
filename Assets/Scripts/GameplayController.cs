@@ -5,8 +5,6 @@ public class GameplayController : MonoBehaviour
 {
     [SerializeField]
     private int _levelIndex = 0;
-    [SerializeField]
-    private List<GameObject> _deactivateWhileMenu;
 
     public static GameplayController Instance { get; private set; }
 
@@ -22,39 +20,13 @@ public class GameplayController : MonoBehaviour
     {
 
     }
-
-    // Update is called once per frame
     protected virtual void  Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            MenuController.Instance.Toggle();
-            if (MenuController.Instance.IsActive())
-            {
-                foreach (var obj in _deactivateWhileMenu)
-                {
-                    obj.SetActive(false);
-                }
-            }
-            else
-            {
-                foreach (var obj in _deactivateWhileMenu)
-                {
-                    obj.SetActive(true);
-                }
-            }
-        }
-        
-        // this should be called when the level is finished
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            CompleteLevel();
-        }
+
     }
 
-    public void CompleteLevel()
-    {
-        MenuController.Instance.CompleteLevel(_levelIndex);
+    public int GetCurrentLevelIndex() {
+        return _levelIndex;
     }
 
     public virtual void StartLevel() {
