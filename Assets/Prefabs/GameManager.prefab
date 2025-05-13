@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5301633547628962360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6834330660372473533}
+  - component: {fileID: 5273941477178097896}
+  - component: {fileID: 2665999146491815989}
+  - component: {fileID: 987013755656790934}
+  - component: {fileID: 6827206363647735270}
+  - component: {fileID: 1781044794365222430}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6834330660372473533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301633547628962360}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -51.85, y: 0, z: -34.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5273941477178097896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301633547628962360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9657dcf63e13b824e8437430471f7d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debug: 0
+  _forcedPhase: 0
+  _scenarioBasePath: Scenario_1
+  _jsonFilenama: scenario.json
+--- !u!114 &2665999146491815989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301633547628962360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f250b42e44a9e6246afad9d3196318f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelIndex: 1
+--- !u!114 &987013755656790934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301633547628962360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d5d4d06a4df6441b60503ec3b41e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jsonFilename: Scenario_1\tasks.json
+  _taskRowPrefab: {fileID: 974559341702589528, guid: 78f6198ff371719428cb739c35f0c191, type: 3}
+  _subtaskRowPrefab: {fileID: 8535055106004880026, guid: 6e430afd45a09c04698107b94a2f4dc5, type: 3}
+  _journalContentContainer: {fileID: 0}
+  _currentObjectiveText: {fileID: 0}
+--- !u!114 &6827206363647735270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301633547628962360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce21791ed6b5c44bb75da97b54c5434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClips:
+  - name: knock-door
+    clip: {fileID: 8300000, guid: 7b1032e55ddd64e4188b15887ef96612, type: 3}
+    volume: 1
+    playLocation: {fileID: 0}
+  - name: paper-slide
+    clip: {fileID: 8300000, guid: d1abc5af8b1b6234fb9b2ac2441dafec, type: 3}
+    volume: 1
+    playLocation: {fileID: 0}
+--- !u!114 &1781044794365222430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301633547628962360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0092c941b12e4e46b6763996f334902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jsonFilename: Scenario_1\story.json
+  _speakerText: {fileID: 0}
+  _nextText: {fileID: 0}
+  _contentText: {fileID: 0}

@@ -102,13 +102,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1640424621003094464}
   - component: {fileID: 4095073879460356222}
+  - component: {fileID: 5681120628646603728}
   m_Layer: 5
   m_Name: StoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1640424621003094464
 RectTransform:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3132710277527357762}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -139,6 +140,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3132710277527357762}
   m_CullTransparentMesh: 1
+--- !u!114 &5681120628646603728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132710277527357762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0092c941b12e4e46b6763996f334902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jsonFilename: Scenario_1\story.json
+  _speakerText: {fileID: 689901317453782929}
+  _nextText: {fileID: 3667065211852043459}
+  _contentText: {fileID: 7797568044620613051}
 --- !u!1 &3667065211852043459
 GameObject:
   m_ObjectHideFlags: 0
