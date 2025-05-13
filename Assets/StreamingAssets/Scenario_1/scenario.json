@@ -51,7 +51,9 @@
                             "output": "Output of command:\r\nlo\t\tno wireless extensions.\r\n\r\neth0\t\tno wireless extensions.\r\n",
                             "outputFile": "",
                             "required": "true",
-                            "final": "true"
+                            "final": "true",
+                            "taskIdToComplete": "check-desktop",
+                            "taskIdToStart": "test-auto"
                         }
                     ]
                 },
