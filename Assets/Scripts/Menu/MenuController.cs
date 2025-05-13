@@ -8,16 +8,16 @@ public class MenuController : MonoBehaviour
     private GameObject _menuContainer;
     [SerializeField]
     private UILevels _levelsController;
-    public static MenuController Instance { get; private set; }
+    //public static MenuController Instance { get; private set; }
 
     private bool _initialInit = true;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-            Destroy(gameObject);
+        //if (Instance != null && Instance != this)
+        //    Destroy(gameObject);
 
-        Instance = this;
+        //Instance = this;
     }
 
     private void OnEnable()
@@ -33,14 +33,13 @@ public class MenuController : MonoBehaviour
         {
             //called every time except on first load at start game
             _menuContainer.SetActive(false);
-
+            UIController.Instance.SetMenuController(this);
         }
 
         _initialInit = false;
     }
     public void Toggle()
     {
-        Debug.Log(_menuContainer.activeInHierarchy);
         if (_menuContainer.activeInHierarchy == false)
             Show();
         else
@@ -49,14 +48,10 @@ public class MenuController : MonoBehaviour
     }
     public void Show()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         _menuContainer.SetActive(true);
     }
     public void Hide()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
         _menuContainer.SetActive(false);
     }
     public bool IsActive() { return _menuContainer.activeInHierarchy == true; }
