@@ -62,6 +62,7 @@ public class TerminalManager : MonoBehaviour
 
     private void Awake()
     {
+      
     }
 
     private void Start()
@@ -210,8 +211,15 @@ public class TerminalManager : MonoBehaviour
 
     private void Interpret(string userInput)
     {
-        List<string> responses = _newInterpreter.Interpret(userInput, _terminalName);
+        // some inputs can change the promt of the terminal
+        string newPromt;
+        List<string> responses = _newInterpreter.Interpret(userInput, _terminalName, out newPromt);
 
+        //change promt
+        if (newPromt != null)
+            _directoryPathText.text = newPromt;
+
+        //cosnider lines to be displayed with next render
         for (int i = 0; i < responses.Count; i++)
         {
             _linesContent.Add(responses[i]);

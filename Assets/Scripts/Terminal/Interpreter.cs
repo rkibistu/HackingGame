@@ -71,8 +71,9 @@ public class Interpreter : MonoBehaviour {
     // The method will look up in the commands list of terminal with the name terminalName
     // and will keep in mind the current phase of the terminal. Only the commands from
     // the current phase of the terminal are checked. Not from previous or future phases.
-    public List<string> Interpret(string input, string terminalName) {
-        Debug.Log("Terminal name supplied: " + terminalName);
+    public List<string> Interpret(string input, string terminalName, out string newPromt) {
+        //this will be changed to a specific value if the input triggered a change in terminal promt
+        newPromt = null;
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
@@ -95,19 +96,33 @@ public class Interpreter : MonoBehaviour {
             //Try to advance to next phase if all requirements are meet
             AdvanceScenario(closerCommand, phase, terminal);
 
-            // If this command has an associated task -> activate it
-            if (closerCommand.taskIdToComplete != null) {
-                TasksController.Instance.Mark(closerCommand.taskIdToComplete, true, true);
-            }
-            if (closerCommand.taskIdToStart != null) {
-                TasksController.Instance.ActivateTask(closerCommand.taskIdToStart);
-            }
+            // Some commands can finish/start tasks
+            CheckForTasks(closerCommand);
+
+            // Some commands can change the terminal promt
+            //CheckForPromtChanging(closerCommand);
+            newPromt = closerCommand.changePrompt;
 
             return PostProcessOutput(closerCommand.output);
         }
-
+    
         // The command is only partially correct
         return new List<string> { "Command is partially recongnized.", "OK: " + commonPrefix };
+    }
+
+    private void CheckForTasks(Command cmd) {
+        if (cmd.taskIdToComplete != null) {
+            TasksController.Instance.Mark(cmd.taskIdToComplete, true, true);
+        }
+        if (cmd.taskIdToStart != null) {
+            TasksController.Instance.ActivateTask(cmd.taskIdToStart);
+        }
+    }
+    private void CheckForPromtChanging(Command cmd, out string newPromt) {
+        newPromt = null;
+        if(cmd.changePrompt != null) {
+            newPromt = cmd.changePrompt;
+        }
     }
 
     // Returns a list with all accesible commands that begin with
@@ -245,6 +260,11 @@ public class Interpreter : MonoBehaviour {
 
         string aux;
         foreach (var cmd in phase.commands) {
+            if (input == cmd.input) {
+                commonPrefix = input;
+                return cmd;
+            }
+
             aux = Helper.GetCommonPrefix(input, cmd.input);
             if (aux.Length > 0 && aux.Length >= commonPrefix.Length) {
                 commonPrefix = aux;

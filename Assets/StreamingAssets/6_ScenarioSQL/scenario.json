@@ -5,7 +5,28 @@
       "phases": [
         {
           "name": "0",
+          "prompt": "Def:\\>",
           "commands": [
+            {
+              "input": "test",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false",
+              "changePrompt": "NewPromt:\\"
+            },
+            {
+              "input": "test_out",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false",
+              "changePrompt": "OldPromt:\\"
+            },
             {
               "input": "ls",
               "alternatives": [
