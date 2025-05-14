@@ -156,6 +156,8 @@ public class TerminalManager : MonoBehaviour
     // This is the single emthod that should be sued to display new lines in terminal!!!
     private int DisplayLinesContent()
     {
+        if (_lastDisplayWasTemporary)
+            RemoveTempLine();
         _lastDisplayWasTemporary = false;
 
         int addedLinesCount = 0;
@@ -317,7 +319,7 @@ public class TerminalManager : MonoBehaviour
         if (options.Count == 1)
         {
             // If last line was a temporary one (autocomplete) -> remove it
-            RemoveTempLine();
+            //RemoveTempLine();
 
             _terminalInput.text = options[0];
             _terminalInput.caretPosition = _terminalInput.text.Length;
@@ -329,7 +331,7 @@ public class TerminalManager : MonoBehaviour
             }
 
             // If last line was a temporary one (autocomplete) -> remove it
-            RemoveTempLine();
+            //RemoveTempLine();
 
             // Display autocomplete line
             string optionsContent = string.Join(" ", options);

@@ -54,17 +54,14 @@ public class Interpreter : MonoBehaviour {
     // Check if the length of the common prefix is equal to the length of one of the alternatives commands
     // If it is, return true. Else, return false
     // This is used to check if the command is a partial match with one of the alternatives
-    public bool CheckCloserPrefixLengthFromAlternatives(string commonPrefix, List<string> alternatives) {
-        bool result = false;
-
+    public bool CheckCloserPrefixLengthFromAlternatives(string input, List<string> alternatives) {
         foreach (var alternative in alternatives) {
-            if (commonPrefix.Length == alternative.Length) {
-                result = true;
-                break;
+            if (input == alternative) {
+                return true;
             }
         }
 
-        return result;
+        return false;
     }
 
     // Get the output of the input command.
@@ -89,7 +86,7 @@ public class Interpreter : MonoBehaviour {
         if (closerCommand == null) {
             return new List<string> { "Command is not recongnized." };
         }
-        if (commonPrefix.Length == closerCommand.input.Length
+        if (input == closerCommand.input
             || CheckCloserPrefixLengthFromAlternatives(commonPrefix, closerCommand.alternatives)) {
             // Found the right command
 
@@ -116,12 +113,6 @@ public class Interpreter : MonoBehaviour {
         }
         if (cmd.taskIdToStart != null) {
             TasksController.Instance.ActivateTask(cmd.taskIdToStart);
-        }
-    }
-    private void CheckForPromtChanging(Command cmd, out string newPromt) {
-        newPromt = null;
-        if(cmd.changePrompt != null) {
-            newPromt = cmd.changePrompt;
         }
     }
 
