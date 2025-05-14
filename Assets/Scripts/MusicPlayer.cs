@@ -18,18 +18,13 @@ public class MusicPlayer : MonoBehaviour
 
     void Update()
     {
-        // If the audio finished playing and it had a clip
-        if (!audioSource.isPlaying && audioSource.clip != null)
+        if (audioSource.clip != null && !manuallyStopped)
         {
-            PlayNextIfNotManuallyStopped();
-        }
-    }
-
-    private void PlayNextIfNotManuallyStopped()
-    {
-        if (!manuallyStopped)
-        {
-            NextTrack();
+            // Use a small threshold to detect end of track
+            if (!audioSource.isPlaying && audioSource.time >= audioSource.clip.length - 0.1f)
+            {
+                NextTrack();
+            }
         }
     }
 
