@@ -7,11 +7,30 @@ public class MusicPlayer : MonoBehaviour
     public AudioClip[] tracks;
     public Text trackNameText;
 
+    bool manuallyStopped = false;
+
     private int currentTrackIndex = 0;
 
     void Start()
     {
         PlayTrack(currentTrackIndex);
+    }
+
+    void Update()
+    {
+        // If the audio finished playing and it had a clip
+        if (!audioSource.isPlaying && audioSource.clip != null)
+        {
+            PlayNextIfNotManuallyStopped();
+        }
+    }
+
+    private void PlayNextIfNotManuallyStopped()
+    {
+        if (!manuallyStopped)
+        {
+            NextTrack();
+        }
     }
 
     public void PlayTrack(int index)
