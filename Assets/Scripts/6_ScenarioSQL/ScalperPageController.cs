@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -32,9 +34,8 @@ namespace ScenarioSQL {
             if (paramsurl.Length > 0) {
                 //?name=value
                 string paramName = paramsurl.Split("=")[0];
-                string paramValue = paramsurl.Split("=")[1];
                 if (paramName == _paramName) {
-                    Filter(paramValue);
+                    Filter(paramsurl.Substring(paramsurl.IndexOf('=') + 1));
                 }
             }
 
@@ -59,6 +60,7 @@ namespace ScenarioSQL {
         }
         private void Filter(string input) {
 
+            Debug.Log(input);
             string normalizedInput = Regex.Replace(input, @"\s+", " ").Trim();
 
             // Get text until first ';' and use it to filter
@@ -66,6 +68,8 @@ namespace ScenarioSQL {
             string filterQuery = normalizedInput.Split(";")[0]; // 6090%'
             filterQuery = Regex.Replace(filterQuery, @"%", "");
             filterQuery = Regex.Replace(filterQuery, @"'", "");
+            filterQuery.TrimEnd();
+            filterQuery.TrimStart();
 
             foreach (var obj in _purchasableObjects) {
                 PurchasableItem item = obj.GetComponent<PurchasableItem>();
@@ -78,20 +82,30 @@ namespace ScenarioSQL {
             }
 
             // parse and execute sql injection
+            Debug.Log("N: " + normalizedInput);
             if(normalizedInput.Contains(";"))
                 ParseAndExecuteInjection(normalizedInput.Substring(normalizedInput.IndexOf(";") + 1));
         }
 
         private void ParseAndExecuteInjection(string injectionInput) {
 
+            Debug.Log("P: " + injectionInput);
             if (!injectionInput.Contains(";")) {
                 Debug.Log("Inejction incomplete");
                 return;
-            }
+            }  
 
             string updateQuery = injectionInput.Split(";")[0]; //  update products set price=49.99 where name like ' % 6090 % '
             string commentQuery = injectionInput.Split(";")[1]; //  #
             //TODO: invalidate ijection if commentQuery is missing??? or something??
+
+            string missingWord;
+            bool queryOkay = CheckQuery(updateQuery, out missingWord);
+            if (queryOkay == false)
+            {
+                Debug.LogWarning("Replace this with some visual feedback! Missing/wrong word in query: " + missingWord);
+                return;
+            }
 
             string price, targetName;
             string pricePattern = @"\s+price\s*=\s*(\d+(\.\d+)?)";
@@ -99,6 +113,15 @@ namespace ScenarioSQL {
 
             Match priceMatch = Regex.Match(updateQuery, pricePattern, RegexOptions.IgnoreCase);
             Match targetNameatch = Regex.Match(updateQuery, targetNamePattern);
+
+            if(priceMatch.Success == false) {
+                Debug.LogWarning("Replace this with some visual feedback! Wrong price pattern!");
+                return;
+            }
+            if(targetNameatch.Success == false) {
+                Debug.LogWarning("Replace this with some visual feedback! Wrong target name pattern!");
+                return;
+            }
 
             if (priceMatch.Success && targetNameatch.Success) {
                 price = priceMatch.Groups[1].Value;
@@ -120,8 +143,32 @@ namespace ScenarioSQL {
             //6090'; update products set price=49.99 where name like ' %6090% '; #
         }
 
+        private bool CheckQuery(string query, out string missingWord) {
+            missingWord = null;
+            var words = new List<string>(query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
+            List<string> wordsToFind = new List<string>() { 
+                "update", "products", "set", "where", "name", "like"
+            };
+            int index = 0;
+            string currentWordToCheck = words[0];
 
+            foreach (var word in words) {
+                currentWordToCheck = wordsToFind[index];
+                if(word.ToLower() == currentWordToCheck) {
+                    index++;
+                }
 
+                if(index >= wordsToFind.Count) {
+                    return true;
+                }
+            }
+
+            missingWord = currentWordToCheck;
+            return false;
+
+        }
+
+        
     }
 }
