@@ -339,6 +339,7 @@ public class TerminalManager : MonoBehaviour
             string optionsContent = string.Join(" ", options);
             AddContent(optionsContent);
             DisplayLinesContentTemp();
+            ScrollToBottom(1);
         }
     }
 
