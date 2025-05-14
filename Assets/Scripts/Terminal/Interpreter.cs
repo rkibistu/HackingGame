@@ -231,10 +231,10 @@ public class Interpreter : MonoBehaviour {
             
             if(AdvanceRequirementsMet(phase) == true) {
                 terminal.currentPhase++;
-
                 //check for tasl completion using phase name
             }
         }
+        terminal.currentPhase = Mathf.Min(terminal.currentPhase, terminal.phases.Count - 1);
     }
 
     private bool AdvanceRequirementsMet(Phase phase) {
