@@ -114,7 +114,9 @@
               "output": "",
               "outputFile": "gcc_output.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "compile-fork-bomb",
+              "taskIdToStart": "upload-fork-bomb"
             }
           ]
         },
@@ -192,8 +194,15 @@
               "output": "",
               "outputFile": "sqlite3_entry.txt",
               "required": "true",
-              "final": "false"
-            },
+              "final": "true",
+              "taskIdToComplete": "check-database-file",
+              "taskIdToStart": "select-exam-table"
+            }
+          ]
+        },
+        {
+          "name": "3",
+          "commands": [
             {
               "input": ".help",
               "alternatives": [],
