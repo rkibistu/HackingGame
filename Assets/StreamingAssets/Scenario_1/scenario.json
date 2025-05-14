@@ -53,7 +53,7 @@
                             "required": "true",
                             "final": "true",
                             "taskIdToComplete": "check-desktop",
-                            "taskIdToStart": "test-auto"
+                            "taskIdToStart": "use-wifi-dongle"
                         }
                     ]
                 },
@@ -110,7 +110,9 @@
                             "output": "Output of command:\r\nlo\t\tno wireless extensions.\r\n\r\neth0\t\tno wireless extensions.\r\n",
                             "outputFile": "",
                             "required": "false",
-                            "final": "false"
+                            "final": "false",
+                            "taskIdToComplete": "use-wifi-dongle",
+                            "taskIdToStart": "use-hcxdumptool"
                         }
                     ]
                 },
@@ -162,7 +164,9 @@
                             "output": "",
                             "outputFile": "iwconfig_dongle_out.txt",
                             "required": "true",
-                            "final": "true"
+                            "final": "true",
+                            "taskIdToComplete": "use-wifi-dongle",
+                            "taskIdToStart": "use-hcxdumptool"
                         }
                     ]
                 },
@@ -236,7 +240,9 @@
                             "output": "",
                             "outputFile": "hcxdumptool_out_1.txt",
                             "required": "true",
-                            "final": "true"
+                            "final": "true",
+                            "taskIdToComplete": "use-hcxdumptool",
+                            "taskIdToStart": "use-hcxpcapngtool"
                         }
                     ]
                 },
@@ -306,7 +312,9 @@
                             "output": "",
                             "outputFile": "hcxdumptool_out_2.txt",
                             "required": "true",
-                            "final": "true"
+                            "final": "true",
+                            "taskIdToComplete": "use-hcxpcapngtool",
+                            "taskIdToStart": "use-hashcat"
                         }
                     ]
                 },
