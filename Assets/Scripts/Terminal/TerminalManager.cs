@@ -62,6 +62,7 @@ public class TerminalManager : MonoBehaviour
 
     private void Awake()
     {
+      
     }
 
     private void Start()
@@ -75,6 +76,12 @@ public class TerminalManager : MonoBehaviour
         _windowHeight = Screen.height;
 
         CalculateCharactersPerLine();
+
+        // change name according to json or keep default if the json doesn t specify it
+        string defaultPrompt = _newInterpreter.GetDefaultPromt(_terminalName);
+        Debug.Log(defaultPrompt);
+        if (defaultPrompt != null)
+            _directoryPathText.text = defaultPrompt;
     }
 
     private void Update()
@@ -155,6 +162,8 @@ public class TerminalManager : MonoBehaviour
     // This is the single emthod that should be sued to display new lines in terminal!!!
     private int DisplayLinesContent()
     {
+        if (_lastDisplayWasTemporary)
+            RemoveTempLine();
         _lastDisplayWasTemporary = false;
 
         int addedLinesCount = 0;
@@ -210,8 +219,15 @@ public class TerminalManager : MonoBehaviour
 
     private void Interpret(string userInput)
     {
-        List<string> responses = _newInterpreter.Interpret(userInput, _terminalName);
+        // some inputs can change the promt of the terminal
+        string newPromt;
+        List<string> responses = _newInterpreter.Interpret(userInput, _terminalName, out newPromt);
 
+        //change promt
+        if (newPromt != null)
+            _directoryPathText.text = newPromt;
+
+        //cosnider lines to be displayed with next render
         for (int i = 0; i < responses.Count; i++)
         {
             _linesContent.Add(responses[i]);
@@ -308,36 +324,28 @@ public class TerminalManager : MonoBehaviour
 
         if (options.Count == 1)
         {
-            // If last line was a temporary one (autocomplete) -> remove it
-            RemoveTempLine();
-
+            // You have one option -> autocomplete
             _terminalInput.text = options[0];
             _terminalInput.caretPosition = _terminalInput.text.Length;
         }
         else
         {
+            // You have mutliple options -> suggest all fo them on a newline
             if(_linesContentIndex < _linesContent.Count) {
                 Debug.LogError("You though you will never have content here when you start this, rethink!");
             }
-
-            // If last line was a temporary one (autocomplete) -> remove it
-            RemoveTempLine();
 
             // Display autocomplete line
             string optionsContent = string.Join(" ", options);
             AddContent(optionsContent);
             DisplayLinesContentTemp();
-
-            //_terminalInput.text = string.Join(" ", options);
-            //_terminalInput.caretPosition = _terminalInput.text.Length;
-            //TODO (optional): treat the case when multiple commands are available with the same prefix
+            ScrollToBottom(1);
         }
     }
 
     // Remove temp line if this is present
     private void RemoveTempLine() {
         if (_lastDisplayWasTemporary == true && _lastLineDisplayed != null) {
-            Debug.Log("Aici");
             Destroy(_lastLineDisplayed);
             _lastLineDisplayed = null;
             _lastDisplayWasTemporary = false;
