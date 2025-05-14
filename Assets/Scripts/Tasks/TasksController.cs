@@ -16,6 +16,8 @@ public class TasksController : MonoBehaviour {
     private Transform _journalContentContainer;
     [SerializeField]
     private TextMeshProUGUI _currentObjectiveText;
+    [SerializeField]
+    private GameObject _currentObjectivePanel;
 
     private TaskList _tasks;
     private Dictionary<string, Task> _journalRows = new();
@@ -176,9 +178,13 @@ public class TasksController : MonoBehaviour {
     //updates the cotnent of the panel
     private void UpdateCurrentObjectivePanel(Task task) {
         _currentTask = task;
-        if (task == null)
+        if (task == null) {
             _currentObjectiveText.text = "";
-        else
+            _currentObjectivePanel.SetActive(false);
+        }
+        else {
+            _currentObjectivePanel.SetActive(true);
             _currentObjectiveText.text = task.title;
+        }
     }
 }

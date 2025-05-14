@@ -54,6 +54,10 @@ public class TerminalManager : MonoBehaviour
     private int _windowHeight;
     private int _charsPerLine;
 
+    //Used to keep some state
+    private bool _lastDisplayWasTemporary; //if this is true -> last line displayed in termianl was one that can/should be override (e.g. autocompelte suggestions)
+    private GameObject _lastLineDisplayed; // last line displayed in terminal, excepting input (only content line)
+
     public string Name { get => _terminalName; private set { } }
 
     private void Awake()
@@ -148,8 +152,11 @@ public class TerminalManager : MonoBehaviour
         _linesContent.Add(content);
     }
 
+    // This is the single emthod that should be sued to display new lines in terminal!!!
     private int DisplayLinesContent()
     {
+        _lastDisplayWasTemporary = false;
+
         int addedLinesCount = 0;
         for (int i = _linesContentIndex; i < _linesContent.Count; i++)
         {
@@ -157,11 +164,24 @@ public class TerminalManager : MonoBehaviour
             DisplayOneContent(_linesContent[i]);
             addedLinesCount++;
         }
-
+        
         _linesContentIndex += addedLinesCount;
         return addedLinesCount;
     }
 
+    // This is used only to display lines that could/should be override later
+    // (like  autocompelte suggestions when there are multiple options)
+    private int DisplayLinesContentTemp() {
+        int result =  DisplayLinesContent();
+        _lastDisplayWasTemporary = true;
+
+        return result;
+    }
+
+    // This method adds a new line in the terminal
+    // but this SHOULD NOT be used directly. This method doesn't update the 
+    // state if it is used directly. Its scope is to be used inside other internal methods
+    // use DisplayLinesContent or DisplayLinesContentAutocomplete instead
     private int DisplayOneContent(string text)
     {
         int linesNeeded = Mathf.CeilToInt((float)text.Length / _charsPerLine);
@@ -180,6 +200,9 @@ public class TerminalManager : MonoBehaviour
             int start = i * _charsPerLine;
             int length = Mathf.Min(_charsPerLine, text.Length - start);
             responseLineObj.GetComponentInChildren<TextMeshProUGUI>().text = text.Substring(start, length);
+
+            //Save state
+            _lastLineDisplayed = responseLineObj;
         }
 
         return linesNeeded;
@@ -285,12 +308,38 @@ public class TerminalManager : MonoBehaviour
 
         if (options.Count == 1)
         {
+            // If last line was a temporary one (autocomplete) -> remove it
+            RemoveTempLine();
+
             _terminalInput.text = options[0];
             _terminalInput.caretPosition = _terminalInput.text.Length;
         }
         else
         {
+            if(_linesContentIndex < _linesContent.Count) {
+                Debug.LogError("You though you will never have content here when you start this, rethink!");
+            }
+
+            // If last line was a temporary one (autocomplete) -> remove it
+            RemoveTempLine();
+
+            // Display autocomplete line
+            string optionsContent = string.Join(" ", options);
+            AddContent(optionsContent);
+            DisplayLinesContentTemp();
+
+            //_terminalInput.text = string.Join(" ", options);
+            //_terminalInput.caretPosition = _terminalInput.text.Length;
             //TODO (optional): treat the case when multiple commands are available with the same prefix
+        }
+    }
+
+    // Remove temp line if this is present
+    private void RemoveTempLine() {
+        if (_lastDisplayWasTemporary && _lastLineDisplayed != null) {
+            Destroy(_lastLineDisplayed);
+            _lastLineDisplayed = null;
+            _lastDisplayWasTemporary = false;
         }
     }
 

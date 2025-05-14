@@ -95,7 +95,7 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
-    new_progress = Progress(user_id=new_user.id, progress=0, timestamp=datetime.utcnow())
+    new_progress = Progress(user_id=new_user.id, progress=1, timestamp=datetime.utcnow())
     db.session.add(new_progress)
     db.session.commit()
 
