@@ -19,9 +19,22 @@ namespace ScenarioSQL {
         [SerializeField]
         private string _paramName = "name";
 
+        //some state variables
+        private bool _firstTimeOnSite = true;
+        private int _secondTimeSearch = 0;
+
         //Enabled and Disabled are called every time the Browser search bar is used
         // so we can use this methods to filter the params
         private void OnEnable() {
+
+            if (_firstTimeOnSite) {
+                _firstTimeOnSite = false;
+                TasksController.Instance.Mark("check-desktop");
+                TasksController.Instance.ActivateTask("try-search");
+
+                DialogueController.Instance.SkipCurrentStoryCompletely();
+                DialogueController.Instance.PlayStory("try-search");
+            }
 
             _internalSearchInput.text = "";
 
@@ -59,8 +72,17 @@ namespace ScenarioSQL {
             Filter(_internalSearchInput.text);
         }
         private void Filter(string input) {
+            Debug.Log("AIci: " + input);
+            if (_secondTimeSearch == 1) {
+                TasksController.Instance.Mark("try-search");
+                TasksController.Instance.ActivateTask("scan-sqlmap");
 
-            Debug.Log(input);
+                DialogueController.Instance.SkipCurrentStoryCompletely();
+                DialogueController.Instance.PlayStory("scan-sqlmap");
+            }
+            _secondTimeSearch++;
+            
+         
             string normalizedInput = Regex.Replace(input, @"\s+", " ").Trim();
 
             // Get text until first ';' and use it to filter
@@ -82,7 +104,6 @@ namespace ScenarioSQL {
             }
 
             // parse and execute sql injection
-            Debug.Log("N: " + normalizedInput);
             if(normalizedInput.Contains(";"))
                 ParseAndExecuteInjection(normalizedInput.Substring(normalizedInput.IndexOf(";") + 1));
         }
