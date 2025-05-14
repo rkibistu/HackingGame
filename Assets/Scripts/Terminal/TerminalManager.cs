@@ -336,7 +336,8 @@ public class TerminalManager : MonoBehaviour
 
     // Remove temp line if this is present
     private void RemoveTempLine() {
-        if (_lastDisplayWasTemporary && _lastLineDisplayed != null) {
+        if (_lastDisplayWasTemporary == true && _lastLineDisplayed != null) {
+            Debug.Log("Aici");
             Destroy(_lastLineDisplayed);
             _lastLineDisplayed = null;
             _lastDisplayWasTemporary = false;

@@ -8,6 +8,7 @@ public class GetDungleElement : InteractiveElement {
     }
     override public void DoSomething() {
         if (_interpreter.AdvanceByAction("plug_dongle")) {
+            TasksController.Instance.ActivateTask("use-wifi-dongle");
             Destroy(gameObject);
         }
     }
