@@ -93,7 +93,20 @@ public class Interpreter : MonoBehaviour {
         if (commonPrefix.Length == closerCommand.input.Length 
             || CheckCloserPrefixLengthFromAlternatives(commonPrefix, closerCommand.alternatives)) {
             // Found the right command
+
+            //Try to advance to next phase if all requirements are meet
             AdvanceScenario(closerCommand, phase, terminal);
+
+            // If this command has an associated task -> activate it
+            if(closerCommand.taskIdToComplete != null)
+            {
+                TasksController.Instance.Mark(closerCommand.taskIdToComplete, true, true);
+            }
+            if (closerCommand.taskIdToStart != null)
+            {
+                TasksController.Instance.ActivateTask(closerCommand.taskIdToStart);
+            }
+
             return PostProcessOutput(closerCommand.output);
         }
 

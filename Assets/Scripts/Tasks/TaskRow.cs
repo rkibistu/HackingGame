@@ -9,10 +9,10 @@ public class TaskRow : MonoBehaviour
     [SerializeField]
     private Image _checkmark;
 
-    public void Init(TasksJSONStructure.Task task, bool complete = false)
+    public void Init(TasksJSONStructure.Task task)
     {
         _title.text = task.title;
-        Mark(complete);
+        Mark(task.done);
     }
     public void Init(TasksJSONStructure.Step step, bool complete = false)
     {
