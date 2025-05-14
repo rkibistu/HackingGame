@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MusicPlayer : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip[] tracks;
-    public Text trackNameText;
+    public TMP_Text trackNameText;
 
     bool manuallyStopped = false;
 
@@ -18,6 +19,8 @@ public class MusicPlayer : MonoBehaviour
     private float[] spectrum = new float[64];
     private float[] bandLevels;
 
+    bool shuffleMode = true;
+
     void Start()
     {
         bandLevels = new float[vuBars.Length];
@@ -26,7 +29,14 @@ public class MusicPlayer : MonoBehaviour
 
     void Update()
     {
-        if (audioSource == null || vuBars == null || vuBars.Length == 0) return;
+        if (!manuallyStopped && audioSource.clip != null &&
+            !audioSource.isPlaying && audioSource.time >= audioSource.clip.length - 0.1f)
+        {
+            if (shuffleMode)
+                ShuffleTrack();
+            else
+                NextTrack();
+        }
 
         // Get frequency spectrum
         audioSource.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
@@ -95,7 +105,24 @@ public class MusicPlayer : MonoBehaviour
         int prev = (currentTrackIndex - 1 + tracks.Length) % tracks.Length;
         PlayTrack(prev);
     }
+
+    public void ShuffleTrack()
+    {
+        if (tracks.Length <= 1) return;
+
+        int newIndex;
+
+        do
+        {
+            newIndex = Random.Range(0, tracks.Length);
+        } while (newIndex == currentTrackIndex); // avoid repeating current track
+
+        PlayTrack(newIndex);
+    }
+
 }
+
+
 public class VUMeter : MonoBehaviour
 {
     public AudioSource audioSource;
@@ -103,7 +130,7 @@ public class VUMeter : MonoBehaviour
     public float sensitivity = 100f;
     public float smoothSpeed = 10f;
 
-    float[] samples = new float[64];
+    float[] samples = new float[256];
     float currentVolume = 0f;
 
     void Update()
