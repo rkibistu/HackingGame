@@ -7,11 +7,14 @@ namespace WebserverAPI
 {
     public class AuthManager : MonoBehaviour
     {
+        [Header("Login Fields")]
+        [SerializeField] private TMP_InputField usernameLoginField;
+        [SerializeField] private TMP_InputField passwordLoginField;
         public void Login()
         {
             // implement logic for getting username and password from input fields
-            string username = "admin1";
-            string password = "changeme";
+            string username = usernameLoginField.text;
+            string password = passwordLoginField.text;
 
 
             var webclient = WebClientService.Instance;
@@ -32,16 +35,21 @@ namespace WebserverAPI
             
         }
 
+        [Header("Register Fields")]
+        [SerializeField] private TMP_InputField usernameRegistrationField;
+        [SerializeField] private TMP_InputField passwordRegistrationField;
+        [SerializeField] private TMP_InputField institutionRegistrationField;
+
         public void Register()
         {
             // implement logic for getting username, password and institution name from input fields
-            string email = "admin2";
-            string password = "changeme";
-            string institutionName = "My Institution";
+            string username = usernameRegistrationField.text;
+            string password = passwordRegistrationField.text;
+            string institutionName = institutionRegistrationField.text;
 
 
             var webclient = WebClientService.Instance;
-            webclient.Register(email, password, institutionName, (success, message) =>
+            webclient.Register(username, password, institutionName, (success, message) =>
             {
                 if (success)
                 {
