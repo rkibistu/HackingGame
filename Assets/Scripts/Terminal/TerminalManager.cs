@@ -76,6 +76,12 @@ public class TerminalManager : MonoBehaviour
         _windowHeight = Screen.height;
 
         CalculateCharactersPerLine();
+
+        // change name according to json or keep default if the json doesn t specify it
+        string defaultPrompt = _newInterpreter.GetDefaultPromt(_terminalName);
+        Debug.Log(defaultPrompt);
+        if (defaultPrompt != null)
+            _directoryPathText.text = defaultPrompt;
     }
 
     private void Update()
@@ -318,36 +324,27 @@ public class TerminalManager : MonoBehaviour
 
         if (options.Count == 1)
         {
-            // If last line was a temporary one (autocomplete) -> remove it
-            //RemoveTempLine();
-
+            // You have one option -> autocomplete
             _terminalInput.text = options[0];
             _terminalInput.caretPosition = _terminalInput.text.Length;
         }
         else
         {
+            // You have mutliple options -> suggest all fo them on a newline
             if(_linesContentIndex < _linesContent.Count) {
                 Debug.LogError("You though you will never have content here when you start this, rethink!");
             }
-
-            // If last line was a temporary one (autocomplete) -> remove it
-            //RemoveTempLine();
 
             // Display autocomplete line
             string optionsContent = string.Join(" ", options);
             AddContent(optionsContent);
             DisplayLinesContentTemp();
-
-            //_terminalInput.text = string.Join(" ", options);
-            //_terminalInput.caretPosition = _terminalInput.text.Length;
-            //TODO (optional): treat the case when multiple commands are available with the same prefix
         }
     }
 
     // Remove temp line if this is present
     private void RemoveTempLine() {
         if (_lastDisplayWasTemporary == true && _lastLineDisplayed != null) {
-            Debug.Log("Aici");
             Destroy(_lastLineDisplayed);
             _lastLineDisplayed = null;
             _lastDisplayWasTemporary = false;

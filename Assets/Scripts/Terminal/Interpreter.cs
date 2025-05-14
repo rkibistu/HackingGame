@@ -35,9 +35,7 @@ public class Interpreter : MonoBehaviour {
             Destroy(gameObject);
 
         Instance = this;
-    }
 
-    void Start() {
         string filePath = Path.Combine(Application.streamingAssetsPath, _scenarioBasePath + "/" + _jsonFilenama);
         if (File.Exists(filePath)) {
             string jsonContent = File.ReadAllText(filePath);
@@ -48,6 +46,10 @@ public class Interpreter : MonoBehaviour {
         }
 
         PrepareOutputsFromFiles();
+    }
+
+    void Start() {
+        
     }
 
 
@@ -107,6 +109,7 @@ public class Interpreter : MonoBehaviour {
         return new List<string> { "Command is partially recongnized.", "OK: " + commonPrefix };
     }
 
+    // Mark as compelte or start a task if the current command specify it
     private void CheckForTasks(Command cmd) {
         if (cmd.taskIdToComplete != null) {
             TasksController.Instance.Mark(cmd.taskIdToComplete, true, true);
@@ -234,6 +237,16 @@ public class Interpreter : MonoBehaviour {
         return -1;
     }
 
+    // Get the default promt of a specific terminal
+    public string GetDefaultPromt(string terminalName) {
+        foreach (var terminal in _scenario.terminals) {
+            if (terminal.name == terminalName) {
+                return terminal.prompt;
+            }
+        }
+
+        return null;
+    }
 
     // The output message is wrote in json or separate files.
     // It needs to be processed and converted to a list of strings,
