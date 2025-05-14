@@ -16,6 +16,8 @@ public class TasksController : MonoBehaviour {
     private Transform _journalContentContainer;
     [SerializeField]
     private TextMeshProUGUI _currentObjectiveText;
+    [SerializeField]
+    private GameObject _currentObjectivePanel;
 
     private TaskList _tasks;
     private Dictionary<string, Task> _journalRows = new();
@@ -57,14 +59,27 @@ public class TasksController : MonoBehaviour {
         }
     }
 
-    public void Mark(string taskId, bool complete = true) {
+    // if markInactiveToo == false -> only an active task can be marked
+    // if markInactiveToo == true -> an existing but inactive task can be marked too
+    public void Mark(string taskId, bool complete = true, bool markInactiveToo = false) {
         if (_journalRows.ContainsKey(taskId)) {
-            //_journalRows[taskId].Mark(complete);
+            //Mark an active task
             _journalRows[taskId].done = true;
             _journalRows[taskId].row.Mark();
 
             if (_currentTask != null && taskId == _currentTask.id) {
                 RenewCurrentObjective();
+            }
+        }
+        else
+        {
+            //Mark an inactive task
+            foreach(var task in _tasks.tasks)
+            {
+                if(task.id == taskId)
+                {
+                    task.done = true;
+                }
             }
         }
     }
@@ -163,9 +178,13 @@ public class TasksController : MonoBehaviour {
     //updates the cotnent of the panel
     private void UpdateCurrentObjectivePanel(Task task) {
         _currentTask = task;
-        if (task == null)
+        if (task == null) {
             _currentObjectiveText.text = "";
-        else
+            _currentObjectivePanel.SetActive(false);
+        }
+        else {
+            _currentObjectivePanel.SetActive(true);
             _currentObjectiveText.text = task.title;
+        }
     }
 }
