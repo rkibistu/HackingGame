@@ -26,10 +26,18 @@ namespace WebserverAPI
 
         public void Login()
         {
+            errorLoginField.text = string.Empty;
+
             // implement logic for getting username and password from input fields
             string username = usernameLoginField.text;
             string password = passwordLoginField.text;
 
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) )
+            {
+                Debug.LogError("All fields are required.");
+                errorLoginField.text = "All fields are required.";
+                return;
+            }
 
             var webclient = WebClientService.Instance;
             webclient.Login(username, password, (success, message) =>
@@ -54,11 +62,18 @@ namespace WebserverAPI
 
         public void Register()
         {
+            errorRegisterField.text = string.Empty;
             // implement logic for getting username, password and institution name from input fields
             string username = usernameRegistrationField.text;
             string password = passwordRegistrationField.text;
             string institutionName = institutionRegistrationField.text;
 
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(institutionName))
+            {
+                Debug.LogError("All fields are required.");
+                errorRegisterField.text = "All fields are required.";
+                return;
+            }
 
             var webclient = WebClientService.Instance;
             webclient.Register(username, password, institutionName, (success, message) =>
