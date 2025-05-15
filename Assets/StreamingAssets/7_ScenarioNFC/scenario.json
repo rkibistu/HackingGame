@@ -53,7 +53,9 @@
               "outputFile": "proxmark_output.txt",
               "changePrompt": "[usb] pm3 --> ",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "enter-proxmark",
+              "taskIdToStart": "break-card"
             }
           ]
         },
@@ -85,7 +87,9 @@
               "output": "",
               "outputFile": "hf_mf_autopwn.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "break-card",
+              "taskIdToStart": "clone-card"
             }
           ]
         },
@@ -108,7 +112,8 @@
               "output": "",
               "outputFile": "hf_mf_cload.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "clone-card"
             }
           ]
         }

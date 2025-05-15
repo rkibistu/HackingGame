@@ -10,9 +10,9 @@
       "active": false
     },
     {
-      "id": "clone-nfc-card",
-      "title": "Clone an NFC card to get later access.",
-      "description": "Clone an NFC card to get later access.",
+      "id": "scan-nfc-card",
+      "title": "Scan an NFC card to get later access.",
+      "description": "Scan an NFC card to get later access.",
       "reward": 10,
       "steps": [],
       "done": false,
@@ -30,13 +30,32 @@
       "storyIdToStart": "time-to-get-out"
     },
     {
-      "id": "clone-nfc-card",
-      "title": "Clone an NFC card to get later access.",
-      "description": "Clone an NFC card to get later access.",
+      "id": "enter-proxmark",
+      "title": "Enter proxmark using 'pm3'",
+      "description": "Enter proxmark using 'pm3'",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "break-card",
+      "title": "Find the card's secrets.",
+      "description": "Find the card's secrets.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "clone-card",
+      "title": "Make a copy of the card.",
+      "description": "Make a copy of the card.",
       "reward": 10,
       "steps": [],
       "done": false,
       "active": false,
+      "storyIdToStart": "scene7-ending"
     }
   ]
 }
