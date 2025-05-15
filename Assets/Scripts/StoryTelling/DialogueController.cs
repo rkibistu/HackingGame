@@ -57,6 +57,8 @@ public class DialogueController : MonoBehaviour
             _currentLineComplete = false;
             _typewriter.CompleteTextRevealed += ContinueStory;
 
+            CheckForTasks(nextLine);
+
             _speakerText.text = nextLine.speaker;
             _typewriter.FeedText(nextLine.content);
         }
@@ -82,6 +84,9 @@ public class DialogueController : MonoBehaviour
         if (nextLine != null) {
             _nextText.SetActive(false);
             _currentLineComplete = false;
+
+            CheckForTasks(nextLine);
+
             _speakerText.text = nextLine.speaker;
             _typewriter.FeedText(nextLine.content);
         }
@@ -171,5 +176,13 @@ public class DialogueController : MonoBehaviour
         StoryList taskList = JsonUtility.FromJson<StoryList>(json);
         Debug.Log("Loaded tasks from: " + path);
         return taskList;
+    }
+
+    private void CheckForTasks(Line storyLine) {
+        if (storyLine.taskIdToComplete != null)
+            TasksController.Instance.Mark(storyLine.taskIdToComplete);
+        
+        if(storyLine.taskIdToStart != null)
+            TasksController.Instance.ActivateTask(storyLine.taskIdToStart);
     }
 }

@@ -22,7 +22,11 @@ public class GameplayController : MonoBehaviour
     }
     protected virtual void  Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.L)) {
+            Debug.Log("Unlock cursour from GamePlaycontroller. Debug");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     public int GetCurrentLevelIndex() {

@@ -1,0 +1,52 @@
+{
+  "stories": [
+    {
+      "id": "intro",
+      "lines": [
+        {
+          "speaker": "Me",
+          "title": "What's going on?",
+          "content": "...",
+          "taskIdToStart": "scan-sqlmap"
+        },
+        {
+          "speaker": "Me",
+          "title": "What's going on?",
+          "content": "The door? Again?."
+        }
+      ]
+    },
+    {
+      "id": "try-search",
+      "lines": [
+        {
+          "speaker": "Eu",
+          "title": "pc-potato",
+          "content": "Let's try pressing some buttons now"
+        }
+      ]
+    },
+    {
+      "id": "scan-sqlmap",
+      "lines": [
+        {
+          "speaker": "Eu",
+          "title": "sqlmap",
+          "content": "Hmm..."
+        },
+        {
+          "speaker": "Eu",
+          "title": "sqlmap",
+          "content": "That search is using URL parameters to filter items... I think i heard about some similar vulnerability. How was it called?"
+        },
+        {
+          "speaker": "Eu",
+          "title": "sqlmap",
+          "content": "Oh, yeah! SqlInjection!",
+          "taskIdToComplete": "try-search",
+          "taskIdToStart":  "scan-sqlmap"
+        }
+      ]
+    }
+  ]
+}

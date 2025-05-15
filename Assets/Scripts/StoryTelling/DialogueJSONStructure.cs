@@ -8,6 +8,8 @@ public class DialogueJSONStructure : MonoBehaviour
         public string speaker;
         public string title;
         public string content;
+        public string taskIdToComplete;
+        public string taskIdToStart;
     }
 
     [System.Serializable]
