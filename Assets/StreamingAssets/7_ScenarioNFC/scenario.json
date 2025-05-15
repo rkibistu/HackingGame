@@ -5,7 +5,15 @@
       "prompt": "kali:kali $>",
       "phases": [
         {
-          "name": "0",
+          "name": "scan_nfc",
+          "action": {
+            "description": "Scan NFC Card",
+            "required": "true",
+            "final": "true"
+          }
+        },
+        {
+          "name": "1",
           "commands": [
             {
               "input": "ls",
@@ -60,7 +68,7 @@
           ]
         },
         {
-          "name": "1",
+          "name": "2",
           "commands": [
             {
               "input": "help",
@@ -103,7 +111,7 @@
           ]
         },
         {
-          "name": "2",
+          "name": "3",
           "commands": [
             {
               "input": "hf --help",
