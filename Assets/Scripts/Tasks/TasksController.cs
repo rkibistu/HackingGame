@@ -113,7 +113,7 @@ public class TasksController : MonoBehaviour {
         foreach (var step in task.steps) {
             step.done = true;
             if (task.active == true) {
-                task.row.Mark();
+                step.row.Mark();
             }
         }
     }

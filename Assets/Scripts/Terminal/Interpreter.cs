@@ -3,8 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using static ScenarioJSONStructure;
-using UnityEditor.XR;
-using System.Linq;
 /*
 * This class is responsible with interpreting the input of all terminals.
 */
