@@ -21,7 +21,7 @@ namespace ScenarioSQL {
 
         //some state variables
         private bool _firstTimeOnSite = true;
-        private int _secondTimeSearch = 0;
+        private bool _firstTimeSearch = true;
 
         //Enabled and Disabled are called every time the Browser search bar is used
         // so we can use this methods to filter the params
@@ -48,6 +48,7 @@ namespace ScenarioSQL {
                 //?name=value
                 string paramName = paramsurl.Split("=")[0];
                 if (paramName == _paramName) {
+                    TriggerStoryFirstTimeSearchByName();
                     Filter(paramsurl.Substring(paramsurl.IndexOf('=') + 1));
                 }
             }
@@ -59,8 +60,9 @@ namespace ScenarioSQL {
 
         public void ApplySearch() {
             //update main url
+            TriggerStoryFirstTimeSearchByName();
 
-            if(_browserSearchBarText.text.Contains("?")) {
+            if (_browserSearchBarText.text.Contains("?")) {
                 string baseUrl = _browserSearchBarText.text.Split('?')[0];
                 _browserSearchBarText.text = baseUrl + "?" + _paramName + "=" + _internalSearchInput.text;
             }
@@ -72,17 +74,6 @@ namespace ScenarioSQL {
             Filter(_internalSearchInput.text);
         }
         private void Filter(string input) {
-            Debug.Log("AIci: " + input);
-            if (_secondTimeSearch == 1) {
-                TasksController.Instance.Mark("try-search");
-                TasksController.Instance.ActivateTask("scan-sqlmap");
-
-                DialogueController.Instance.SkipCurrentStoryCompletely();
-                DialogueController.Instance.PlayStory("scan-sqlmap");
-            }
-            _secondTimeSearch++;
-            
-         
             string normalizedInput = Regex.Replace(input, @"\s+", " ").Trim();
 
             // Get text until first ';' and use it to filter
@@ -190,6 +181,14 @@ namespace ScenarioSQL {
 
         }
 
-        
+        private void TriggerStoryFirstTimeSearchByName() {
+            if (_firstTimeSearch) {
+                TasksController.Instance.Mark("try-search");
+                TasksController.Instance.ActivateTask("scan-sqlmap");
+
+                DialogueController.Instance.SkipCurrentStoryCompletely();
+                DialogueController.Instance.PlayStory("scan-sqlmap");
+            }
+        }
     }
 }
