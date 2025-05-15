@@ -44,14 +44,12 @@ public class GameplayController : MonoBehaviour {
     }
     private void EnableAllChildsOfGameObject(string name) {
         var obj = GameObject.Find(name);
-        if (obj) {
-            Debug.Log(obj);
-            foreach (Transform child in obj.GetComponentsInChildren<Transform>(true)) {
-                Debug.Log(child.gameObject.name);
-                child.gameObject.SetActive(true);
-            }
+        if (obj == null) {
+            Debug.LogWarning("You tried to enable <" + name + "> using one of the jsons file, but a gameobject with this name doesn't exist.");
+            return;
         }
-        else
-            Debug.Log("null");
+        foreach (Transform child in obj.transform) {
+            child.gameObject.SetActive(true);
+        }
     }
 }

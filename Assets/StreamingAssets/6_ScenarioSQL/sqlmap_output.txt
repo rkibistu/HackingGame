@@ -48,7 +48,7 @@ Parameter: name (GET)
 
     Type: UPDATE query
     Title: Generic UPDATE query
-    Payload: UPDATE products SET <column_name>=<value> WHERE name LIKE '<insert_some_regex>'; 
+    Payload: UPDATE <table_name> SET <column_name>=<value> WHERE name LIKE '<value>'; 
 ---
 [14:43:27] [INFO] the back-end DBMS is MySQL
 web server operating system: Linux Debian

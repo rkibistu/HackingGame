@@ -95,7 +95,7 @@ public class Interpreter : MonoBehaviour {
             AdvanceScenario(closerCommand, phase, terminal);
 
             // Some commands can finish/start tasks
-            CheckForTasks(closerCommand);
+            CheckForActions(closerCommand);
 
             // Some commands can change the terminal promt
             //CheckForPromtChanging(closerCommand);
@@ -109,7 +109,7 @@ public class Interpreter : MonoBehaviour {
     }
 
     // Mark as compelte or start a task if the current command specify it
-    private void CheckForTasks(Command cmd) {
+    private void CheckForActions(Command cmd) {
         if (cmd.taskIdToComplete != null) {
             TasksController.Instance.Mark(cmd.taskIdToComplete, true, true);
         }
@@ -120,6 +120,10 @@ public class Interpreter : MonoBehaviour {
         if (cmd.storyIdToStart != null) {
             DialogueController.Instance.SkipCurrentStoryCompletely();
             DialogueController.Instance.PlayStory(cmd.storyIdToStart);
+        }
+
+        if(cmd.gameobjectToEnable != null) { 
+            GameplayController.Instance.EnablePopup(cmd.gameobjectToEnable);
         }
     }
 
