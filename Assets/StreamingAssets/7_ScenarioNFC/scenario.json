@@ -63,6 +63,15 @@
           "name": "1",
           "commands": [
             {
+              "input": "help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Only hf module is loaded. Use `hf --help` to display the helper module of `hf`.\r\n\r\n ",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "hf --help",
               "alternatives": [],
               "outputType": "inline",
@@ -106,7 +115,7 @@
               "final": "false"
             },
             {
-              "input": "hf mf cload -f hf-mf-04013-dump.bin",
+              "input": "hf mf cload -f hf-mf-04013-dump.eml",
               "alternatives": [],
               "outputType": "file",
               "output": "",
