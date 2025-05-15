@@ -35,9 +35,7 @@ public class Interpreter : MonoBehaviour {
             Destroy(gameObject);
 
         Instance = this;
-    }
 
-    void Start() {
         string filePath = Path.Combine(Application.streamingAssetsPath, _scenarioBasePath + "/" + _jsonFilenama);
         if (File.Exists(filePath)) {
             string jsonContent = File.ReadAllText(filePath);
@@ -50,29 +48,31 @@ public class Interpreter : MonoBehaviour {
         PrepareOutputsFromFiles();
     }
 
+    void Start() {
+        
+    }
+
 
     // Check if the length of the common prefix is equal to the length of one of the alternatives commands
     // If it is, return true. Else, return false
     // This is used to check if the command is a partial match with one of the alternatives
-    public bool CheckCloserPrefixLengthFromAlternatives(string commonPrefix, List<string> alternatives) {
-        bool result = false;
-
+    public bool CheckCloserPrefixLengthFromAlternatives(string input, List<string> alternatives) {
         foreach (var alternative in alternatives) {
-            if (commonPrefix.Length == alternative.Length) {
-                result = true;
-                break;
+            if (input == alternative) {
+                return true;
             }
         }
 
-        return result;
+        return false;
     }
 
     // Get the output of the input command.
     // The method will look up in the commands list of terminal with the name terminalName
     // and will keep in mind the current phase of the terminal. Only the commands from
     // the current phase of the terminal are checked. Not from previous or future phases.
-    public List<string> Interpret(string input, string terminalName) {
-        Debug.Log("Terminal name supplied: " + terminalName);
+    public List<string> Interpret(string input, string terminalName, out string newPromt) {
+        //this will be changed to a specific value if the input triggered a change in terminal promt
+        newPromt = null;
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
@@ -88,26 +88,40 @@ public class Interpreter : MonoBehaviour {
         if (closerCommand == null) {
             return new List<string> { "Command is not recongnized." };
         }
-        if (commonPrefix.Length == closerCommand.input.Length
+        if (input == closerCommand.input
             || CheckCloserPrefixLengthFromAlternatives(commonPrefix, closerCommand.alternatives)) {
             // Found the right command
 
             //Try to advance to next phase if all requirements are meet
             AdvanceScenario(closerCommand, phase, terminal);
 
-            // If this command has an associated task -> activate it
-            if (closerCommand.taskIdToComplete != null) {
-                TasksController.Instance.Mark(closerCommand.taskIdToComplete, true, true);
-            }
-            if (closerCommand.taskIdToStart != null) {
-                TasksController.Instance.ActivateTask(closerCommand.taskIdToStart);
-            }
+            // Some commands can finish/start tasks
+            CheckForTasks(closerCommand);
+
+            // Some commands can change the terminal promt
+            //CheckForPromtChanging(closerCommand);
+            newPromt = closerCommand.changePrompt;
 
             return PostProcessOutput(closerCommand.output);
         }
-
+    
         // The command is only partially correct
         return new List<string> { "Command is partially recongnized.", "OK: " + commonPrefix };
+    }
+
+    // Mark as compelte or start a task if the current command specify it
+    private void CheckForTasks(Command cmd) {
+        if (cmd.taskIdToComplete != null) {
+            TasksController.Instance.Mark(cmd.taskIdToComplete, true, true);
+        }
+        if (cmd.taskIdToStart != null) {
+            TasksController.Instance.ActivateTask(cmd.taskIdToStart);
+        }
+
+        if (cmd.storyIdToStart != null) {
+            DialogueController.Instance.SkipCurrentStoryCompletely();
+            DialogueController.Instance.PlayStory(cmd.storyIdToStart);
+        }
     }
 
     // Returns a list with all accesible commands that begin with
@@ -228,6 +242,16 @@ public class Interpreter : MonoBehaviour {
         return -1;
     }
 
+    // Get the default promt of a specific terminal
+    public string GetDefaultPromt(string terminalName) {
+        foreach (var terminal in _scenario.terminals) {
+            if (terminal.name == terminalName) {
+                return terminal.prompt;
+            }
+        }
+
+        return null;
+    }
 
     // The output message is wrote in json or separate files.
     // It needs to be processed and converted to a list of strings,
@@ -245,6 +269,11 @@ public class Interpreter : MonoBehaviour {
 
         string aux;
         foreach (var cmd in phase.commands) {
+            if (input == cmd.input) {
+                commonPrefix = input;
+                return cmd;
+            }
+
             aux = Helper.GetCommonPrefix(input, cmd.input);
             if (aux.Length > 0 && aux.Length >= commonPrefix.Length) {
                 commonPrefix = aux;

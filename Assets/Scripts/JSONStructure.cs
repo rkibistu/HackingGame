@@ -19,6 +19,8 @@ public class ScenarioJSONStructure : MonoBehaviour
         public bool final;
         public string taskIdToComplete;
         public string taskIdToStart;
+        public string storyIdToStart;
+        public string changePrompt;
 
         // Changed/used in execution, not present in json
         public bool executed = false;
@@ -49,6 +51,7 @@ public class ScenarioJSONStructure : MonoBehaviour
     {
         // data from json
         public string name;
+        public string prompt;
         public List<Phase> phases;
 
         // Changed/used in execution, not present in json

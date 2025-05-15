@@ -7,6 +7,27 @@
           "name": "0",
           "commands": [
             {
+              "input": "test",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false",
+              "changePrompt": "NewPromt:/",
+              "storyIdToStart": "scan-sqlmap"
+            },
+            {
+              "input": "test_out",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false",
+              "changePrompt": "OldPromt:/"
+            },
+            {
               "input": "ls",
               "alternatives": [
                 "ls",

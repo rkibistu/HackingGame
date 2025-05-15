@@ -1,0 +1,50 @@
+{
+  "tasks": [
+    {
+      "id": "check-door",
+      "title": "Check the door",
+      "description": "Go and check the door, you need special instructions?",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "scan-sqlmap"
+    },
+    {
+      "id": "check-desktop",
+      "title": "Check http://pc-potato.ro",
+      "description": "",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "try-search",
+      "title": "Try things. Maybe you will observe something.",
+      "description": "",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "scan-sqlmap",
+      "title": "Use `sqlmap --help` and search for sql vulnerabilities.",
+      "description": "",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "use-sqlinjection",
+      "title": "Use `hcxpcapngtool --help` to extract hashes from raw traffic.",
+      "description": "",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    }
+  ]
+}

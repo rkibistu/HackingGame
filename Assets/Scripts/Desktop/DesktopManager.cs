@@ -96,6 +96,19 @@ public class DesktopManager : MonoBehaviour {
         _runningApps.Add(app.ID, app);
     }
 
+    // This doesn't alter the stack, just return the focused app
+    public ApplicationManager GetFocusedApp() {
+        if (_focusedStack.Count == 0)
+            return null;
+
+        int id = _focusedStack.Peek();
+
+        if (_runningApps.ContainsKey(id) == false)
+            return null;
+
+        return _runningApps[id];
+    }
+
     public void Focus(ApplicationManager app) {
         if (app == null)
             return;
@@ -105,6 +118,7 @@ public class DesktopManager : MonoBehaviour {
         _focusedStack.Push(app.ID);
     }
 
+    // This alters the stack
     private ApplicationManager GetNextAppInStack() {
         int id;
         ApplicationManager focusedApp = null;
