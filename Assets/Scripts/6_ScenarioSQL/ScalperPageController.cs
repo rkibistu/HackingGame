@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
@@ -15,9 +16,17 @@ namespace ScenarioSQL {
         private TMP_InputField _internalSearchInput;
         [SerializeField]
         private TMP_InputField _browserSearchBarText;
-
         [SerializeField]
         private string _paramName = "name";
+
+        [Header("Feedback")]
+        [SerializeField]
+        private GameObject _feedbackPanel;
+        [SerializeField]
+        private TextMeshProUGUI _feedbackText;
+        [SerializeField]
+        private int _feedbackTextLiveTime = 3;
+
 
         //some state variables
         private bool _firstTimeOnSite = true;
@@ -26,6 +35,8 @@ namespace ScenarioSQL {
         //Enabled and Disabled are called every time the Browser search bar is used
         // so we can use this methods to filter the params
         private void OnEnable() {
+
+            
 
             if (_firstTimeOnSite) {
                 _firstTimeOnSite = false;
@@ -56,6 +67,16 @@ namespace ScenarioSQL {
         }
         private void OnDisable() {
 
+        }
+
+        private void Start() {
+            //Register callback for Buy button oif every item
+            foreach (var obj in _purchasableObjects) {
+                var item = obj.GetComponent<PurchasableItem>();
+                if (item != null) {
+                    item.OnBuyClicked += HandleBuyClicked;
+                }
+            }
         }
 
         public void ApplySearch() {
@@ -183,11 +204,37 @@ namespace ScenarioSQL {
 
         private void TriggerStoryFirstTimeSearchByName() {
             if (_firstTimeSearch) {
-                //TasksController.Instance.Mark("try-search");
-                TasksController.Instance.ActivateTask("scan-sqlmap");
-
                 DialogueController.Instance.SkipCurrentStoryCompletely();
                 DialogueController.Instance.PlayStory("scan-sqlmap");
+            }
+        }
+
+        private void HandleBuyClicked(PurchasableItem item) {
+            Debug.Log($"[ScalperPageController] Item bought: {item.TitleText} for {item.GetPriceValue()}");
+            // Do anything else here, like updating UI, inventory, etc.
+
+            float price = item.GetPriceValue();
+            float balance = GameplayScenario6.Instance.PersonalBalance;
+            if(balance >= price) {
+                EnableAndSetFeedbackText("SUCCESS! You bought: " + item.TitleText + " at " + price + "$", Color.green);
+                TasksController.Instance.Mark("use-sqlinjection");
+            }
+            else {
+                EnableAndSetFeedbackText("You don't have enough money! Your balance is: " + balance + "$", Color.red);
+            }
+        }
+
+        private void EnableAndSetFeedbackText(string text, Color color) {
+            _feedbackText.text = text;
+            _feedbackText.color = color;
+            _feedbackPanel.gameObject.SetActive(true);
+            StartCoroutine(DisableObjectWithDelayCoroutine(_feedbackPanel));
+        }
+
+        private IEnumerator DisableObjectWithDelayCoroutine(GameObject obj) {
+            yield return new WaitForSeconds(_feedbackTextLiveTime);
+            if (obj != null) {
+                obj.SetActive(false);
             }
         }
     }

@@ -56,33 +56,65 @@ public class TasksController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.T)) {
             //Mark("check-room");
             //ActivateTask("check-door");
+            GameplayController.Instance.StartLevel();
         }
     }
 
     // if markInactiveToo == false -> only an active task can be marked
     // if markInactiveToo == true -> an existing but inactive task can be marked too
     public void Mark(string taskId, bool complete = true, bool markInactiveToo = false) {
-        if (_journalRows.ContainsKey(taskId)) {
-            //Mark an active task
-            _journalRows[taskId].done = true;
-            _journalRows[taskId].row.Mark();
 
-            CheckForStory(_journalRows[taskId]);
+        foreach (var task in _tasks.tasks) {
 
-            if (_currentTask != null && taskId == _currentTask.id) {
+            if (task.id == taskId) {
+                MarkTaskAsComplete(task);
+            }
+            else {
+                foreach (var step in task.steps) {
+                    if (step.id == taskId) {
+                        MarkStepAsComplete(task, step, task.active);
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void MarkTaskAsComplete(Task task) {
+        MarkAllStepsAsComplete(task);
+        task.done = true;
+
+        CheckForActionsAfterCompletion(task);
+
+        if (task.active) {
+            task.row.Mark();
+            if (_currentTask != null && task.id == _currentTask.id) {
                 RenewCurrentObjective();
             }
         }
-        else
-        {
-            //Mark an inactive task
-            foreach(var task in _tasks.tasks)
-            {
-                if(task.id == taskId)
-                {
-                    CheckForStory(task);
-                    task.done = true;
-                }
+    }
+    private void MarkStepAsComplete(Task parent, Step step, bool isActive) {
+        step.done = true;
+        if (isActive) {
+            step.row.Mark();
+        }
+
+        bool taskComplete = true;
+        foreach (var s in parent.steps) {
+            if (s.done == false) {
+                taskComplete = false;
+                break;
+            }
+        }
+        if (taskComplete == true) {
+            MarkTaskAsComplete(parent);
+        }
+    }
+    private void MarkAllStepsAsComplete(Task task) {
+        foreach (var step in task.steps) {
+            step.done = true;
+            if (task.active == true) {
+                step.row.Mark();
             }
         }
     }
@@ -106,6 +138,9 @@ public class TasksController : MonoBehaviour {
             // This could be changed later. Maybe a dedicated script for the panel so
             // we add some aniamtions and effects
             UpdateCurrentObjectivePanel(task);
+
+            if (task.gameobjectToEnableOnActivation != null)
+                GameplayController.Instance.EnablePopup(task.gameobjectToEnableOnActivation);
 
             foreach (var step in task.steps) {
                 row = Instantiate(_subtaskRowPrefab, _journalContentContainer);
@@ -191,13 +226,28 @@ public class TasksController : MonoBehaviour {
         }
     }
 
-    private void CheckForStory(Task task) {
+
+    private void CheckForActionsAfterCompletion(Task task) {
         if (task == null)
             return;
 
+        //story
         if (task.storyIdToStart != null) {
             DialogueController.Instance.SkipCurrentStoryCompletely();
             DialogueController.Instance.PlayStory(task.storyIdToStart);
+        }
+
+        //tasks
+        if (task.taskIdToComplete != null) {
+            Mark(task.id, true, true);
+        }
+        if (task.taskIdToStart != null) {
+            ActivateTask(task.taskIdToStart);
+        }
+
+        //gameobjects to enable
+        if (task.gameobjectToEnableOnCompletion != null) {
+            GameplayController.Instance.EnablePopup(task.gameobjectToEnableOnCompletion);
         }
     }
 }

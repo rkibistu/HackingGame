@@ -57,7 +57,7 @@ public class DialogueController : MonoBehaviour
             _currentLineComplete = false;
             _typewriter.CompleteTextRevealed += ContinueStory;
 
-            CheckForTasks(nextLine);
+            CheckForActions(nextLine);
 
             _speakerText.text = nextLine.speaker;
             _typewriter.FeedText(nextLine.content);
@@ -85,7 +85,7 @@ public class DialogueController : MonoBehaviour
             _nextText.SetActive(false);
             _currentLineComplete = false;
 
-            CheckForTasks(nextLine);
+            CheckForActions(nextLine);
 
             _speakerText.text = nextLine.speaker;
             _typewriter.FeedText(nextLine.content);
@@ -178,11 +178,14 @@ public class DialogueController : MonoBehaviour
         return taskList;
     }
 
-    private void CheckForTasks(Line storyLine) {
+    private void CheckForActions(Line storyLine) {
         if (storyLine.taskIdToComplete != null)
             TasksController.Instance.Mark(storyLine.taskIdToComplete);
         
         if(storyLine.taskIdToStart != null)
             TasksController.Instance.ActivateTask(storyLine.taskIdToStart);
+
+        if(storyLine.gameobjectToEnable != null)
+            GameplayController.Instance.EnablePopup(storyLine.gameobjectToEnable);
     }
 }
