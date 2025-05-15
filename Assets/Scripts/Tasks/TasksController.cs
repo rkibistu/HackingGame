@@ -56,6 +56,7 @@ public class TasksController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.T)) {
             //Mark("check-room");
             //ActivateTask("check-door");
+            GameplayController.Instance.StartLevel();
         }
     }
 
@@ -83,7 +84,7 @@ public class TasksController : MonoBehaviour {
         MarkAllStepsAsComplete(task);
         task.done = true;
 
-        CheckForStory(task);
+        CheckForActionsAfterCompletion(task);
 
         if (task.active) {
             task.row.Mark();
@@ -137,6 +138,9 @@ public class TasksController : MonoBehaviour {
             // This could be changed later. Maybe a dedicated script for the panel so
             // we add some aniamtions and effects
             UpdateCurrentObjectivePanel(task);
+
+            if (task.gameobjectToEnableOnActivation != null)
+                GameplayController.Instance.EnablePopup(task.gameobjectToEnableOnActivation);
 
             foreach (var step in task.steps) {
                 row = Instantiate(_subtaskRowPrefab, _journalContentContainer);
@@ -222,20 +226,28 @@ public class TasksController : MonoBehaviour {
         }
     }
 
-    private void CheckForStory(Task task) {
+
+    private void CheckForActionsAfterCompletion(Task task) {
         if (task == null)
             return;
 
+        //story
         if (task.storyIdToStart != null) {
             DialogueController.Instance.SkipCurrentStoryCompletely();
             DialogueController.Instance.PlayStory(task.storyIdToStart);
         }
 
+        //tasks
         if (task.taskIdToComplete != null) {
             Mark(task.id, true, true);
         }
-        if(task.taskIdToStart != null) {
+        if (task.taskIdToStart != null) {
             ActivateTask(task.taskIdToStart);
+        }
+
+        //gameobjects to enable
+        if (task.gameobjectToEnableOnCompletion != null) {
+            GameplayController.Instance.EnablePopup(task.gameobjectToEnableOnCompletion);
         }
     }
 }

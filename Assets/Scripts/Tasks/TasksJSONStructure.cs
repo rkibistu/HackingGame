@@ -27,6 +27,8 @@ public class TasksJSONStructure : MonoBehaviour
         public string storyIdToStart; //start this story when this task is complete
         public string taskIdToStart; //start this task when this task is complete
         public string taskIdToComplete; //end this task when this task is complete
+        public string gameobjectToEnableOnCompletion; // enable gameobject with this name when this task is complete
+        public string gameobjectToEnableOnActivation; // enable gameobject with this name when this task is activate
 
         //not in json, used at runtime
         public TaskRow row = null;

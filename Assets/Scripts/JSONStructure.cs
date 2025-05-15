@@ -21,6 +21,7 @@ public class ScenarioJSONStructure : MonoBehaviour
         public string taskIdToStart;
         public string storyIdToStart;
         public string changePrompt;
+        public string gameobjectToEnable; // enable gameobject with this name when this cmd is called
 
         // Changed/used in execution, not present in json
         public bool executed = false;
