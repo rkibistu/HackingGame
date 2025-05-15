@@ -7,8 +7,7 @@
       "reward": 10,
       "steps": [],
       "done": false,
-      "active": false,
-      "storyIdToStart": "scan-sqlmap"
+      "active": false
     },
     {
       "id": "check-desktop",
@@ -30,10 +29,23 @@
     },
     {
       "id": "scan-sqlmap",
-      "title": "Use `sqlmap --help` and search for sql vulnerabilities.",
+      "title": "Use `sqlmap` and search for sql vulnerabilities.",
       "description": "",
       "reward": 10,
-      "steps": [],
+      "steps": [
+        {
+          "id": "scan-sqlmap-1",
+          "title": "check for tables info",
+          "description": "",
+          "done": false
+        },
+        {
+          "id": "scan-sqlmap-2",
+          "title": "check for columns info",
+          "description": "",
+          "done": false
+        }
+      ],
       "done": false,
       "active": false
     },

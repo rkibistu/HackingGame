@@ -183,9 +183,6 @@ namespace ScenarioSQL {
 
         private void TriggerStoryFirstTimeSearchByName() {
             if (_firstTimeSearch) {
-                //TasksController.Instance.Mark("try-search");
-                TasksController.Instance.ActivateTask("scan-sqlmap");
-
                 DialogueController.Instance.SkipCurrentStoryCompletely();
                 DialogueController.Instance.PlayStory("scan-sqlmap");
             }

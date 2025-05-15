@@ -1,0 +1,13 @@
+Usage: sqlmap [OPTIONS]
+
+-u <URL>         : target URL.
+--tables         : enumerate DBMS database tables.
+--columns        : enumerate DBMS database table columns.
+--help           : show this help.
+--version        : show version.
+
+Example:
+$ sqlmap --tables --columns -u <URL> 
+$ sqlmap -u http://pc-potato.ro/index.php?name
+$ sqlmap --version
+$ sqlmap --help
