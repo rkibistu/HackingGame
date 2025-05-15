@@ -56,7 +56,7 @@ public class TasksController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.T)) {
             //Mark("check-room");
             //ActivateTask("check-door");
-            GameplayController.Instance.StartLevel();
+            //GameplayController.Instance.StartLevel();
         }
     }
 

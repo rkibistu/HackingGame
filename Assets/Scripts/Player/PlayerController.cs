@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    
+    //Called by animator
     public void StartActions() {
         GameplayController.Instance.StartLevel();
     }
