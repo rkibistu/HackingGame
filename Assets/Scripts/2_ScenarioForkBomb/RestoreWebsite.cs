@@ -15,25 +15,9 @@ public class RestoreWebsite : MonoBehaviour
     private string _backupWebServerString = "Download Backup";
 
     [Header("Recovery webpage story and task IDs")]
-    [SerializeField]
-    private string _storyRecoveryWebsiteId;
-    [SerializeField]
-    private string _taskRecoveryWebsiteId;
- 
 
     [SerializeField]
     private TMP_Text _downloadBackuptMessage;
-
-    private void OnEnable()
-    {
-        if (_recoveryWebpage.activeSelf)
-        {
-            if (TasksController.Instance.CheckCurrentTask(_taskRecoveryWebsiteId))
-            {
-                DialogueController.Instance.PlayStory(_storyRecoveryWebsiteId);
-            }
-        }
-    }
 
     public void OnRecoverButtonClicked()
     {
@@ -41,7 +25,7 @@ public class RestoreWebsite : MonoBehaviour
         if (_recoveryState == 0)
         {
             // Download Backup
-            Interpreter.Instance.AdvanceByAction("database_downloaded");
+            //Interpreter.Instance.AdvanceByAction("database_downloaded");
             buttonText.text = _restoreWebServerString;
             _recoveryState++;
             _downloadBackuptMessage.text = "Backup downloaded. Restarting web server...";

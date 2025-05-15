@@ -27,12 +27,6 @@ public class LoginManager : MonoBehaviour
 
     [Header("Login story and task IDs")]
     [SerializeField]
-    private string _storyLoginId;
-    [SerializeField]
-    private string _taskBeforeLoginPageId;
-    [SerializeField]
-    private string _taskAfterLoginPageId;
-    [SerializeField]
     private string _taskAfterSuccessLoginPageId;
 
     void Start()
@@ -42,18 +36,6 @@ public class LoginManager : MonoBehaviour
         _submitWebpage.SetActive(false);
     }
 
-    void OnEnable()
-    {
-        if (_loginWebpage.activeSelf)
-        {
-            if (TasksController.Instance.CheckCurrentTask(_taskBeforeLoginPageId))
-            {
-                TasksController.Instance.ActivateTask(_taskAfterLoginPageId);
-                DialogueController.Instance.PlayStory(_storyLoginId);
-            }
-        }
-    }
-
     public void OnLoginButtonClicked()
     {
         string enteredUsername = _usernameInputField.text;
@@ -61,8 +43,6 @@ public class LoginManager : MonoBehaviour
 
         if (enteredUsername == correctUsername && enteredPassword == correctPassword)
         {
-            Debug.Log("Login successful" + _taskAfterSuccessLoginPageId);
-
             TasksController.Instance.ActivateTask(_taskAfterSuccessLoginPageId);
             ClearPanel();
             _loginWebpage.SetActive(false);

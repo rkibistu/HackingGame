@@ -191,15 +191,7 @@
           ]
         },
         {
-          "name": "database_downloaded",
-          "action": {
-            "description": "Download backup of database",
-            "required": "true",
-            "final": "true"
-          }
-        },
-        {
-          "name": "3",
+          "name": "2",
           "commands": [
             {
               "input": "ls",
@@ -216,7 +208,7 @@
                 "ls -lh"
               ],
               "outputType": "inline",
-              "output": "Output of command:\r\ncredentials.txt\tforkbomb.c\tbackup_database.db\r\n",
+              "output": "Output of command:\r\ncredentials.txt\tforkbomb.c\t forkbomb \tbackup_database.db \t\r\n",
               "outputFile": "",
               "required": "false",
               "final": "false"
@@ -266,12 +258,13 @@
               "required": "true",
               "final": "true",
               "taskIdToComplete": "check-database-file",
-              "taskIdToStart": "select-exam-table"
+              "taskIdToStart": "select-exam-table",
+              "changePrompt": "sqlite3>"
             }
           ]
         },
         {
-          "name": "4",
+          "name": "3",
           "commands": [
             {
               "input": ".help",
@@ -280,7 +273,8 @@
               "output": "",
               "outputFile": "sqlite3_help.txt",
               "required": "false",
-              "final": "false"
+              "final": "false",
+              "changePrompt": "sqlite3>"
             },
             {
               "input": ".version",
@@ -289,16 +283,33 @@
               "output": "SQLite version 3.46.0 2024-05-23 13:25:27",
               "outputFile": "",
               "required": "false",
-              "final": "false"
+              "final": "false",
+              "changePrompt": "sqlite3>"
+            },
+            {
+              "input": ".tables",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Tables: exams",
+              "outputFile": "",
+              "required": "false",
+              "final": "false",
+              "changePrompt": "sqlite3>"
             },
             {
               "input": "SELECT * FROM exams;",
-              "alternatives": [],
+              "alternatives": [
+                "select * from exams;",
+                "SELECT * FROM exams",
+                "SELECT * from exams",
+                "select * FROM exams;"
+              ],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlite3_output.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "changePrompt": "sqlite3>"
             }
           ]
         }
