@@ -24,6 +24,7 @@ public class TasksJSONStructure : MonoBehaviour
         public bool done;
         public bool active; //not all tasks should be displayed in the list. Only active ones. They are activated during gameplay
         public Step[] steps;
+        public string storyIdToStart; //start this story when this task is complete
 
         //not in json, used at runtime
         public TaskRow row = null;

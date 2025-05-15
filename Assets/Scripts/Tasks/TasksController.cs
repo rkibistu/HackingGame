@@ -67,6 +67,8 @@ public class TasksController : MonoBehaviour {
             _journalRows[taskId].done = true;
             _journalRows[taskId].row.Mark();
 
+            CheckForStory(_journalRows[taskId]);
+
             if (_currentTask != null && taskId == _currentTask.id) {
                 RenewCurrentObjective();
             }
@@ -78,6 +80,7 @@ public class TasksController : MonoBehaviour {
             {
                 if(task.id == taskId)
                 {
+                    CheckForStory(task);
                     task.done = true;
                 }
             }
@@ -185,6 +188,16 @@ public class TasksController : MonoBehaviour {
         else {
             _currentObjectivePanel.SetActive(true);
             _currentObjectiveText.text = task.title;
+        }
+    }
+
+    private void CheckForStory(Task task) {
+        if (task == null)
+            return;
+
+        if (task.storyIdToStart != null) {
+            DialogueController.Instance.SkipCurrentStoryCompletely();
+            DialogueController.Instance.PlayStory(task.storyIdToStart);
         }
     }
 }
