@@ -111,6 +111,8 @@ namespace ScenarioSQL {
         }
       
         private void Filter(string input) {
+            _feedbackPanelSqlInjection.SetActive(false);
+
             string normalizedInput = Regex.Replace(input, @"\s+", " ").Trim();
 
             // Get text until first ';' and use it to filter
@@ -227,7 +229,8 @@ namespace ScenarioSQL {
 
         // If it is first time accesing the page after usign sqlmap -> enable popup HowToSql
         private void EnablePopupSqlInjection() {
-            if (TasksController.Instance.CheckIfComplete(_taskIdToActivateHowToSql) && _firstTimeOnSiteAfterSqlmap) {
+            bool taskCompleted = TasksController.Instance.CheckIfComplete(_taskIdToActivateHowToSql);
+            if (taskCompleted == true && _firstTimeOnSiteAfterSqlmap == true) {
                 _firstTimeOnSiteAfterSqlmap = false;
                 _howToSqlPopup.SetActive(true);
             } 

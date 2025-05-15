@@ -66,9 +66,12 @@ public class TasksController : MonoBehaviour {
     public bool CheckIfComplete(string taskId) {
         // If it is not added in the journal it means it was not activated
         // An inactive task can be complete, but we will return this as not coimplete
+        Debug.Log(taskId);
         if (_journalRows.ContainsKey(taskId)) {
+            Debug.Log(_journalRows[taskId].done);
             return _journalRows[taskId].done;
         }
+        Debug.Log("false");
         return false;
     }
 
