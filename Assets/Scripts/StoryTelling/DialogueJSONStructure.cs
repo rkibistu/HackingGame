@@ -10,6 +10,7 @@ public class DialogueJSONStructure : MonoBehaviour
         public string content;
         public string taskIdToComplete;
         public string taskIdToStart;
+        public string gameobjectToEnable; // enable gameobject with this name when this storyline si played
     }
 
     [System.Serializable]

@@ -6,13 +6,12 @@
         {
           "speaker": "Me",
           "title": "What's going on?",
-          "content": "...",
-          "taskIdToStart": "scan-sqlmap"
+          "content": "..."
         },
         {
           "speaker": "Me",
           "title": "What's going on?",
-          "content": "The door? Again?."
+          "content": "The door? Again?"
         }
       ]
     },
@@ -32,7 +31,9 @@
         {
           "speaker": "Eu",
           "title": "sqlmap",
-          "content": "Hmm..."
+          "content": "Hmm...",
+          "taskIdToComplete": "try-search",
+          "taskIdToStart": "scan-sqlmap"
         },
         {
           "speaker": "Eu",
@@ -42,9 +43,7 @@
         {
           "speaker": "Eu",
           "title": "sqlmap",
-          "content": "Oh, yeah! SqlInjection!",
-          "taskIdToComplete": "try-search",
-          "taskIdToStart":  "scan-sqlmap"
+          "content": "Oh, yeah! SqlInjection!"
         }
       ]
     }
