@@ -224,7 +224,7 @@
                             "input": "hcxdumptool --help",
                             "alternatives": [],
                             "outputType": "inline",
-                            "output": "Output of command:\r\nhcxdumptool 6.3.5  (C) 2024 ZeroBeat\r\nUsage: hcxdumptool [OPTIONS]\r\n-i <interface>\t\t: name of the interface to be used.\r\n-o <dump file>\t\t: name of the file to which packets are written.\r\n--version \t\t\t: show version.\r\n--active_beacon\t\t: trasmit beacon from collected ESSID.\r\n--help\t\t: show this help\r\nexample:\r\n$ hcxdumptool --version\r\n$ hcxdumptool --help\r\n$ hcxdumptool -i <interface> -o dumpfile.pcapng --active_beacon\r\n$ hcxdumptool -i eth0 -o dumpfile.pcapng --active_beacon\r\n",
+                            "output": "Output of command:\r\nhcxdumptool 6.3.5  (C) 2024 ZeroBeat\r\nUsage: hcxdumptool [OPTIONS]\r\n-i <interface>\t\t: name of the interface to be used.\r\n-o <dump file>\t\t: name of the file to which packets are written.\r\n--version \t\t\t: show version.\r\n--active_beacon\t\t: trasmit beacon from collected ESSID.\r\n--help\t\t: show this help\r\nexample:\r\n$ hcxdumptool --version\r\n$ hcxdumptool --help\r\n$ hcxdumptool -i <interface> -o dumpfile.pcapng --active_beacon\r\n$ hcxdumptool -i wnps01 -o dumpfile.pcapng --active_beacon\r\n",
                             "outputFile": "",
                             "required": "false",
                             "final": "false"
@@ -454,7 +454,8 @@
                             "output": "",
                             "outputFile": "hashcat_out_2.txt",
                             "required": "true",
-                            "final": "true"
+                            "final": "true",
+                            "taskIdToComplete": "use-hcxpcapngtool"
                         }
                     ]
                 }
