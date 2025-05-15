@@ -7,7 +7,85 @@
           "name": "0",
           "commands": [
             {
+              "input": "test",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false",
+              "changePrompt": "NewPromt:/",
+              "storyIdToStart": "scan-sqlmap"
+            },
+            {
+              "input": "test_out",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false",
+              "changePrompt": "OldPromt:/"
+            },
+            {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\n\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "sqlmap",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: sqlmap [OPTIONS]\r\n\r\nTry 'sqlmap --help' for more information.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "sqlmap --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: sqlmap [OPTIONS]\r\n\r\n-u <URL>\t\t: target URL.\r\n--tables \t\t: enumerate DBMS database tables.\r\n--columns \t\t: enumerate DBMS database table columns.\r\n--help \t\t: show this help.\r\n--version \t\t: show version.\r\nexample:\r\n$ sqlmap -u <URL> --tables --columns\r\n$ sqlmap -u scalper/index.php?name=8090\r\n$ sqlmap --version\r\n$ sqlmap --help\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "sqlmap --version",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nsqlmap (1.8.4#stable) \r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "sqlmap -u scalper/index.php?name=8090",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlmap_output.txt",
@@ -15,7 +93,14 @@
               "final": "false"
             },
             {
-              "input": "sqlmap -u scalper/index.php?name=8090 --tables —columns",
+              "input": "sqlmap -u scalper/index.php?name=8090 --tables --columns",
+              "alternatives": [
+                "sqlmap --tables --columns -u scalper/index.php?name=8090",
+                "sqlmap --columns --tables -u scalper/index.php?name=8090",
+                "sqlmap -u scalper/index.php?name=8090 --columns --tables",
+                "sqlmap --columns -u scalper/index.php?name=8090 --tables",
+                "sqlmap --tables -u scalper/index.php?name=8090 --columns"
+              ],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlmap_output_schema.txt",
@@ -27,5 +112,4 @@
       ]
     }
   ]
-
 }

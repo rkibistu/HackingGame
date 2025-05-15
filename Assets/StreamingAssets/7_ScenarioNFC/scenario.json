@@ -7,7 +7,46 @@
           "name": "0",
           "commands": [
             {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\n\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "pm3 --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: pm3 [OPTIONS]\r\n--help \t\t: show this help.\r\nexample:\r\n$ pm3\r\n$ pm3 --help\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "pm3",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "proxmark_output.txt",
@@ -20,15 +59,55 @@
           "name": "1",
           "commands": [
             {
-              "input": "hf search",
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
               "outputType": "inline",
-              "output": "",
-              "outputFile": "[*] Mifare Classic 1k card detected",
+              "output": "Output of command:\r\n\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "hf --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: hf [OPTIONS]\r\n\r\nexample:\r\n$ hf search \t\t: Search for ISO14443-A (HF) tags in range.\r\n$ hf mf autopwn \t\t: Automatic recovery of Mifare Classic keys and \r\n \t\t\tdump of card contents.\r\n$ hf mf cload -f <FILE> \t: Load a binary dump back onto a Mifare Classic \r\n\t\t\tcard.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "hf search",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "[*] Mifare Classic 1k card detected",
+              "outputFile": "",
               "required": "false",
               "final": "false"
             },
             {
               "input": "hf mf autopwn",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "hf_mf_autopwn.txt",
@@ -41,10 +120,49 @@
           "name": "2",
           "commands": [
             {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\nhf-mf-04013-dump.bin\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "hf --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: hf [OPTIONS]\r\n\r\nexample:\r\n$ hf search \t\t: Search for ISO14443-A (HF) tags in range.\r\n$ hf mf autopwn \t\t: Automatic recovery of Mifare Classic keys and \r\n \t\t\tdump of card contents.\r\n$ hf mf cload -f <FILE> \t: Load a binary dump back onto a Mifare Classic \r\n\t\t\tcard.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "hf mf cload -f hf-mf-04013-dump.bin",
+              "alternatives": [],
               "outputType": "file",
               "output": "",
-              "outputFile": "cobaltstrike_output.txt",
+              "outputFile": "hf_mf_cload.txt",
               "required": "true",
               "final": "true"
             }
@@ -53,5 +171,4 @@
       ]
     }
   ]
-
 }

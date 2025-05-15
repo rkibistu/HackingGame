@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  cybergame-database:
+    build:
+      context: ./database
+      args:
+        MYSQL_VERSION: ${MYSQL_VERSION}
+        MYSQL_PORT: ${MYSQL_PORT}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+    container_name: cybergame-database
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - ./database/data:/var/lib/mysql
+    ports:
+      - ${MYSQL_PORT} # remove host and first port
+    networks:
+      - webserver_network
+  cybergame-webserver:
+    build:
+      context: ./webserver
+      args:
+        WEBSERVER_VERSION: ${WEBSERVER_VERSION}
+        WEBSERVER_PORT: ${WEBSERVER_PORT}
+    container_name: cybergame-webserver
+    restart: always
+    environment:
+      - WEBSERVER_HOST=${WEBSERVER_HOST}
+      - WEBSERVER_PORT=${WEBSERVER_PORT}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - WEBSERVER_DEBUG=${WEBSERVER_DEBUG}
+      - MYSQL_CONTAINER_NAME=${MYSQL_CONTAINER_NAME}
+    ports:
+      - ${WEBSERVER_HOST}:${WEBSERVER_PORT}:${WEBSERVER_PORT} # remove host and first port
+    depends_on:
+      - cybergame-database
+    volumes:
+      - ./webserver/app.py:/app/app.py
+      - ./webserver/models.py:/app/models.py
+      - ./webserver/templates:/app/templates
+      - ./webserver/static:/app/static
+      - ./webserver/cv.py:/app/cv.py
+      - ./modsecurity/logs/modsec_audit.log:/app/logs/modsec_audit.log
+    networks:
+      - webserver_network
+      - outside_network
+  cybergame-security:
+    build:
+      context: ./modsecurity
+      args:
+        UBUNTU_VERSION: ${UBUNTU_VERSION}
+        HTTP_PORT_DEFAULT: ${WEBSERVER_HTTP_PORT}
+        HTTPS_PORT_DEFAULT: ${WEBSERVER_HTTPS_PORT}
+        HTTP_WEBSERVER_PORT: ${WEBSERVER_PORT}
+        WEBSERVER_NAME: ${WEBSERVER_NAME}
+        WEBSERVER_CONTAINER_NAME: cybergame-webserver
+        CERT_FILENAME: ${CERT_FILENAME}
+        CERT_KEY_FILENAME: ${CERT_KEY_FILENAME}
+        WEBSERVER_PUBLIC_IP: ${WEBSERVER_PUBLIC_IP}
+    container_name: cybergame-security
+    restart: always
+    ports:
+      - ${WEBSERVER_HTTP_PORT}:${WEBSERVER_HTTP_PORT}
+      - ${WEBSERVER_HTTPS_PORT}:${WEBSERVER_HTTPS_PORT}
+    depends_on:
+      - cybergame-webserver
+    volumes:
+      - ./modsecurity/logs:/var/log/apache2
+    networks:
+      - outside_network
+
+networks:
+  webserver_network:
+    driver: bridge
+  outside_network:
+    driver: bridge

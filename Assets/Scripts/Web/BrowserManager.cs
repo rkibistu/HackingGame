@@ -24,13 +24,16 @@ public class BrowserManager : MonoBehaviour {
 
     private void Start() {
         SetMainSite();
+
+        _headerInput.onEndEdit.AddListener((value) => {
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                ChangeSite(value);
+            }
+        });
     }
 
     private void Update() {
-
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            ChangeSite(_headerInput.text);
-        }
+        
     }
 
     private void SetMainSite() {

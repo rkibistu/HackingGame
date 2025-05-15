@@ -2,10 +2,12 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System;
-
+using static ScenarioJSONStructure;
+using UnityEditor.XR;
+using System.Linq;
 /*
- * This class is responsible with interpreting the input of all terminals.
- */
+* This class is responsible with interpreting the input of all terminals.
+*/
 public class Interpreter : MonoBehaviour {
     public enum OutputTypes {
         inline = 0,
@@ -33,9 +35,7 @@ public class Interpreter : MonoBehaviour {
             Destroy(gameObject);
 
         Instance = this;
-    }
 
-    void Start() {
         string filePath = Path.Combine(Application.streamingAssetsPath, _scenarioBasePath + "/" + _jsonFilenama);
         if (File.Exists(filePath)) {
             string jsonContent = File.ReadAllText(filePath);
@@ -48,12 +48,31 @@ public class Interpreter : MonoBehaviour {
         PrepareOutputsFromFiles();
     }
 
+    void Start() {
+        
+    }
+
+
+    // Check if the length of the common prefix is equal to the length of one of the alternatives commands
+    // If it is, return true. Else, return false
+    // This is used to check if the command is a partial match with one of the alternatives
+    public bool CheckCloserPrefixLengthFromAlternatives(string input, List<string> alternatives) {
+        foreach (var alternative in alternatives) {
+            if (input == alternative) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     // Get the output of the input command.
     // The method will look up in the commands list of terminal with the name terminalName
     // and will keep in mind the current phase of the terminal. Only the commands from
     // the current phase of the terminal are checked. Not from previous or future phases.
-    public List<string> Interpret(string input, string terminalName) {
-        Debug.Log("Terminal name supplied: " + terminalName);
+    public List<string> Interpret(string input, string terminalName, out string newPromt) {
+        //this will be changed to a specific value if the input triggered a change in terminal promt
+        newPromt = null;
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
@@ -65,23 +84,55 @@ public class Interpreter : MonoBehaviour {
 
         string commonPrefix;
         Command closerCommand = ChooseClosestCommand(input, phase, out commonPrefix);
-         
+
         if (closerCommand == null) {
             return new List<string> { "Command is not recongnized." };
         }
-        if (commonPrefix.Length == closerCommand.input.Length) {
+        if (input == closerCommand.input
+            || CheckCloserPrefixLengthFromAlternatives(commonPrefix, closerCommand.alternatives)) {
             // Found the right command
+
+            //Try to advance to next phase if all requirements are meet
             AdvanceScenario(closerCommand, phase, terminal);
+
+            // Some commands can finish/start tasks
+            CheckForTasks(closerCommand);
+
+            // Some commands can change the terminal promt
+            //CheckForPromtChanging(closerCommand);
+            newPromt = closerCommand.changePrompt;
+
             return PostProcessOutput(closerCommand.output);
         }
-
+    
         // The command is only partially correct
         return new List<string> { "Command is partially recongnized.", "OK: " + commonPrefix };
+    }
+
+    // Mark as compelte or start a task if the current command specify it
+    private void CheckForTasks(Command cmd) {
+        if (cmd.taskIdToComplete != null) {
+            TasksController.Instance.Mark(cmd.taskIdToComplete, true, true);
+        }
+        if (cmd.taskIdToStart != null) {
+            TasksController.Instance.ActivateTask(cmd.taskIdToStart);
+        }
+
+        if (cmd.storyIdToStart != null) {
+            DialogueController.Instance.SkipCurrentStoryCompletely();
+            DialogueController.Instance.PlayStory(cmd.storyIdToStart);
+        }
     }
 
     // Returns a list with all accesible commands that begin with
     // the string inputPrefix
     public List<string> GetPossibleCommands(string inputPrefix, string terminalName) {
+        if (_debug)
+            return GetPossibleCommandsWithArgs(inputPrefix, terminalName);
+        else
+            return GetPossibleCommandsNoArgs(inputPrefix, terminalName);
+    }
+    public List<string> GetPossibleCommandsWithArgs(string inputPrefix, string terminalName) {
         if (inputPrefix == null || inputPrefix == "")
             return null;
 
@@ -89,18 +140,73 @@ public class Interpreter : MonoBehaviour {
 
         Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
         if (terminal == null) {
-            Debug.LogError("MissConfiguration: tried to itnerpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
+            Debug.LogError("MissConfiguration: tried to interpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
             return new List<string> { "Command is not recongnized." };
         }
         int phaseToCheck = (_debug == true) ? _forcedPhase : terminal.currentPhase;
         Phase phase = terminal.phases[phaseToCheck];
 
         string aux;
-        foreach(var cmd in phase.commands) {
+        foreach (var cmd in phase.commands) {
+            bool found = false;
+
             aux = Helper.GetCommonPrefix(inputPrefix, cmd.input);
-            if(aux.Length == inputPrefix.Length) {
-                result.Add(cmd.input);
+            if (aux.Length == inputPrefix.Length) {
+                result.Add(cmd.input + ";");
+                found = true;
             }
+
+            // Check if the command is in the alternatives list
+            if (found == false) {
+                foreach (var alternative in cmd.alternatives) {
+                    aux = Helper.GetCommonPrefix(inputPrefix, alternative);
+                    if (aux.Length == inputPrefix.Length) {
+                        result.Add(alternative + ";");
+                        break;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public List<string> GetPossibleCommandsNoArgs(string inputPrefix, string terminalName) {
+        if (inputPrefix == null || inputPrefix == "")
+            return null;
+
+        if (Helper.HasOnlyOneWord(inputPrefix) == false)
+            return null;
+
+        List<string> result = new List<string>();
+
+        Terminal terminal = _scenario.terminals.Find(t => t.name == terminalName);
+        if (terminal == null) {
+            Debug.LogError("MissConfiguration: tried to interpret a command from a terminal that doesn t exist. The name of the terminal may be wrong in unity or inside the scenario json");
+            return new List<string> { "Command is not recongnized." };
+        }
+        int phaseToCheck = (_debug == true) ? _forcedPhase : terminal.currentPhase;
+        Phase phase = terminal.phases[phaseToCheck];
+
+        string aux;
+        foreach (var cmd in phase.commands) {
+            aux = Helper.GetCommonPrefix(inputPrefix, cmd.input);
+            if (aux.Length == inputPrefix.Length) {
+                // Add only the cmd, not the args too
+                string toAdd = Helper.GetFirstWord(cmd.input);
+                if (!result.Contains(toAdd)) {
+                    result.Add(toAdd);
+                }
+            }
+
+            //DONT need this, alternatives start with the same word(cmd) always
+            // Check if the command is in the alternatives list
+            //foreach (var alternative in cmd.alternatives) {
+            //    aux = Helper.GetCommonPrefix(inputPrefix, alternative);
+            //    if (aux.Length == inputPrefix.Length) {
+            //        result.Add(alternative);
+            //    }
+            //}
         }
 
         return result;
@@ -111,9 +217,9 @@ public class Interpreter : MonoBehaviour {
     public bool AdvanceByAction(string actionName) {
 
         bool result = false;
-        foreach(var terminal in _scenario.terminals) {
+        foreach (var terminal in _scenario.terminals) {
             var action = terminal.phases[terminal.currentPhase];
-            if(action.name == actionName) {
+            if (action.name == actionName) {
 
                 if (AdvanceRequirementsMet(terminal.phases[terminal.currentPhase])) {
                     terminal.currentPhase++;
@@ -126,12 +232,9 @@ public class Interpreter : MonoBehaviour {
         return result;
     }
 
-    public int GetPhase(string terminalName)
-    {
-        foreach (var terminal in _scenario.terminals)
-        {
-            if(terminal.name == terminalName)
-            {
+    public int GetPhase(string terminalName) {
+        foreach (var terminal in _scenario.terminals) {
+            if (terminal.name == terminalName) {
                 return terminal.currentPhase;
             }
         }
@@ -139,6 +242,16 @@ public class Interpreter : MonoBehaviour {
         return -1;
     }
 
+    // Get the default promt of a specific terminal
+    public string GetDefaultPromt(string terminalName) {
+        foreach (var terminal in _scenario.terminals) {
+            if (terminal.name == terminalName) {
+                return terminal.prompt;
+            }
+        }
+
+        return null;
+    }
 
     // The output message is wrote in json or separate files.
     // It needs to be processed and converted to a list of strings,
@@ -156,10 +269,24 @@ public class Interpreter : MonoBehaviour {
 
         string aux;
         foreach (var cmd in phase.commands) {
+            if (input == cmd.input) {
+                commonPrefix = input;
+                return cmd;
+            }
+
             aux = Helper.GetCommonPrefix(input, cmd.input);
             if (aux.Length > 0 && aux.Length >= commonPrefix.Length) {
                 commonPrefix = aux;
                 closerCommand = cmd;
+            }
+
+            // Check if the command is in the alternatives list
+            foreach (var alternative in cmd.alternatives) {
+                aux = Helper.GetCommonPrefix(input, alternative);
+                if (aux.Length > 0 && aux.Length >= commonPrefix.Length) {
+                    commonPrefix = aux;
+                    closerCommand = cmd;
+                }
             }
         }
 
@@ -171,12 +298,14 @@ public class Interpreter : MonoBehaviour {
     private void AdvanceScenario(Command completedCommand, Phase phase, Terminal terminal) {
 
         completedCommand.executed = true;
-        if(completedCommand.final == true) {
-            
-            if(AdvanceRequirementsMet(phase) == true) {
+        if (completedCommand.final == true) {
+
+            if (AdvanceRequirementsMet(phase) == true) {
                 terminal.currentPhase++;
+                //check for tasl completion using phase name
             }
         }
+        terminal.currentPhase = Mathf.Min(terminal.currentPhase, terminal.phases.Count - 1);
     }
 
     private bool AdvanceRequirementsMet(Phase phase) {
