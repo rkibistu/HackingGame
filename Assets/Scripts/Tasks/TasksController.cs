@@ -134,6 +134,13 @@ public class TasksController : MonoBehaviour {
         }
     }
 
+    public bool CheckCurrentTask(string id)
+    {
+        Debug.Log("CheckCurrentTask: " + _currentTask.id);
+        if (_currentTask.id == id)
+            return true;
+        return false;
+    }
     public void ActivateTask(string id) {
         foreach (var task in _tasks.tasks) {
             if (task.id != id)

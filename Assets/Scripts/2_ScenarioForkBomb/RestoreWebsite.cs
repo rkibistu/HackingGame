@@ -13,6 +13,28 @@ public class RestoreWebsite : MonoBehaviour
     private int _recoveryState = 0;
     private string _restoreWebServerString = "Restart Web Server";
     private string _backupWebServerString = "Download Backup";
+
+    [Header("Recovery webpage story and task IDs")]
+    [SerializeField]
+    private string _storyRecoveryWebsiteId;
+    [SerializeField]
+    private string _taskRecoveryWebsiteId;
+ 
+
+    [SerializeField]
+    private TMP_Text _downloadBackuptMessage;
+
+    private void OnEnable()
+    {
+        if (_recoveryWebpage.activeSelf)
+        {
+            if (TasksController.Instance.CheckCurrentTask(_taskRecoveryWebsiteId))
+            {
+                DialogueController.Instance.PlayStory(_storyRecoveryWebsiteId);
+            }
+        }
+    }
+
     public void OnRecoverButtonClicked()
     {
         TextMeshProUGUI buttonText = _recoveryButton.GetComponentInChildren<TextMeshProUGUI>();
@@ -22,6 +44,7 @@ public class RestoreWebsite : MonoBehaviour
             Interpreter.Instance.AdvanceByAction("database_downloaded");
             buttonText.text = _restoreWebServerString;
             _recoveryState++;
+            _downloadBackuptMessage.text = "Backup downloaded. Restarting web server...";
         }
         else
         {

@@ -2,8 +2,17 @@
   "tasks": [
     {
       "id": "check-assignment",
-      "title": "Check Assignment",
-      "description": "Go to https://university.com and check the assignment.",
+      "title": "Check the assignment",
+      "description": "Go to https://university.com and login to see the assignment.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "find-credentials",
+      "title": "Login to the university website",
+      "description": "Open the terminal and look after the credentials. Use 'cat' to read the file.",
       "reward": 10,
       "steps": [],
       "done": false,

@@ -21,6 +21,15 @@ public class BrowserManager : MonoBehaviour {
     [SerializeField]
     private Site _notFoundSite;
 
+    //[SerializeField]
+    //private string _loginUniWebsiteUrl;
+    //[SerializeField]
+    //private string _storyLoginId;
+    //[SerializeField]
+    //private string _taskBeforeLoginPageId;
+    //[SerializeField]
+    //private string _taskAfterLoginPageId;
+
     private Site _activeSite;
     private Stack<Site> _backSites = new Stack<Site>();
     private Stack<Site> _forwardSites = new Stack<Site>();
@@ -53,6 +62,19 @@ public class BrowserManager : MonoBehaviour {
         }
     }
 
+    //private void EnableWebsiteStoryBasedOfTask(string baseURL, string websiteUrl, 
+    //                                                        string storyId, string taskId, string nextTaskId)
+    //{
+    //    if (baseURL == websiteUrl)
+    //    {
+    //        if (TasksController.Instance.CheckCurrentTask(taskId))
+    //        {
+    //            TasksController.Instance.ActivateTask(nextTaskId);
+    //            DialogueController.Instance.PlayStory(storyId);
+    //        }
+    //    }
+    //}
+
     private void ChangeSite(string url) {
 
         //base url without params
@@ -62,6 +84,10 @@ public class BrowserManager : MonoBehaviour {
 
         foreach (var site in _sites) {
             if (site.URL == baseUrl) {
+                //enable story and next task after user gets to the login page of the  university website
+                //EnableWebsiteStoryBasedOfTask(baseUrl, _loginUniWebsiteUrl, _storyLoginId,
+                //    _taskBeforeLoginPageId, _taskAfterLoginPageId);
+
                 _backSites.Push(_activeSite);
                 _forwardSites.Clear();
                 _activeSite.Obj.SetActive(false);
