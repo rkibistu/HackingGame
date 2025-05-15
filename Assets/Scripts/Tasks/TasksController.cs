@@ -230,5 +230,12 @@ public class TasksController : MonoBehaviour {
             DialogueController.Instance.SkipCurrentStoryCompletely();
             DialogueController.Instance.PlayStory(task.storyIdToStart);
         }
+
+        if (task.taskIdToComplete != null) {
+            Mark(task.id, true, true);
+        }
+        if(task.taskIdToStart != null) {
+            ActivateTask(task.taskIdToStart);
+        }
     }
 }
