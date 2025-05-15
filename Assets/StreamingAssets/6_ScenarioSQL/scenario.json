@@ -3,9 +3,41 @@
     {
       "name": "6_scenarioSQL",
       "phases": [
+        
         {
           "name": "0",
           "commands": [
+            {
+              "input": "test --da --nu",
+              "alternatives": [
+                "test --nu --da"
+              ],
+              "outputType": "inline",
+              "output": "output: test da nu",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "test --nu --da --poate",
+              "alternatives": [
+              ],
+              "outputType": "inline",
+              "output": "output: test da nu paote",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "test",
+              "alternatives": [
+              ],
+              "outputType": "inline",
+              "output": "output: test",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
             {
               "input": "ls",
               "alternatives": [
@@ -77,8 +109,8 @@
               "input": "sqlmap -u https://pc-potato.ro/index.php?name --tables",
               "alternatives": [
                 "sqlmap -u https://pc-potato.ro/index.php?name= --tables",
-                "sqlmap --tables -u  https://pc-potato.ro/index.php?name",
-                "sqlmap --tables -u  https://pc-potato.ro/index.php?name="
+                "sqlmap --tables -u https://pc-potato.ro/index.php?name",
+                "sqlmap --tables -u https://pc-potato.ro/index.php?name="
               ],
               "outputType": "file",
               "output": "",
@@ -91,8 +123,8 @@
               "input": "sqlmap -u https://pc-potato.ro/index.php?name --columns",
               "alternatives": [
                 "sqlmap -u https://pc-potato.ro/index.php?name= --columns",
-                "sqlmap --columns -u  https://pc-potato.ro/index.php?name",
-                "sqlmap --columns -u  https://pc-potato.ro/index.php?name="
+                "sqlmap --columns -u https://pc-potato.ro/index.php?name",
+                "sqlmap --columns -u https://pc-potato.ro/index.php?name="
               ],
               "outputType": "file",
               "output": "",

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Text.RegularExpressions;
+using UnityEngine.Windows;
 
 public class Helper {
     public static string GetCommonPrefix(string str1, string str2) {
@@ -12,6 +14,13 @@ public class Helper {
         }
 
         return str1.Substring(0, i);
+    }
+
+    public static bool IsMatching(string str1, string str2) {
+        string temp1 = Regex.Replace(str1.Trim(), @"\s+", " ");
+        string temp2 = Regex.Replace(str2.Trim(), @"\s+", " ");
+
+        return temp1 == temp2;
     }
 
     public static string GetCommonPrefixBeforeFirstSpace(string str1, string str2) {

@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 using static ScenarioJSONStructure;
+using System.Text.RegularExpressions;
 /*
 * This class is responsible with interpreting the input of all terminals.
 */
@@ -54,7 +55,7 @@ public class Interpreter : MonoBehaviour {
     // Check if the length of the common prefix is equal to the length of one of the alternatives commands
     // If it is, return true. Else, return false
     // This is used to check if the command is a partial match with one of the alternatives
-    public bool CheckCloserPrefixLengthFromAlternatives(string input, List<string> alternatives) {
+    private bool CheckCloserPrefixLengthFromAlternatives(string input, List<string> alternatives) {
         foreach (var alternative in alternatives) {
             if (input == alternative) {
                 return true;
@@ -265,19 +266,32 @@ public class Interpreter : MonoBehaviour {
         Command closerCommand = null;
         commonPrefix = "";
 
+        //remove extra spaces
+        //input = Regex.Replace(input.Trim(), @"\s+", " ");
+
         string aux;
         foreach (var cmd in phase.commands) {
-            if (input == cmd.input) {
+            //check for exact match
+            if (Helper.IsMatching(input, cmd.input)) {
                 commonPrefix = input;
                 return cmd;
             }
+            else {
+                foreach(var alternative in cmd.alternatives) {
+                    if(Helper.IsMatching(input, alternative)) {
+                        commonPrefix = input;
+                        return cmd;
+                    }
+                }
+            }
 
+
+            // No match -> keep the longest common prefix
             aux = Helper.GetCommonPrefix(input, cmd.input);
             if (aux.Length > 0 && aux.Length >= commonPrefix.Length) {
                 commonPrefix = aux;
                 closerCommand = cmd;
             }
-
             // Check if the command is in the alternatives list
             foreach (var alternative in cmd.alternatives) {
                 aux = Helper.GetCommonPrefix(input, alternative);
