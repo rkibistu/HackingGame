@@ -117,6 +117,11 @@ public class Interpreter : MonoBehaviour {
         if (cmd.taskIdToStart != null) {
             TasksController.Instance.ActivateTask(cmd.taskIdToStart);
         }
+
+        if (cmd.storyIdToStart != null) {
+            DialogueController.Instance.SkipCurrentStoryCompletely();
+            DialogueController.Instance.PlayStory(cmd.storyIdToStart);
+        }
     }
 
     // Returns a list with all accesible commands that begin with
