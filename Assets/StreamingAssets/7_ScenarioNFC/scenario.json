@@ -2,6 +2,7 @@
   "terminals": [
     {
       "name": "7_scenarioNFC",
+      "prompt": "kali:kali $>",
       "phases": [
         {
           "name": "0",
@@ -50,6 +51,7 @@
               "outputType": "file",
               "output": "",
               "outputFile": "proxmark_output.txt",
+              "changePrompt": "[usb] pm3 --> ",
               "required": "true",
               "final": "true"
             }
@@ -58,35 +60,6 @@
         {
           "name": "1",
           "commands": [
-            {
-              "input": "ls",
-              "alternatives": [
-                "ls",
-                "ls -l",
-                "ls -a",
-                "ls -la",
-                "ls -al",
-                "ls -l -a",
-                "ls -a -l",
-                "ls -l -a -h",
-                "ls -a -l -h",
-                "ls -lh"
-              ],
-              "outputType": "inline",
-              "output": "Output of command:\r\n\r\n",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
-            {
-              "input": "whoami",
-              "alternatives": [],
-              "outputType": "inline",
-              "output": "Output of command:\r\nanonymous\r\n",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
             {
               "input": "hf --help",
               "alternatives": [],
@@ -119,35 +92,6 @@
         {
           "name": "2",
           "commands": [
-            {
-              "input": "ls",
-              "alternatives": [
-                "ls",
-                "ls -l",
-                "ls -a",
-                "ls -la",
-                "ls -al",
-                "ls -l -a",
-                "ls -a -l",
-                "ls -l -a -h",
-                "ls -a -l -h",
-                "ls -lh"
-              ],
-              "outputType": "inline",
-              "output": "Output of command:\r\nhf-mf-04013-dump.bin\r\n",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
-            {
-              "input": "whoami",
-              "alternatives": [],
-              "outputType": "inline",
-              "output": "Output of command:\r\nanonymous\r\n",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
             {
               "input": "hf --help",
               "alternatives": [],
