@@ -8,7 +8,7 @@ public class GameplayController : MonoBehaviour
 
     public static GameplayController Instance { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (Instance != null && Instance != this)
             Destroy(gameObject);
@@ -22,6 +22,13 @@ public class GameplayController : MonoBehaviour
     }
     protected virtual void  Update()
     {
+        // Next line in dialogue
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            if (DialogueController.Instance.IsStoryRunning) {
+                DialogueController.Instance.Next();
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.L)) {
             Debug.Log("Unlock cursour from GamePlaycontroller. Debug");
             Cursor.lockState = CursorLockMode.None;
