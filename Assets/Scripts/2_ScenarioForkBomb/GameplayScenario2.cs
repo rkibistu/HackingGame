@@ -13,6 +13,8 @@ public class GameplayScenario2 : GameplayController
     public override void StartLevel() {
 
         DialogueController.Instance.PlayStory("intro");
+        TasksController.Instance.ActivateTask("check-assignment");
+        
     }
     
     
