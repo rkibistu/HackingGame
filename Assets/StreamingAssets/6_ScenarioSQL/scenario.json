@@ -3,41 +3,9 @@
     {
       "name": "6_scenarioSQL",
       "phases": [
-        
         {
           "name": "0",
           "commands": [
-            {
-              "input": "test --da --nu",
-              "alternatives": [
-                "test --nu --da"
-              ],
-              "outputType": "inline",
-              "output": "output: test da nu",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
-            {
-              "input": "test --nu --da --poate",
-              "alternatives": [
-              ],
-              "outputType": "inline",
-              "output": "output: test da nu paote",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
-            {
-              "input": "test",
-              "alternatives": [
-              ],
-              "outputType": "inline",
-              "output": "output: y",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
             {
               "input": "ls",
               "alternatives": [
@@ -95,9 +63,9 @@
               "final": "false"
             },
             {
-              "input": "sqlmap -u https://pc-potato.ro/index.php?name",
+              "input": "sqlmap -u https://pc-potato.ro?name",
               "alternatives": [
-                "sqlmap -u https://pc-potato.ro/index.php?name="
+                "sqlmap -u https://pc-potato.ro?name="
               ],
               "outputType": "file",
               "output": "",
@@ -106,11 +74,11 @@
               "final": "false"
             },
             {
-              "input": "sqlmap -u https://pc-potato.ro/index.php?name --tables",
+              "input": "sqlmap -u https://pc-potato.ro?name --tables",
               "alternatives": [
-                "sqlmap -u https://pc-potato.ro/index.php?name= --tables",
-                "sqlmap --tables -u https://pc-potato.ro/index.php?name",
-                "sqlmap --tables -u https://pc-potato.ro/index.php?name="
+                "sqlmap -u https://pc-potato.ro?name= --tables",
+                "sqlmap --tables -u https://pc-potato.ro?name",
+                "sqlmap --tables -u https://pc-potato.ro?name="
               ],
               "outputType": "file",
               "output": "",
@@ -120,11 +88,11 @@
               "taskIdToComplete": "scan-sqlmap-1"
             },
             {
-              "input": "sqlmap -u https://pc-potato.ro/index.php?name --columns",
+              "input": "sqlmap -u https://pc-potato.ro?name --columns",
               "alternatives": [
-                "sqlmap -u https://pc-potato.ro/index.php?name= --columns",
-                "sqlmap --columns -u https://pc-potato.ro/index.php?name",
-                "sqlmap --columns -u https://pc-potato.ro/index.php?name="
+                "sqlmap -u https://pc-potato.ro?name= --columns",
+                "sqlmap --columns -u https://pc-potato.ro?name",
+                "sqlmap --columns -u https://pc-potato.ro?name="
               ],
               "outputType": "file",
               "output": "",
@@ -134,18 +102,18 @@
               "taskIdToComplete": "scan-sqlmap-2"
             },
             {
-              "input": "sqlmap -u https://pc-potato.ro/index.php?name --tables --columns",
+              "input": "sqlmap -u https://pc-potato.ro?name --tables --columns",
               "alternatives": [
-                "sqlmap --tables --columns -u https://pc-potato.ro/index.php?name",
-                "sqlmap --tables --columns -u https://pc-potato.ro/index.php?name=",
-                "sqlmap --columns --tables -u https://pc-potato.ro/index.php?name",
-                "sqlmap --columns --tables -u https://pc-potato.ro/index.php?name=",
-                "sqlmap -u https://pc-potato.ro/index.php?name= --columns --tables",
-                "sqlmap -u https://pc-potato.ro/index.php?name --columns --tables",
-                "sqlmap --columns -u https://pc-potato.ro/index.php?name= --tables",
-                "sqlmap --columns -u https://pc-potato.ro/index.php?name --tables",
-                "sqlmap --tables -u https://pc-potato.ro/index.php?name= --columns",
-                "sqlmap --tables -u https://pc-potato.ro/index.php?name --columns"
+                "sqlmap --tables --columns -u https://pc-potato.ro?name",
+                "sqlmap --tables --columns -u https://pc-potato.ro?name=",
+                "sqlmap --columns --tables -u https://pc-potato.ro?name",
+                "sqlmap --columns --tables -u https://pc-potato.ro?name=",
+                "sqlmap -u https://pc-potato.ro?name= --columns --tables",
+                "sqlmap -u https://pc-potato.ro?name --columns --tables",
+                "sqlmap --columns -u https://pc-potato.ro?name= --tables",
+                "sqlmap --columns -u https://pc-potato.ro?name --tables",
+                "sqlmap --tables -u https://pc-potato.ro?name= --columns",
+                "sqlmap --tables -u https://pc-potato.ro?name --columns"
               ],
               "outputType": "file",
               "output": "",

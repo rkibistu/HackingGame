@@ -21,7 +21,77 @@
                 "ls -lh"
               ],
               "outputType": "inline",
-              "output": "Output of command:\r\nforkbomb.c\r\n",
+              "output": "Output of command:\r\ncredentials.txt\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "whoami",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nanonymous\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cat [FILE]\r\n\r\nConcatenate FILE to standard output.\r\n\r\nTry 'cat --help' for more information.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat --help",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\nUsage: cat [FILE]\r\n\r\nConcatenate FILE to standard output.\r\n\r\n--help \t\t: show this help.\r\n--version \t\t: show version.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat --version",
+              "alternatives": [],
+              "outputType": "inline",
+              "output": "Output of command:\r\ncat (GNU coreutils) 9.4\r\nCopyright (C) 2023 Free Software Foundation, Inc.\r\nLicense GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.\r\nThis is free software: you are free to change and redistribute it.\r\nThere is NO WARRANTY, to the extent permitted by law.\r\nWritten by Torbjörn Granlund and Richard M. Stallman.\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "cat credentials.txt",
+              "alternatives": [],
+              "outputType": "file",
+              "output": "",
+              "outputFile": "credentials.txt",
+              "required": "true",
+              "final": "true"
+            }
+          ]
+        },
+        {
+          "name": "1",
+          "commands": [
+            {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\ncredentials.txt\tforkbomb.c\r\n",
               "outputFile": "",
               "required": "false",
               "final": "false"
@@ -114,17 +184,11 @@
               "output": "",
               "outputFile": "gcc_output.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "compile-fork-bomb",
+              "taskIdToStart": "upload-fork-bomb"
             }
           ]
-        },
-        {
-          "name": "database_downloaded",
-          "action": {
-            "description": "Download backup of database",
-            "required": "true",
-            "final": "true"
-          }
         },
         {
           "name": "2",
@@ -144,7 +208,7 @@
                 "ls -lh"
               ],
               "outputType": "inline",
-              "output": "Output of command:\r\nforkbomb.c\tbackup_database.db\r\n",
+              "output": "Output of command:\r\ncredentials.txt\tforkbomb.c\t forkbomb \tbackup_database.db \t\r\n",
               "outputFile": "",
               "required": "false",
               "final": "false"
@@ -192,8 +256,16 @@
               "output": "",
               "outputFile": "sqlite3_entry.txt",
               "required": "true",
-              "final": "false"
-            },
+              "final": "true",
+              "taskIdToComplete": "check-database-file",
+              "taskIdToStart": "select-exam-table",
+              "changePrompt": "sqlite3>"
+            }
+          ]
+        },
+        {
+          "name": "3",
+          "commands": [
             {
               "input": ".help",
               "alternatives": [],
@@ -213,8 +285,22 @@
               "final": "false"
             },
             {
-              "input": "SELECT * FROM exams;",
+              "input": ".tables",
               "alternatives": [],
+              "outputType": "inline",
+              "output": "Tables: exams",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
+              "input": "SELECT * FROM exams;",
+              "alternatives": [
+                "select * from exams;",
+                "SELECT * FROM exams",
+                "SELECT * from exams",
+                "select * FROM exams;"
+              ],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlite3_output.txt",

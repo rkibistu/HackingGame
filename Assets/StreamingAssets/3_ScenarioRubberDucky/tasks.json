@@ -1,0 +1,90 @@
+{
+  "tasks": [
+    {
+      "id": "upload-payload",
+      "title": "Upload payload to `/mnt/ducky`",
+      "description": "Payload needs to be uploaded to /mnt/ducky. You can read the payload with `cat`.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "unplug-ducky",
+      "title": "Unplug the RubberDucky",
+      "description": "Unplug the RubberDucky from the PC.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "start-cobaltstrike",
+      "title": "Start C2 teamserver on 127.0.0.1 with 123456 password",
+      "description": "Start CobaltStrike C2 teamserver on 127.0.0.1 with 123456 password",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "teleport-parking-lot",
+      "title": "Go through the door at the parking lot",
+      "description": "Go through the door at the parking lot.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "parking-lot"
+    },
+    {
+      "id": "spread-rubberduckies",
+      "title": "Spread the RubberDuckies next to the car doors",
+      "description": "Spread the RubberDuckies next to the car doors",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "take-nap",
+      "title": "Return home and take a nap",
+      "description": "Return home and take a nap",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "return-home"
+    },
+    {
+      "id": "start-client",
+      "title": "Start CobaltStrike C2 client with `cobaltstrike`",
+      "description": "Start CobaltStrike C2 client `cobaltstrike`",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "check-cobaltstrike"
+    },
+    {
+      "id": "check-client",
+      "title": "Check website for successful beacons",
+      "description": "Check website for successful beacons",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "check-cobaltstrike"
+    },
+    {
+      "id": "outro",
+      "title": "Nice work",
+      "description": "Nice work",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "scene3-ending"
+    }
+  ]
+}

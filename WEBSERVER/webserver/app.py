@@ -208,7 +208,6 @@ def admin_login():
 @app.route('/admin/dashboard')
 @web_session_required('admin')
 def admin_users():
-    app.logger.debug('Mesaj de debug: Ruta "/admin/dashboard" a fost accesată.')
     search_query = request.args.get('q', '')
     page = request.args.get('page', 1, type=int)
     

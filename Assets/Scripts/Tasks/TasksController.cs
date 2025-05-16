@@ -56,8 +56,23 @@ public class TasksController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.T)) {
             //Mark("check-room");
             //ActivateTask("check-door");
-            GameplayController.Instance.StartLevel();
+            //GameplayController.Instance.StartLevel();
         }
+    }
+
+
+    //ATENTION: an inactive but compelte task will return FALSE here
+    //  this was not a mistake
+    public bool CheckIfComplete(string taskId) {
+        // If it is not added in the journal it means it was not activated
+        // An inactive task can be complete, but we will return this as not coimplete
+        Debug.Log(taskId);
+        if (_journalRows.ContainsKey(taskId)) {
+            Debug.Log(_journalRows[taskId].done);
+            return _journalRows[taskId].done;
+        }
+        Debug.Log("false");
+        return false;
     }
 
     // if markInactiveToo == false -> only an active task can be marked
@@ -119,6 +134,12 @@ public class TasksController : MonoBehaviour {
         }
     }
 
+    public bool CheckCurrentTask(string id)
+    {
+        if (_currentTask.id == id)
+            return true;
+        return false;
+    }
     public void ActivateTask(string id) {
         foreach (var task in _tasks.tasks) {
             if (task.id != id)
