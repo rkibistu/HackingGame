@@ -21,7 +21,7 @@
                 "ls -lh"
               ],
               "outputType": "inline",
-              "output": "Output of command:\r\npayload.txt\r\n",
+              "output": "Output of command:\r\npayload.txt\tteamserver\r\n",
               "outputFile": "",
               "required": "false",
               "final": "false"
@@ -126,12 +126,16 @@
           "commands": [
             {
               "input": "./teamserver",
-              "alternatives": [],
+              "alternatives": [
+                "teamserver",
+                "./teamserver --help",
+                "teamserver --help"
+              ],
               "outputType": "inline",
               "output": "Output of command:\r\nUsage: teamserver <host ip> <password>\r\n\r\nStart the Cobalt Strike team server.\r\n\r\n",
               "outputFile": "",
-              "required": "true",
-              "final": "true"
+              "required": "false",
+              "final": "false"
             },
             {
               "input": "./teamserver 127.0.0.1 123456",
@@ -143,6 +147,14 @@
               "final": "true"
             }
           ]
+        },
+        {
+          "name": "teleport_parking_lot",
+          "action": {
+            "description": "Spread rubber duckies in the parking lot",
+            "required": "true",
+            "final": "true"
+          }
         },
         {
           "name": "3",
