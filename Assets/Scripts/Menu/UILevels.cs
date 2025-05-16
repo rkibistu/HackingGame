@@ -32,6 +32,8 @@ public class UILevels : MonoBehaviour
         int i = 0;
         for (i = 0; i < _levelsAccessible; i++)
         {
+            if (i >= _levelButtons.Count)
+                break;
             _levelButtons[i].interactable = true;
         }
         for (int j = i; j < _levelButtons.Count; j++)
