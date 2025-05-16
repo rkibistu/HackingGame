@@ -70,9 +70,9 @@ namespace SlimUI.ModernMenu{
 
 			// check slider values
 			musicSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume");
-			sensitivityXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("XSensitivity");
-			sensitivityYSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("YSensitivity");
-			mouseSmoothSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MouseSmoothing");
+			//sensitivityXSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("XSensitivity");
+			//sensitivityYSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("YSensitivity");
+			//mouseSmoothSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MouseSmoothing");
 
 			// check full screen
 			if(Screen.fullScreen == true){
@@ -155,12 +155,12 @@ namespace SlimUI.ModernMenu{
 			}
 
 			// check mouse inverse
-			if(PlayerPrefs.GetInt("Inverted")==0){
-				invertmousetext.GetComponent<TMP_Text>().text = "off";
-			}
-			else if(PlayerPrefs.GetInt("Inverted")==1){
-				invertmousetext.GetComponent<TMP_Text>().text = "on";
-			}
+			//if(PlayerPrefs.GetInt("Inverted")==0){
+			//	invertmousetext.GetComponent<TMP_Text>().text = "off";
+			//}
+			//else if(PlayerPrefs.GetInt("Inverted")==1){
+			//	invertmousetext.GetComponent<TMP_Text>().text = "on";
+			//}
 
 			// check motion blur
 			if(PlayerPrefs.GetInt("MotionBlur")==0){
