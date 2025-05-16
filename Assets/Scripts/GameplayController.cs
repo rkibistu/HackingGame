@@ -39,6 +39,10 @@ public class GameplayController : MonoBehaviour {
     public virtual void StartLevel() {
     }
 
+    public void ExitToMainMenu() {
+
+    }
+
     public void EnablePopup(string name) {
         EnableAllChildsOfGameObject(name);
     }
