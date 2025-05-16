@@ -3,29 +3,40 @@
     {
       "name": "6_scenarioSQL",
       "phases": [
+        
         {
           "name": "0",
           "commands": [
             {
-              "input": "test",
-              "alternatives": [],
+              "input": "test --da --nu",
+              "alternatives": [
+                "test --nu --da"
+              ],
               "outputType": "inline",
-              "output": "Output of command:\r\nanonymous\r\n",
+              "output": "output: test da nu",
               "outputFile": "",
               "required": "false",
-              "final": "false",
-              "changePrompt": "NewPromt:/",
-              "storyIdToStart": "scan-sqlmap"
+              "final": "false"
             },
             {
-              "input": "test_out",
-              "alternatives": [],
+              "input": "test --nu --da --poate",
+              "alternatives": [
+              ],
               "outputType": "inline",
-              "output": "Output of command:\r\nanonymous\r\n",
+              "output": "output: test da nu paote",
               "outputFile": "",
               "required": "false",
-              "final": "false",
-              "changePrompt": "OldPromt:/"
+              "final": "false"
+            },
+            {
+              "input": "test",
+              "alternatives": [
+              ],
+              "outputType": "inline",
+              "output": "output: y",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
             },
             {
               "input": "ls",
@@ -68,9 +79,9 @@
             {
               "input": "sqlmap --help",
               "alternatives": [],
-              "outputType": "inline",
-              "output": "Output of command:\r\nUsage: sqlmap [OPTIONS]\r\n\r\n-u <URL>\t\t: target URL.\r\n--tables \t\t: enumerate DBMS database tables.\r\n--columns \t\t: enumerate DBMS database table columns.\r\n--help \t\t: show this help.\r\n--version \t\t: show version.\r\nexample:\r\n$ sqlmap -u <URL> --tables --columns\r\n$ sqlmap -u scalper/index.php?name=8090\r\n$ sqlmap --version\r\n$ sqlmap --help\r\n",
-              "outputFile": "",
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlmap_help.txt",
               "required": "false",
               "final": "false"
             },
@@ -84,8 +95,10 @@
               "final": "false"
             },
             {
-              "input": "sqlmap -u scalper/index.php?name=8090",
-              "alternatives": [],
+              "input": "sqlmap -u https://pc-potato.ro?name",
+              "alternatives": [
+                "sqlmap -u https://pc-potato.ro?name="
+              ],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlmap_output.txt",
@@ -93,19 +106,53 @@
               "final": "false"
             },
             {
-              "input": "sqlmap -u scalper/index.php?name=8090 --tables --columns",
+              "input": "sqlmap -u https://pc-potato.ro?name --tables",
               "alternatives": [
-                "sqlmap --tables --columns -u scalper/index.php?name=8090",
-                "sqlmap --columns --tables -u scalper/index.php?name=8090",
-                "sqlmap -u scalper/index.php?name=8090 --columns --tables",
-                "sqlmap --columns -u scalper/index.php?name=8090 --tables",
-                "sqlmap --tables -u scalper/index.php?name=8090 --columns"
+                "sqlmap -u https://pc-potato.ro?name= --tables",
+                "sqlmap --tables -u https://pc-potato.ro?name",
+                "sqlmap --tables -u https://pc-potato.ro?name="
+              ],
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlmap_output_tables.txt",
+              "required": "false",
+              "final": "false",
+              "taskIdToComplete": "scan-sqlmap-1"
+            },
+            {
+              "input": "sqlmap -u https://pc-potato.ro?name --columns",
+              "alternatives": [
+                "sqlmap -u https://pc-potato.ro?name= --columns",
+                "sqlmap --columns -u https://pc-potato.ro?name",
+                "sqlmap --columns -u https://pc-potato.ro?name="
+              ],
+              "outputType": "file",
+              "output": "",
+              "outputFile": "sqlmap_output_columns.txt",
+              "required": "false",
+              "final": "false",
+              "taskIdToComplete": "scan-sqlmap-2"
+            },
+            {
+              "input": "sqlmap -u https://pc-potato.ro?name --tables --columns",
+              "alternatives": [
+                "sqlmap --tables --columns -u https://pc-potato.ro?name",
+                "sqlmap --tables --columns -u https://pc-potato.ro?name=",
+                "sqlmap --columns --tables -u https://pc-potato.ro?name",
+                "sqlmap --columns --tables -u https://pc-potato.ro?name=",
+                "sqlmap -u https://pc-potato.ro?name= --columns --tables",
+                "sqlmap -u https://pc-potato.ro?name --columns --tables",
+                "sqlmap --columns -u https://pc-potato.ro?name= --tables",
+                "sqlmap --columns -u https://pc-potato.ro?name --tables",
+                "sqlmap --tables -u https://pc-potato.ro?name= --columns",
+                "sqlmap --tables -u https://pc-potato.ro?name --columns"
               ],
               "outputType": "file",
               "output": "",
               "outputFile": "sqlmap_output_schema.txt",
               "required": "false",
-              "final": "false"
+              "final": "false",
+              "taskIdToComplete": "scan-sqlmap"
             }
           ]
         }

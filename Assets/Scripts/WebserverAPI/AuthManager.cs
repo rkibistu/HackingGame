@@ -7,15 +7,37 @@ namespace WebserverAPI
 {
     public class AuthManager : MonoBehaviour
     {
+        [Header("Login/Register panels")]
+        public GameObject loginPanel;
+        public GameObject registerPanel;
+
+        [Header("Error Fields")]
+        [SerializeField] private TMP_Text errorLoginField;
+        [SerializeField] private TMP_Text errorRegisterField;
+
         [Header("Login Fields")]
         [SerializeField] private TMP_InputField usernameLoginField;
         [SerializeField] private TMP_InputField passwordLoginField;
+
+        [Header("Register Fields")]
+        [SerializeField] private TMP_InputField usernameRegistrationField;
+        [SerializeField] private TMP_InputField passwordRegistrationField;
+        [SerializeField] private TMP_InputField institutionRegistrationField;
+
         public void Login()
         {
+            errorLoginField.text = string.Empty;
+
             // implement logic for getting username and password from input fields
             string username = usernameLoginField.text;
             string password = passwordLoginField.text;
 
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) )
+            {
+                Debug.LogError("All fields are required.");
+                errorLoginField.text = "All fields are required.";
+                return;
+            }
 
             var webclient = WebClientService.Instance;
             webclient.Login(username, password, (success, message) =>
@@ -24,29 +46,34 @@ namespace WebserverAPI
                 {
                     // implement login success logic here -> redirect to first game
                     Debug.Log("Login successful: " + message);
+                    ClearAllInputFields();
                 }
                 else
                 {
                     // implement login failed logic here -> remain in login page, display login error message
                     Debug.LogError("Login failed: " + message);
+                    ClearAllInputFields();
+                    errorLoginField.text = "The username or password is invalid.";
                 }
             });
 
             
         }
 
-        [Header("Register Fields")]
-        [SerializeField] private TMP_InputField usernameRegistrationField;
-        [SerializeField] private TMP_InputField passwordRegistrationField;
-        [SerializeField] private TMP_InputField institutionRegistrationField;
-
         public void Register()
         {
+            errorRegisterField.text = string.Empty;
             // implement logic for getting username, password and institution name from input fields
             string username = usernameRegistrationField.text;
             string password = passwordRegistrationField.text;
             string institutionName = institutionRegistrationField.text;
 
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(institutionName))
+            {
+                Debug.LogError("All fields are required.");
+                errorRegisterField.text = "All fields are required.";
+                return;
+            }
 
             var webclient = WebClientService.Instance;
             webclient.Register(username, password, institutionName, (success, message) =>
@@ -55,18 +82,22 @@ namespace WebserverAPI
                 {
                     // implement register success logic here -> redirect to login page
                     Debug.Log("Registration successful: " + message);
+                    ShowLogin();
                 }
                 else
                 {
-
                     if (message.Contains("Username already exists!")){
                         // implement logic to inform user that the username already exists
                         Debug.LogError("Username already exists: " + message);
+                        ClearAllInputFields();
+                        errorRegisterField.text = "Username already exists.";
                     }
                     else
                     {
                         // implement login failed logic here -> remain in register page, display register error message
                         Debug.LogError("Registration failed: " + message);
+                        ClearAllInputFields();
+                        errorRegisterField.text = "Registration failed.";
                     }
                 }
             });
@@ -91,5 +122,43 @@ namespace WebserverAPI
                 }
             });
         }
+
+        /// <summary>
+        /// Clear all the input fields in the login and registration panels.
+        /// </summary>
+        public void ClearAllInputFields()
+        {
+            usernameLoginField.text = string.Empty;
+            passwordLoginField.text = string.Empty;
+            usernameRegistrationField.text = string.Empty;
+            passwordRegistrationField.text = string.Empty;
+            institutionRegistrationField.text = string.Empty;
+            errorLoginField.text = string.Empty;
+            errorRegisterField.text = string.Empty;
+        }
+
+        /// <summary>
+        /// Call this from your “Go To Register” button.
+        /// </summary>
+        public void ShowRegister()
+        {
+            loginPanel.SetActive(false);
+            ClearAllInputFields();
+            registerPanel.SetActive(true);
+        }
+
+        /// <summary>
+        /// Call this from your “Go To Login” button.
+        /// </summary>
+        public void ShowLogin()
+        {
+            registerPanel.SetActive(false);
+            ClearAllInputFields();
+            loginPanel.SetActive(true);
+        }
+
+
+        
+
     }
 }

