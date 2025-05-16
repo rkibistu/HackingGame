@@ -13,18 +13,26 @@ public class SubmitSolution : MonoBehaviour
     [SerializeField]
     private TerminalManager _terminalManager;
 
+    [Header("Submit asignment story and task IDs")]
+    [SerializeField]
+    private string _taskForAllowSubmitId;
+    [SerializeField]
+    private string _taskForSuccessSubmitId;
+
+    [SerializeField]
+    private TMP_Text _errorSubmitMessage;
+
     public void OnSubmitButtonClicked()
     {
-        int phase = Interpreter.Instance.GetPhase(_terminalManager.Name);
-        if (phase == 1)
+        if (TasksController.Instance.CheckCurrentTask(_taskForAllowSubmitId))
         {
+            TasksController.Instance.ActivateTask(_taskForSuccessSubmitId);
             _recoveryWebpage.SetActive(true);
             _submitWebpage.SetActive(false);
         }
         else
         {
-            Debug.Log("TODO");
+            _errorSubmitMessage.text = "No file uploaded.";
         }
-
     }
 }

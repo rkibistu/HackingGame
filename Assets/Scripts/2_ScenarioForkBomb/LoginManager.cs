@@ -19,8 +19,15 @@ public class LoginManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _errorLoginText;
 
-    public string correctUsername = "admin"; // Hardcoded username
-    public string correctPassword = "admin"; // Hardcoded password
+    [Header("Login credentials")]
+    [SerializeField]
+    private string correctUsername = "admin";
+    [SerializeField]
+    private string correctPassword = "admin";
+
+    [Header("Login story and task IDs")]
+    [SerializeField]
+    private string _taskAfterSuccessLoginPageId;
 
     void Start()
     {
@@ -36,10 +43,11 @@ public class LoginManager : MonoBehaviour
 
         if (enteredUsername == correctUsername && enteredPassword == correctPassword)
         {
+            TasksController.Instance.ActivateTask(_taskAfterSuccessLoginPageId);
             ClearPanel();
             _loginWebpage.SetActive(false);
             _submitWebpage.SetActive(true);
-            _errorLoginText.gameObject.SetActive(false); // Disable error text if it was previously active.
+            _errorLoginText.gameObject.SetActive(false); // Disable error text if it was previously active.   
         }
         else
         {
