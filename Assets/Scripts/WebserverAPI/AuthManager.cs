@@ -2,11 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using SlimUI.ModernMenu;
 
 namespace WebserverAPI
 {
     public class AuthManager : MonoBehaviour
     {
+        [SerializeField]
+        private UIMenuManager _menuManager;
+
         [Header("Error Fields")]
         [SerializeField] private TMP_Text errorLoginField;
         [SerializeField] private TMP_Text errorRegisterField;
@@ -41,8 +45,9 @@ namespace WebserverAPI
                 if (success)
                 {
                     // implement login success logic here -> redirect to first game
-                    Debug.Log("Login successful: " + message);
+                    //Debug.Log("Login successful: " + message);
                     ClearAllInputFields();
+                    _menuManager.SwitchToMainMenu();
                 }
                 else
                 {
@@ -78,7 +83,7 @@ namespace WebserverAPI
                 {
                     // implement register success logic here -> redirect to login page
                     Debug.Log("Registration successful: " + message);
-                    //ShowLogin();
+                    _menuManager.SwitchToMainMenu();
                 }
                 else
                 {

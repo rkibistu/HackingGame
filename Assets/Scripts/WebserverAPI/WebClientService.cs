@@ -26,7 +26,7 @@ namespace WebserverAPI
     {
         private static WebClientService _instance;
 
-        private string _baseUrl = "https://game.cyberman.ro";
+        private string _baseUrl = "https://game.cyberman.ro/";
         private string _accessToken = string.Empty;
         private string _refreshToken = string.Empty;
 
@@ -120,8 +120,6 @@ namespace WebserverAPI
                 { "username", username },
                 { "password", password }
             };
-
-            Debug.Log(_baseUrl);
 
             StartCoroutine(PostRequest("login", payload, (success, response) =>
             {
