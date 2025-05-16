@@ -8,17 +8,26 @@ public class BrowserOpener : MonoBehaviour
     private string url = "https://your-url.com";
 
     [SerializeField]
-    private int width = 800;
+    private int width = 0;
     [SerializeField]
-    private int height = 600;
+    private int height = 0;
     [SerializeField]
-    private int x = 100;
+    private int x = 0;
     [SerializeField] 
-    private int y = 100;
+    private int y = 0;
 
     public void OpenBrowser()
     {
-        string args = $"--new-window \"{url}\" --window-size={width},{height} --window-position={x},{y}";
+        string args;
+        if (width > 0 && height > 0)
+        {
+            args = $"--new-window \"{url}\" --window-size={width},{height} --window-position={x},{y}";
+        }
+        else
+        {
+            args = $"--new-window \"{url}\" --window-position={x},{y} -fullscreen\";";
+        }
+    
 
         // Try Chrome
         if (TryStart("chrome", args)) return;
