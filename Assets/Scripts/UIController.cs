@@ -21,7 +21,7 @@ public class UIController : MonoBehaviour {
     private GameObject _storyPanel;
     [Tooltip("The menu used in game with all setting and help panels")]
     [SerializeField]
-    private GameObject _ingameMenu;
+    private IngameMenuController _ingameMenu;
 
    
     [Header("Elements")]
@@ -55,22 +55,11 @@ public class UIController : MonoBehaviour {
 
     private void Update() {
         if(Input.GetKeyUp(KeyCode.I)) {
-            if(_ingameMenu.activeInHierarchy == false) {
-                _lastCursorLockMode = Cursor.lockState;
-                _lastCursorVisibility = Cursor.visible;
-
-                _ingameMenu.SetActive(true);
-            }
-            else {
-                Cursor.lockState = _lastCursorLockMode;
-                Cursor.visible = _lastCursorVisibility;
-
-                _ingameMenu.SetActive(false);
-            }
+            _ingameMenu.Toggle();
         }
 
         // We don't want to accept other keyboard input if the IngameMenu is active
-        if (_ingameMenu.activeInHierarchy)
+        if (_ingameMenu.IsOpen())
             return;
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
