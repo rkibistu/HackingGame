@@ -119,92 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &18640896
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 887.9, g: 267.57, b: 0, a: 0}
-    - _r: {r: 0, g: 0, b: 10, a: 10}
-    - _rect2props: {r: 0.000061035156, g: 5, b: 813.5052, a: 813.5052}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
---- !u!21 &19921384
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 887.8907, g: 510.13794, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 0, a: 0}
-    - _rect2props: {r: 0.00012207031, g: -15, b: 977.949, a: 977.949}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &22265777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,6 +182,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -369,6 +287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inkjet printer (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -443,6 +365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -516,6 +442,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
       propertyPath: m_Name
       value: Inkjet printer (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -643,6 +573,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inkjet printer (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -717,6 +651,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -727,6 +665,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
   m_PrefabInstance: {fileID: 116823500}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &121575206
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 887.89075, g: 510.13794, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 10, a: 10}
+    - _rect2props: {r: 0.00012207031, g: -10.000122, b: 974.4135, a: 974.4135}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &132118855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -790,6 +771,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1014,6 +999,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1193,6 +1182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1270,6 +1263,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1377,6 +1374,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208628585}
   m_CullTransparentMesh: 1
+--- !u!21 &210508028
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 887.9, g: 267.57, b: 0, a: 0}
+    - _r: {r: 0, g: 0, b: 10, a: 10}
+    - _rect2props: {r: 0.000061035156, g: 5, b: 813.5052, a: 813.5052}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &214702011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1444,6 +1484,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1627,6 +1671,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1641,47 +1689,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
   m_PrefabInstance: {fileID: 226755072}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &227029811
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 230, g: 70, b: 20, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &233388262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1823,6 +1830,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1837,6 +1848,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
   m_PrefabInstance: {fileID: 241074374}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &248419153
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 653.9, g: 35, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 0, a: 0}
+    - _rect2props: {r: 0.000061035156, g: -15.000061, b: 476.51932, a: 476.51932}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &249695534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1905,6 +1959,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1919,49 +1977,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: acbbc0f543394a64687ed92f75890016, type: 3}
   m_PrefabInstance: {fileID: 249695534}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &263637011
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 887.9, g: 442.565, b: 0, a: 0}
-    - _r: {r: 0, g: 0, b: 10, a: 10}
-    - _rect2props: {r: 0.000061035156, g: 4.999878, b: 937.24536, a: 937.24536}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &289479646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,6 +2334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2401,6 +2420,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2562,6 +2585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2683,6 +2710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2761,6 +2792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inkjet printer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2834,6 +2869,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2917,6 +2956,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2994,6 +3037,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3210,6 +3257,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3291,6 +3342,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -3493,6 +3548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3566,6 +3625,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
       propertyPath: m_Name
       value: PC (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3823,6 +3886,49 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ada1188ad7cee054c8771775e7592de6, type: 3}
+--- !u!21 &493225651
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 887.9, g: 442.565, b: 0, a: 0}
+    - _r: {r: 0, g: 0, b: 10, a: 10}
+    - _rect2props: {r: 0.000061035156, g: 4.999878, b: 937.24536, a: 937.24536}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &512027858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,6 +4181,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -4153,6 +4263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4163,92 +4277,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: acbbc0f543394a64687ed92f75890016, type: 3}
   m_PrefabInstance: {fileID: 532577985}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &537404260
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 653.8873, g: 142.5, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 0, a: 0}
-    - _rect2props: {r: 0.00012207031, g: -14.999939, b: 552.5243, a: 552.5243}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
---- !u!21 &555059040
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 887.8907, g: 67.642944, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 0, a: 0}
-    - _rect2props: {r: 0.00012207031, g: -15, b: 665.05774, a: 665.05774}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &557054197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4437,6 +4465,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4521,6 +4553,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inkjet printer
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4557,6 +4593,49 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3000002, y: 0.60000014, z: 0.0010000003}
   m_Center: {x: -0.8500002, y: 0.30000007, z: -0.00050000014}
+--- !u!21 &591231919
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 887.89075, g: 67.642944, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 10, a: 10}
+    - _rect2props: {r: 0.00012207031, g: -10, b: 661.5223, a: 661.5223}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &593988266 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3378003577771366597, guid: 457670b74201c2b488e557b66efbce59, type: 3}
@@ -4576,6 +4655,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportTarget: {fileID: 1320234720}
   playerObject: {fileID: 0}
+--- !u!21 &598755850
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 887.8907, g: 510.13794, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 0, a: 0}
+    - _rect2props: {r: 0.00012207031, g: -15, b: 977.949, a: 977.949}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &607138619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4639,6 +4761,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5445,6 +5571,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5683,6 +5813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inkjet printer (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5764,6 +5898,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -5919,6 +6057,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
       propertyPath: m_Name
       value: Inkjet printer (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6092,49 +6234,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1232881685912006790, guid: 9a4bd51537ebdc54c8d54e3843b0a955, type: 3}
   m_PrefabInstance: {fileID: 755886927}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &766217858
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 148.3949, g: 25, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 0, a: 0}
-    - _rect2props: {r: 0.000015258789, g: -15, b: 112.00211, a: 112.00211}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &772177413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6206,6 +6305,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -6326,6 +6429,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6399,6 +6506,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6500,6 +6611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6577,6 +6692,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
       propertyPath: m_Name
       value: Inkjet printer (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6980,6 +7099,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7101,6 +7224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -7182,6 +7309,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -7376,6 +7507,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7582,6 +7717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -7596,49 +7735,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
   m_PrefabInstance: {fileID: 908905679}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &945840014
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 653.9, g: 35, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 0, a: 0}
-    - _rect2props: {r: 0.000061035156, g: -15.000061, b: 476.51932, a: 476.51932}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &955300850
 GameObject:
   m_ObjectHideFlags: 0
@@ -7985,6 +8081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8058,6 +8158,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8274,6 +8378,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
       propertyPath: m_Name
       value: PC (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8584,6 +8692,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8594,49 +8706,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
   m_PrefabInstance: {fileID: 1079415277}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1100755146
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 887.89075, g: 67.642944, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 10, a: 10}
-    - _rect2props: {r: 0.00012207031, g: -10, b: 661.5223, a: 661.5223}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &1101312956 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4153571066038888412, guid: ada1188ad7cee054c8771775e7592de6, type: 3}
@@ -8710,6 +8779,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8785,6 +8858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8836,49 +8913,6 @@ Material:
     - _halfSize: {r: 887.8907, g: 67.642944, b: 0, a: 0}
     - _r: {r: 30, g: 30, b: 0, a: 0}
     - _rect2props: {r: 0.00012207031, g: -15, b: 665.05774, a: 665.05774}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
---- !u!21 &1131115389
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 887.89075, g: 510.13794, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 10, a: 10}
-    - _rect2props: {r: 0.00012207031, g: -10.000122, b: 974.4135, a: 974.4135}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!1001 &1134436350
@@ -8944,6 +8978,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9026,6 +9064,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -9112,6 +9154,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -9243,6 +9289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9368,6 +9418,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9568,6 +9622,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9722,6 +9780,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -9799,6 +9861,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9882,6 +9948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -9964,6 +10034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -10041,6 +10115,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
       propertyPath: m_Name
       value: Inkjet printer (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10124,6 +10202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -10205,6 +10287,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -10337,6 +10423,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -10552,6 +10642,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10651,6 +10745,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10823,49 +10921,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4775142046997069685, guid: e018ccce53466cb4db953914c49f58a6, type: 3}
   m_PrefabInstance: {fileID: 2066828538452135592}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1396032102
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/IndependentRoundedCorners
-  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _halfSize: {r: 148.3949, g: 80, b: 0, a: 0}
-    - _r: {r: 30, g: 30, b: 10, a: 10}
-    - _rect2props: {r: 0.000015258789, g: -10.000015, b: 147.35745, a: 147.35745}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!21 &1397457882
 Material:
   serializedVersion: 8
@@ -10976,6 +11031,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -11396,6 +11455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11469,6 +11532,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11684,6 +11751,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -11812,6 +11883,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -11960,6 +12035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12034,6 +12113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12107,6 +12190,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12651,6 +12738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inkjet printer (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12671,15 +12762,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 292088319539565435, guid: a364a5ce17e3efa40843d522a3c41bf8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -77.3
       objectReference: {fileID: 0}
     - target: {fileID: 292088319539565435, guid: a364a5ce17e3efa40843d522a3c41bf8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 292088319539565435, guid: a364a5ce17e3efa40843d522a3c41bf8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -62.4
       objectReference: {fileID: 0}
     - target: {fileID: 292088319539565435, guid: a364a5ce17e3efa40843d522a3c41bf8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12809,6 +12900,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12890,6 +12985,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -13067,6 +13166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13077,6 +13180,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
   m_PrefabInstance: {fileID: 1600041439}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1604788214
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 148.3949, g: 25, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 0, a: 0}
+    - _rect2props: {r: 0.000015258789, g: -15, b: 112.00211, a: 112.00211}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1606796680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13140,6 +13286,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
       propertyPath: m_Name
       value: Inkjet printer (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13736,6 +13886,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13835,6 +13989,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14256,6 +14414,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14547,6 +14709,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitor (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -14629,6 +14795,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -14707,6 +14877,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14781,6 +14955,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14791,6 +14969,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
   m_PrefabInstance: {fileID: 1792146469}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1796781253
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 887.8907, g: 67.642944, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 0, a: 0}
+    - _rect2props: {r: 0.00012207031, g: -15, b: 665.05774, a: 665.05774}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1809269243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14854,6 +15075,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15158,6 +15383,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15389,6 +15618,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15462,6 +15695,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15772,6 +16009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inkjet printer (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15782,6 +16023,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f47a265f2dc98e64db6701c7d264e8ea, type: 3}
   m_PrefabInstance: {fileID: 1897856020}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1899438985
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 653.8873, g: 142.5, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 0, a: 0}
+    - _rect2props: {r: 0.00012207031, g: -14.999939, b: 552.5243, a: 552.5243}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1911122030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15853,6 +16137,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: m_Name
       value: Monitor (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797760339730403953, guid: abe5d66a888999a4a99aa39c6005174c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -16036,6 +16324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -16114,6 +16406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16187,6 +16483,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16434,6 +16734,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
       propertyPath: m_Name
       value: PC (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16791,6 +17095,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HP Laptop (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -16869,6 +17177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Macbook air 2022 M2 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16942,6 +17254,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
       propertyPath: m_Name
       value: Macbook air 2022 M2 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5ba5f5a54a4abd4ab9340b57881c776, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17142,6 +17458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17226,6 +17546,90 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 08e5dfe65620c0543be9d16621a1efbe, type: 3}
   m_PrefabInstance: {fileID: 2114238429}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &2118947304
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 230, g: 70, b: 20, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!21 &2120678930
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/IndependentRoundedCorners
+  m_Shader: {fileID: 4800000, guid: d3beb88e61f88ca4393acdefb005fa70, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _halfSize: {r: 148.3949, g: 80, b: 0, a: 0}
+    - _r: {r: 30, g: 30, b: 10, a: 10}
+    - _rect2props: {r: 0.000015258789, g: -10.000015, b: 147.35745, a: 147.35745}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &2126738186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17434,6 +17838,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: m_Name
       value: HP Laptop (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: acbbc0f543394a64687ed92f75890016, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323345014675288466, guid: acbbc0f543394a64687ed92f75890016, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
