@@ -168,7 +168,7 @@ namespace SlimUI.ModernMenu{
 			lineKeyBindings.SetActive(false);
 
 			PanelMovement.SetActive(false);
-			lineMovement.SetActive(false);
+			//lineMovement.SetActive(false);
 			PanelCombat.SetActive(false);
 			lineCombat.SetActive(false);
 			PanelGeneral.SetActive(false);
