@@ -1,0 +1,44 @@
+<VirtualHost *:${HTTP_PORT_DEFAULT}>
+    ServerName ${WEBSERVER_NAME}
+    Redirect permanent / https://${WEBSERVER_NAME}/
+</VirtualHost>
+
+
+<VirtualHost *:${HTTP_PORT_DEFAULT}>
+    ServerName ${WEBSERVER_NAME}
+    ServerAlias ${WEBSERVER_PUBLIC_IP}
+    Redirect permanent / https://${WEBSERVER_NAME}/
+</VirtualHost>
+
+<VirtualHost *:${HTTPS_PORT_DEFAULT}>
+    ServerName ${WEBSERVER_PUBLIC_IP}
+    ServerAlias ${WEBSERVER_PUBLIC_IP}
+    Redirect permanent / https://${WEBSERVER_NAME}/
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/server.crt
+    SSLCertificateKeyFile /etc/ssl/private/server.key
+</VirtualHost>
+
+
+<VirtualHost *:${HTTPS_PORT_DEFAULT}>
+    ServerAdmin cyberadmin@localhost
+    ServerName ${WEBSERVER_NAME}
+    ProxyRequests Off
+    ProxyPreserveHost On
+
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/server.crt
+    SSLCertificateKeyFile /etc/ssl/private/server.key
+
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+    ProxyPass / http://${WEBSERVER_CONTAINER_NAME}:${HTTP_WEBSERVER_PORT}/
+    ProxyPassReverse / http://${WEBSERVER_CONTAINER_NAME}:${HTTP_WEBSERVER_PORT}/
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

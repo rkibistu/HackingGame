@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -13,13 +16,51 @@ namespace ScenarioSQL {
         private TMP_InputField _internalSearchInput;
         [SerializeField]
         private TMP_InputField _browserSearchBarText;
-
         [SerializeField]
         private string _paramName = "name";
+
+        [Header("Feedback - buy item")]
+        [SerializeField]
+        private GameObject _feedbackPanelBuyItem;
+        [SerializeField]
+        private TextMeshProUGUI _feedbackTextBuyItem;
+        [SerializeField]
+        private int _feedbackTextBuyItemLifetime = 3;
+
+        [Header("Feedback - sql injection")]
+        [SerializeField]
+        private GameObject _feedbackPanelSqlInjection;
+        [SerializeField]
+        private TextMeshProUGUI _feedbackTextSqlInjection;
+
+        [Header("Popups")]
+        [Tooltip("Used to explain how to use sql injection on this simulated site")]
+        [SerializeField]
+        private GameObject _howToSqlPopup;
+        [Tooltip("The id that has to be compelted before showing the howToSql popup")]
+        [SerializeField]
+        private string _taskIdToActivateHowToSql = "scan-sqlmap";
+
+
+        //some state variables
+        private bool _firstTimeOnSite = true;
+        private bool _firstTimeSearch = true;
+        private bool _firstTimeOnSiteAfterSqlmap = true;
 
         //Enabled and Disabled are called every time the Browser search bar is used
         // so we can use this methods to filter the params
         private void OnEnable() {
+
+            if (_firstTimeOnSite) {
+                _firstTimeOnSite = false;
+                TasksController.Instance.Mark("check-desktop");
+                TasksController.Instance.ActivateTask("try-search");
+
+                DialogueController.Instance.SkipCurrentStoryCompletely();
+                DialogueController.Instance.PlayStory("try-search");
+            }
+            EnablePopupSqlInjection();
+
 
             _internalSearchInput.text = "";
 
@@ -32,9 +73,9 @@ namespace ScenarioSQL {
             if (paramsurl.Length > 0) {
                 //?name=value
                 string paramName = paramsurl.Split("=")[0];
-                string paramValue = paramsurl.Split("=")[1];
                 if (paramName == _paramName) {
-                    Filter(paramValue);
+                    TriggerStoryFirstTimeSearchByName();
+                    Filter(paramsurl.Substring(paramsurl.IndexOf('=') + 1));
                 }
             }
 
@@ -43,10 +84,21 @@ namespace ScenarioSQL {
 
         }
 
+        private void Start() {
+            //Register callback for Buy button oif every item
+            foreach (var obj in _purchasableObjects) {
+                var item = obj.GetComponent<PurchasableItem>();
+                if (item != null) {
+                    item.OnBuyClicked += HandleBuyClicked;
+                }
+            }
+        }
+
         public void ApplySearch() {
             //update main url
+            TriggerStoryFirstTimeSearchByName();
 
-            if(_browserSearchBarText.text.Contains("?")) {
+            if (_browserSearchBarText.text.Contains("?")) {
                 string baseUrl = _browserSearchBarText.text.Split('?')[0];
                 _browserSearchBarText.text = baseUrl + "?" + _paramName + "=" + _internalSearchInput.text;
             }
@@ -57,7 +109,9 @@ namespace ScenarioSQL {
             //update the page content
             Filter(_internalSearchInput.text);
         }
+      
         private void Filter(string input) {
+            _feedbackPanelSqlInjection.SetActive(false);
 
             string normalizedInput = Regex.Replace(input, @"\s+", " ").Trim();
 
@@ -66,6 +120,8 @@ namespace ScenarioSQL {
             string filterQuery = normalizedInput.Split(";")[0]; // 6090%'
             filterQuery = Regex.Replace(filterQuery, @"%", "");
             filterQuery = Regex.Replace(filterQuery, @"'", "");
+            filterQuery.TrimEnd();
+            filterQuery.TrimStart();
 
             foreach (var obj in _purchasableObjects) {
                 PurchasableItem item = obj.GetComponent<PurchasableItem>();
@@ -85,13 +141,22 @@ namespace ScenarioSQL {
         private void ParseAndExecuteInjection(string injectionInput) {
 
             if (!injectionInput.Contains(";")) {
-                Debug.Log("Inejction incomplete");
+                Debug.Log("Injection incomplete");
+                FeedbackSqlInjection("Injection incomplete");
                 return;
-            }
+            }  
 
             string updateQuery = injectionInput.Split(";")[0]; //  update products set price=49.99 where name like ' % 6090 % '
             string commentQuery = injectionInput.Split(";")[1]; //  #
             //TODO: invalidate ijection if commentQuery is missing??? or something??
+
+            string missingWord;
+            bool queryOkay = CheckQuery(updateQuery, out missingWord);
+            if (queryOkay == false)
+            {
+                FeedbackSqlInjection("Missing/wrong word in query: " + missingWord);
+                return;
+            }
 
             string price, targetName;
             string pricePattern = @"\s+price\s*=\s*(\d+(\.\d+)?)";
@@ -99,6 +164,15 @@ namespace ScenarioSQL {
 
             Match priceMatch = Regex.Match(updateQuery, pricePattern, RegexOptions.IgnoreCase);
             Match targetNameatch = Regex.Match(updateQuery, targetNamePattern);
+
+            if(priceMatch.Success == false) {
+                FeedbackSqlInjection("Wrong price pattern!");
+                return;
+            }
+            if(targetNameatch.Success == false) {
+                FeedbackSqlInjection("Wrong target name pattern!");
+                return;
+            }
 
             if (priceMatch.Success && targetNameatch.Success) {
                 price = priceMatch.Groups[1].Value;
@@ -120,8 +194,81 @@ namespace ScenarioSQL {
             //6090'; update products set price=49.99 where name like ' %6090% '; #
         }
 
+        private bool CheckQuery(string query, out string missingWord) {
+            missingWord = null;
+            var words = new List<string>(query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
+            List<string> wordsToFind = new List<string>() { 
+                "update", "products", "set", "where", "name", "like"
+            };
+            int index = 0;
+            string currentWordToCheck = words[0];
 
+            foreach (var word in words) {
+                currentWordToCheck = wordsToFind[index];
+                if(word.ToLower() == currentWordToCheck) {
+                    index++;
+                }
 
+                if(index >= wordsToFind.Count) {
+                    return true;
+                }
+            }
+
+            missingWord = currentWordToCheck;
+            return false;
+
+        }
+
+        private void TriggerStoryFirstTimeSearchByName() {
+            if (_firstTimeSearch) {
+                DialogueController.Instance.SkipCurrentStoryCompletely();
+                DialogueController.Instance.PlayStory("scan-sqlmap");
+            }
+        }
+
+        // If it is first time accesing the page after usign sqlmap -> enable popup HowToSql
+        private void EnablePopupSqlInjection() {
+            bool taskCompleted = TasksController.Instance.CheckIfComplete(_taskIdToActivateHowToSql);
+            if (taskCompleted == true && _firstTimeOnSiteAfterSqlmap == true) {
+                _firstTimeOnSiteAfterSqlmap = false;
+                _howToSqlPopup.SetActive(true);
+            } 
+        }
+
+        private void HandleBuyClicked(PurchasableItem item) {
+            Debug.Log($"[ScalperPageController] Item bought: {item.TitleText} for {item.GetPriceValue()}");
+            // Do anything else here, like updating UI, inventory, etc.
+
+            float price = item.GetPriceValue();
+            float balance = GameplayScenario6.Instance.PersonalBalance;
+            if(balance >= price) {
+                EnableAndSetFeedbackText("SUCCESS! You bought: " + item.TitleText + " at " + price + "$", Color.green);
+                TasksController.Instance.Mark("use-sqlinjection");
+            }
+            else {
+                EnableAndSetFeedbackText("You don't have enough money! Your balance is: " + balance + "$", Color.red);
+            }
+        }
+
+        private void EnableAndSetFeedbackText(string text, Color color) {
+            _feedbackTextBuyItem.text = text;
+            _feedbackTextBuyItem.color = color;
+            _feedbackPanelBuyItem.gameObject.SetActive(true);
+            StartCoroutine(DisableObjectWithDelayCoroutine(_feedbackPanelBuyItem));
+        }
+
+        // Enable panel with feedback and set text accordingly
+        private void FeedbackSqlInjection(string text) {
+            _feedbackPanelSqlInjection.SetActive(true);
+            _feedbackTextSqlInjection.text = text;
+        }
+
+        private IEnumerator DisableObjectWithDelayCoroutine(GameObject obj) {
+            yield return new WaitForSeconds(_feedbackTextBuyItemLifetime);
+            if (obj != null) {
+                obj.SetActive(false);
+            }
+        }
     }
 }

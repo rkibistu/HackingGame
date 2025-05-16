@@ -13,15 +13,22 @@ public class RestoreWebsite : MonoBehaviour
     private int _recoveryState = 0;
     private string _restoreWebServerString = "Restart Web Server";
     private string _backupWebServerString = "Download Backup";
+
+    [Header("Recovery webpage story and task IDs")]
+
+    [SerializeField]
+    private TMP_Text _downloadBackuptMessage;
+
     public void OnRecoverButtonClicked()
     {
         TextMeshProUGUI buttonText = _recoveryButton.GetComponentInChildren<TextMeshProUGUI>();
         if (_recoveryState == 0)
         {
             // Download Backup
-            Interpreter.Instance.AdvanceByAction("database_downloaded");
+            //Interpreter.Instance.AdvanceByAction("database_downloaded");
             buttonText.text = _restoreWebServerString;
             _recoveryState++;
+            _downloadBackuptMessage.text = "Backup downloaded. Restarting web server...";
         }
         else
         {

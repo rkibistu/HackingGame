@@ -54,10 +54,15 @@ public class TerminalManager : MonoBehaviour
     private int _windowHeight;
     private int _charsPerLine;
 
+    //Used to keep some state
+    private bool _lastDisplayWasTemporary; //if this is true -> last line displayed in termianl was one that can/should be override (e.g. autocompelte suggestions)
+    private GameObject _lastLineDisplayed; // last line displayed in terminal, excepting input (only content line)
+
     public string Name { get => _terminalName; private set { } }
 
     private void Awake()
     {
+      
     }
 
     private void Start()
@@ -71,6 +76,12 @@ public class TerminalManager : MonoBehaviour
         _windowHeight = Screen.height;
 
         CalculateCharactersPerLine();
+
+        // change name according to json or keep default if the json doesn t specify it
+        string defaultPrompt = _newInterpreter.GetDefaultPromt(_terminalName);
+        Debug.Log(defaultPrompt);
+        if (defaultPrompt != null)
+            _directoryPathText.text = defaultPrompt;
     }
 
     private void Update()
@@ -148,8 +159,13 @@ public class TerminalManager : MonoBehaviour
         _linesContent.Add(content);
     }
 
+    // This is the single emthod that should be sued to display new lines in terminal!!!
     private int DisplayLinesContent()
     {
+        if (_lastDisplayWasTemporary)
+            RemoveTempLine();
+        _lastDisplayWasTemporary = false;
+
         int addedLinesCount = 0;
         for (int i = _linesContentIndex; i < _linesContent.Count; i++)
         {
@@ -157,11 +173,24 @@ public class TerminalManager : MonoBehaviour
             DisplayOneContent(_linesContent[i]);
             addedLinesCount++;
         }
-
+        
         _linesContentIndex += addedLinesCount;
         return addedLinesCount;
     }
 
+    // This is used only to display lines that could/should be override later
+    // (like  autocompelte suggestions when there are multiple options)
+    private int DisplayLinesContentTemp() {
+        int result =  DisplayLinesContent();
+        _lastDisplayWasTemporary = true;
+
+        return result;
+    }
+
+    // This method adds a new line in the terminal
+    // but this SHOULD NOT be used directly. This method doesn't update the 
+    // state if it is used directly. Its scope is to be used inside other internal methods
+    // use DisplayLinesContent or DisplayLinesContentAutocomplete instead
     private int DisplayOneContent(string text)
     {
         int linesNeeded = Mathf.CeilToInt((float)text.Length / _charsPerLine);
@@ -180,6 +209,9 @@ public class TerminalManager : MonoBehaviour
             int start = i * _charsPerLine;
             int length = Mathf.Min(_charsPerLine, text.Length - start);
             responseLineObj.GetComponentInChildren<TextMeshProUGUI>().text = text.Substring(start, length);
+
+            //Save state
+            _lastLineDisplayed = responseLineObj;
         }
 
         return linesNeeded;
@@ -187,8 +219,15 @@ public class TerminalManager : MonoBehaviour
 
     private void Interpret(string userInput)
     {
-        List<string> responses = _newInterpreter.Interpret(userInput, _terminalName);
+        // some inputs can change the promt of the terminal
+        string newPromt;
+        List<string> responses = _newInterpreter.Interpret(userInput, _terminalName, out newPromt);
 
+        //change promt
+        if (newPromt != null)
+            _directoryPathText.text = newPromt;
+
+        //cosnider lines to be displayed with next render
         for (int i = 0; i < responses.Count; i++)
         {
             _linesContent.Add(responses[i]);
@@ -285,12 +324,31 @@ public class TerminalManager : MonoBehaviour
 
         if (options.Count == 1)
         {
+            // You have one option -> autocomplete
             _terminalInput.text = options[0];
             _terminalInput.caretPosition = _terminalInput.text.Length;
         }
         else
         {
-            //TODO (optional): treat the case when multiple commands are available with the same prefix
+            // You have mutliple options -> suggest all fo them on a newline
+            if(_linesContentIndex < _linesContent.Count) {
+                Debug.LogError("You though you will never have content here when you start this, rethink!");
+            }
+
+            // Display autocomplete line
+            string optionsContent = string.Join(" ", options);
+            AddContent(optionsContent);
+            DisplayLinesContentTemp();
+            ScrollToBottom(1);
+        }
+    }
+
+    // Remove temp line if this is present
+    private void RemoveTempLine() {
+        if (_lastDisplayWasTemporary == true && _lastLineDisplayed != null) {
+            Destroy(_lastLineDisplayed);
+            _lastLineDisplayed = null;
+            _lastDisplayWasTemporary = false;
         }
     }
 
