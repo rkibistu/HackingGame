@@ -7,10 +7,6 @@ namespace WebserverAPI
 {
     public class AuthManager : MonoBehaviour
     {
-        [Header("Login/Register panels")]
-        public GameObject loginPanel;
-        public GameObject registerPanel;
-
         [Header("Error Fields")]
         [SerializeField] private TMP_Text errorLoginField;
         [SerializeField] private TMP_Text errorRegisterField;
@@ -82,7 +78,7 @@ namespace WebserverAPI
                 {
                     // implement register success logic here -> redirect to login page
                     Debug.Log("Registration successful: " + message);
-                    ShowLogin();
+                    //ShowLogin();
                 }
                 else
                 {
@@ -136,29 +132,6 @@ namespace WebserverAPI
             errorLoginField.text = string.Empty;
             errorRegisterField.text = string.Empty;
         }
-
-        /// <summary>
-        /// Call this from your “Go To Register” button.
-        /// </summary>
-        public void ShowRegister()
-        {
-            loginPanel.SetActive(false);
-            ClearAllInputFields();
-            registerPanel.SetActive(true);
-        }
-
-        /// <summary>
-        /// Call this from your “Go To Login” button.
-        /// </summary>
-        public void ShowLogin()
-        {
-            registerPanel.SetActive(false);
-            ClearAllInputFields();
-            loginPanel.SetActive(true);
-        }
-
-
-        
 
     }
 }
