@@ -24,6 +24,8 @@ namespace SlimUI.ModernMenu {
         public GameObject _mainMenu;
         [Tooltip("The Menu for REGISTER form.")]
         public GameObject _registerMenu;
+        [Tooltip("Menu used in game (During gameplay)")]
+        public GameObject _ingameMenu;
 
 
         public enum Theme { custom1, custom2, custom3 };
@@ -130,6 +132,8 @@ namespace SlimUI.ModernMenu {
                 _allMenues.Add(_mainMenu);
             if (_registerMenu)
                 _allMenues.Add(_registerMenu);
+            if (_ingameMenu)
+                _allMenues.Add(_ingameMenu);
         }
         private void DisableAllMenues() {
             foreach(var menu in _allMenues) {
