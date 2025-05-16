@@ -224,6 +224,8 @@ namespace ScenarioSQL {
             if (_firstTimeSearch) {
                 DialogueController.Instance.SkipCurrentStoryCompletely();
                 DialogueController.Instance.PlayStory("scan-sqlmap");
+                TasksController.Instance.ActivateTask("scan-sqlmap");
+                _firstTimeSearch = false;
             }
         }
 
@@ -244,7 +246,7 @@ namespace ScenarioSQL {
             float balance = GameplayScenario6.Instance.PersonalBalance;
             if(balance >= price) {
                 EnableAndSetFeedbackText("SUCCESS! You bought: " + item.TitleText + " at " + price + "$", Color.green);
-                TasksController.Instance.Mark("use-sqlinjection");
+                //TasksController.Instance.Mark("use-sqlinjection");
             }
             else {
                 EnableAndSetFeedbackText("You don't have enough money! Your balance is: " + balance + "$", Color.red);
