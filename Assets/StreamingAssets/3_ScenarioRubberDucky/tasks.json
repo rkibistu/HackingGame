@@ -55,6 +55,36 @@
       "steps": [],
       "done": false,
       "active": false
+    },
+    {
+      "id": "start-client",
+      "title": "Start CobaltStrike C2 client with `cobaltstrike`",
+      "description": "Start CobaltStrike C2 client `cobaltstrike`",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "check-cobaltstrike"
+    },
+    {
+      "id": "check-client",
+      "title": "Check website for successful beacons",
+      "description": "Check website for successful beacons",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "check-cobaltstrike"
+    },
+    {
+      "id": "outro",
+      "title": "Nice work",
+      "description": "Nice work",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "scene3-ending"
     }
   ]
 }

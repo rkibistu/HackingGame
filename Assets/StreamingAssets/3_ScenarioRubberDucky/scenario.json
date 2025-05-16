@@ -21,7 +21,7 @@
                 "ls -lh"
               ],
               "outputType": "inline",
-              "output": "Output of command:\r\npayload.txt\tteamserver\r\n",
+              "output": "Output of command:\r\npayload.txt\tteamserver\tcobaltstrike\r\n",
               "outputFile": "",
               "required": "false",
               "final": "false"
@@ -109,7 +109,9 @@
               "output": "'payload.txt' -> './mnt/ducky/payload.txt'",
               "outputFile": "",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "upload-payload",
+              "taskIdToStart": "unplug-ducky"
             }
           ]
         },
@@ -118,12 +120,34 @@
           "action": {
             "description": "Remove the Rubber Ducky from the PC",
             "required": "true",
-            "final": "true"
+            "final": "true",
+            "taskIdToComplete": "unplug-ducky",
+            "taskIdToStart": "start-cobaltstrike"
           }
         },
         {
           "name": "2",
           "commands": [
+            {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\npayload.txt\tteamserver\tcobaltstrike\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
             {
               "input": "./teamserver",
               "alternatives": [
@@ -144,7 +168,9 @@
               "output": "",
               "outputFile": "teamserver_output.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "start-cobaltstrike",
+              "taskIdToStart": "teleport-parking-lot"
             }
           ]
         },
@@ -153,22 +179,78 @@
           "action": {
             "description": "Spread rubber duckies in the parking lot",
             "required": "true",
-            "final": "true"
+            "final": "true",
+            "taskIdToComplete": "teleport-parking-lot",
+            "taskIdToStart": "spread-rubberduckies"
           }
         },
         {
-          "name": "3",
+          "name": "scatter-rubber-duckies",
+          "action": {
+            "description": "Scatter rubber duckies in the parking lot",
+            "required": "true",
+            "final": "true",
+            "taskIdToComplete": "spread-rubberduckies",
+            "taskIdToStart": "take-nap"
+          }
+        },
+        {
+          "name": "return-home-and-sleep",
+          "action": {
+            "description": "Return home and sleep",
+            "required": "true",
+            "final": "true",
+            "taskIdToComplete": "take-nap",
+            "taskIdToStart": "start-client"
+          }
+        },
+        {
+          "name": "6",
           "commands": [
             {
+              "input": "ls",
+              "alternatives": [
+                "ls",
+                "ls -l",
+                "ls -a",
+                "ls -la",
+                "ls -al",
+                "ls -l -a",
+                "ls -a -l",
+                "ls -l -a -h",
+                "ls -a -l -h",
+                "ls -lh"
+              ],
+              "outputType": "inline",
+              "output": "Output of command:\r\npayload.txt\tteamserver\tcobaltstrike\r\n",
+              "outputFile": "",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "./cobaltstrike",
-              "alternatives": [],
+              "alternatives": [
+                "cobaltstrike"
+              ],
               "outputType": "file",
               "output": "",
               "outputFile": "cobaltstrike_output.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "start-client",
+              "taskIdToStart": "check-client"
             }
           ]
+        },
+        {
+          "name": "check-website",
+          "action": {
+            "description": "Check website for beacons",
+            "required": "true",
+            "final": "true",
+            "taskIdToComplete": "check-client",
+            "taskIdToStart": "outro"
+          }
         }
       ]
     }
