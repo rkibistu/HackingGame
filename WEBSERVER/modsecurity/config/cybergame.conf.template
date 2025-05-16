@@ -28,7 +28,7 @@
     ProxyPreserveHost On
 
     SSLEngine on
-    SSLCertificateFile /etc/ssl/certs/server.crt
+    SSLCertificateFile    /etc/ssl/certs/server.crt
     SSLCertificateKeyFile /etc/ssl/private/server.key
 
     <Proxy *>
@@ -36,8 +36,21 @@
         Allow from all
     </Proxy>
 
-    ProxyPass / http://${WEBSERVER_CONTAINER_NAME}:${HTTP_WEBSERVER_PORT}/
-    ProxyPassReverse / http://${WEBSERVER_CONTAINER_NAME}:${HTTP_WEBSERVER_PORT}/
+
+    <Location "/admin/logs/all">
+        SecRuleEngine Off
+        # SecRuleRemoveById 953110 959100 980140
+    </Location>
+
+    <Location "/admin/logs/attacks">
+        SecRuleEngine Off
+        # SecRuleRemoveById 953110 959100 980140
+    </Location>
+
+
+
+    ProxyPass        /   http://${WEBSERVER_CONTAINER_NAME}:${HTTP_WEBSERVER_PORT}/
+    ProxyPassReverse /   http://${WEBSERVER_CONTAINER_NAME}:${HTTP_WEBSERVER_PORT}/
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
