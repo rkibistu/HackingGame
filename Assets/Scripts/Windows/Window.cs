@@ -13,6 +13,9 @@ public class Window : MonoBehaviour
     public class ClickEvent : UnityEvent<PointerEventData> { }
     public ClickEvent OnClickEvent;
 
+    public UnityEvent OnCloseButtonClicked;
+    public UnityEvent OnMaximizeButtonClicked;
+
     private RectTransform _transform;
 
     // The app that is opened inside this window
@@ -153,5 +156,14 @@ public class Window : MonoBehaviour
         // Apply
         _transform.sizeDelta = newSize;
         _transform.position = newPosition;
+    }
+
+    public void CloseButtonClick()
+    {
+        OnCloseButtonClicked?.Invoke();
+    }
+    public void MaximizeButtonClick()
+    {
+        OnMaximizeButtonClicked?.Invoke();
     }
 }
