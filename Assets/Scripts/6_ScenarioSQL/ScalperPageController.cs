@@ -26,6 +26,8 @@ namespace ScenarioSQL {
         private TextMeshProUGUI _feedbackTextBuyItem;
         [SerializeField]
         private int _feedbackTextBuyItemLifetime = 3;
+        [SerializeField]
+        private string _storySqlInjId = "end-sqlinj-story";
 
         [Header("Feedback - sql injection")]
         [SerializeField]
@@ -225,6 +227,7 @@ namespace ScenarioSQL {
                 DialogueController.Instance.SkipCurrentStoryCompletely();
                 DialogueController.Instance.PlayStory("scan-sqlmap");
                 TasksController.Instance.ActivateTask("scan-sqlmap");
+                TasksController.Instance.Mark("try-search");
                 _firstTimeSearch = false;
             }
         }
@@ -246,6 +249,7 @@ namespace ScenarioSQL {
             float balance = GameplayScenario6.Instance.PersonalBalance;
             if(balance >= price) {
                 EnableAndSetFeedbackText("SUCCESS! You bought: " + item.TitleText + " at " + price + "$", Color.green);
+                DialogueController.Instance.PlayStory(_storySqlInjId);
                 //TasksController.Instance.Mark("use-sqlinjection");
             }
             else {
