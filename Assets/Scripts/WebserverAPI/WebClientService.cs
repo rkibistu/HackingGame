@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -244,6 +245,37 @@ namespace WebserverAPI
                     callback(false, response);
                 }
             });
+        }
+
+
+        public void CheckOnlineServer(Action<bool, string> callback)
+        {
+            GetData("online", true, (success, response) =>
+            {
+                if (success)
+                {
+                   callback(true, "Server is online.");
+                }
+                else
+                {
+                    callback(false, response);
+                }
+            });
+        }
+
+
+        /// usage:
+        /// bool online = await WebClientService.Instance.IsServerOnlineAsync();
+        public Task<bool> IsServerOnlineAsync()
+        {
+            var tcs = new TaskCompletionSource<bool>();
+
+            CheckOnlineServer((success, message) =>
+            {
+                tcs.SetResult(success);
+            });
+
+            return tcs.Task;
         }
 
         /// <summary>
