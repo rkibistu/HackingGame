@@ -76,7 +76,10 @@ public class DialogueController : MonoBehaviour
 
     public void Next() {
         if (_currentLineComplete == false)
+        {
+            _typewriter.Skip();
             return;
+        }
 
         Line nextLine = null;
         GetNextLineInStory(_currentStoryId, out nextLine);

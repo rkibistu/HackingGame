@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameplayController : MonoBehaviour {
     [SerializeField]
@@ -19,7 +20,7 @@ public class GameplayController : MonoBehaviour {
     }
     protected virtual void Update() {
         // Next line in dialogue
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)) {
             if (DialogueController.Instance.IsStoryRunning) {
                 DialogueController.Instance.Next();
             }
