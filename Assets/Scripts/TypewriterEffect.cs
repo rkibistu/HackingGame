@@ -130,7 +130,7 @@ public class TypewriterEffect : MonoBehaviour
         }
     }
 
-    private void Skip()
+    public void Skip()
     {
         if (CurrentlySkipping)
             return;
