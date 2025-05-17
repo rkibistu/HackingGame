@@ -47,22 +47,6 @@ public class AudioControllerBasic : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            SetSFXVolume(0.2f);
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SetSFXVolume(1.0f);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            PlaySound("knock-door");
-        }
-    }
-
     public void PlaySound(string clipName) {
         if (_audioClipDict.TryGetValue(clipName, out NamedAudioClip namedClip)) {
             Vector3 position = namedClip.playLocation != null ? namedClip.playLocation.position : transform.position;

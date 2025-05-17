@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
 
 public class TaskRow : MonoBehaviour
 {
@@ -9,13 +11,19 @@ public class TaskRow : MonoBehaviour
     [SerializeField]
     private Image _checkmark;
 
+    public UnityEvent<string> OnTaskRowClicked;
+
+    private string _id;
+
     public void Init(TasksJSONStructure.Task task)
     {
         _title.text = task.title;
+        _id = task.id;
         Mark(task.done);
     }
     public void Init(TasksJSONStructure.Step step, bool complete = false)
     {
+        _id = step.id;
         _title.text = step.title;
         Mark(complete);
     }
@@ -29,5 +37,10 @@ public class TaskRow : MonoBehaviour
         {
             _checkmark.gameObject.SetActive(false);
         }
+    }
+
+    public void HandleOnClick()
+    {
+        OnTaskRowClicked?.Invoke(_id);
     }
 }
