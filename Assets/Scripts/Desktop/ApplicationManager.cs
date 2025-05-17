@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -17,25 +18,37 @@ public class ApplicationManager : MonoBehaviour {
     [SerializeField]
     private string _name;
 
+    // Dekstop will join this event so it known when the window clsoe button is clicked
+    public UnityEvent OnWindowCloseButtonClicked;
+
     public bool IsOpen { get { return _window.gameObject.activeInHierarchy; } }
     public int ID { get; private set; }
 
     private static int _id = 0;
 
+    //This is called by the desktop
     public void Open() {
         ID = _id++;
 
         _window.gameObject.SetActive(true);
         _window.SetAppAssociated(this);
 
-        _window.OnCloseButtonClicked.AddListener(Close);
+        _window.OnCloseButtonClicked.AddListener(InternalClose);
     }
 
+    //This is called by the desktop
     public void Close() {
-        _window.OnCloseButtonClicked.RemoveListener(Close);
+        OnWindowCloseButtonClicked.RemoveAllListeners();
 
         _window.SetAppAssociated(null);
         _window.gameObject.SetActive(false);
+    }
+
+    //This is closed internal when window close button is clicked
+    private void InternalClose()
+    {
+        _window.OnCloseButtonClicked.RemoveListener(InternalClose);
+        OnWindowCloseButtonClicked?.Invoke();
     }
 
     public void Focus() {
