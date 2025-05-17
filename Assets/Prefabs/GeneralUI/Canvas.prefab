@@ -345,6 +345,9 @@ MonoBehaviour:
   _window: {fileID: 6648714923970892688}
   _iconSprite: {fileID: 21300000, guid: 56da9405bc0eceb4ca4a5df3b4781270, type: 3}
   _name: Browser
+  OnWindowCloseButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &85695207395934096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,8 +3532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: 93}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 252.12, y: 185.27}
+  m_SizeDelta: {x: 158.83, y: 55.146}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5775484686260662724
 CanvasRenderer:
@@ -3818,7 +3821,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699934443843514527}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3827,8 +3830,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 255.35515, y: 92}
-  m_SizeDelta: {x: 510.7103, y: -184}
+  m_AnchoredPosition: {x: -0.0025177002, y: 0.0009765625}
+  m_SizeDelta: {x: 0.0050049, y: -0.0019379}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7064346427175453683
 CanvasRenderer:
@@ -24324,6 +24327,12 @@ MonoBehaviour:
   OnClickEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnCloseButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMaximizeButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3853962656747172356
 GameObject:
   m_ObjectHideFlags: 0
@@ -27790,6 +27799,9 @@ MonoBehaviour:
   _window: {fileID: 6426939275347662966}
   _iconSprite: {fileID: 21300000, guid: 630826cfdb2ae314cb000d97af21bf09, type: 3}
   _name: Terminal
+  OnWindowCloseButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4359367182062987015
 GameObject:
   m_ObjectHideFlags: 0
@@ -35753,6 +35765,7 @@ MonoBehaviour:
   _crosshair: {fileID: 4589598725692812916}
   _hintInteractiveText: {fileID: 8472287973896727834}
   _currentObjectivePanel: {fileID: 1368037287028822325}
+  _endLevelPanel: {fileID: 0}
   _deactivateWhileMenu:
   - {fileID: 0}
   - {fileID: 0}
@@ -35782,7 +35795,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5334496084897349551}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -35791,8 +35804,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 232, y: 92}
-  m_SizeDelta: {x: 510.7103, y: -184}
+  m_AnchoredPosition: {x: -0.002532959, y: -0.00004386902}
+  m_SizeDelta: {x: -0.0049, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2614307749485337068
 CanvasRenderer:
@@ -42442,6 +42455,12 @@ MonoBehaviour:
   minWidth: 500
   minHeight: 500
   OnClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCloseButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMaximizeButtonClicked:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6534531896720713942
@@ -58394,8 +58413,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 235, y: 93}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 487.93, y: 185.42}
+  m_SizeDelta: {x: 199.86, y: 54.843}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2559068191303679445
 CanvasRenderer:
@@ -61444,6 +61463,7 @@ MonoBehaviour:
   _videoPanel: {fileID: 2904655785454997857}
   _areYouSurePanel: {fileID: 5885891907709687004}
   _objectivesPanel: {fileID: 0}
+  _sfxVolumeSlider: {fileID: 0}
 --- !u!95 &4069187235184950482
 Animator:
   serializedVersion: 7
@@ -63066,11 +63086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037933161857242533, guid: b9262051caefb654b996bdcba6339c41, type: 3}
       propertyPath: rect2props.w
-      value: 1304.892
+      value: 712.4137
       objectReference: {fileID: 0}
     - target: {fileID: 2037933161857242533, guid: b9262051caefb654b996bdcba6339c41, type: 3}
       propertyPath: rect2props.x
-      value: 0.00024414062
+      value: 0.00018310547
       objectReference: {fileID: 0}
     - target: {fileID: 2037933161857242533, guid: b9262051caefb654b996bdcba6339c41, type: 3}
       propertyPath: rect2props.y
@@ -63078,7 +63098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037933161857242533, guid: b9262051caefb654b996bdcba6339c41, type: 3}
       propertyPath: rect2props.z
-      value: 1304.892
+      value: 712.4137
       objectReference: {fileID: 0}
     - target: {fileID: 3201789740912025740, guid: b9262051caefb654b996bdcba6339c41, type: 3}
       propertyPath: m_IsActive
@@ -63238,7 +63258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {x: 0, y: 0, z: 10, w: 10}
-  rect2props: {x: 0.00024414062, y: 4.999756, z: 1927.2152, w: 1927.2152}
+  rect2props: {x: 0.00018310547, y: 5, z: 1009.37024, w: 1009.37024}
   image: {fileID: 7924074141790973925}
 --- !u!114 &5627759725892495456 stripped
 MonoBehaviour:
@@ -63269,7 +63289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r: {x: 0, y: 0, z: 10, w: 10}
-  rect2props: {x: 0.00024414062, y: 5, z: 1790.3419, w: 1790.3419}
+  rect2props: {x: 0.00012207031, y: 4.999878, z: 872.576, w: 872.576}
   image: {fileID: 5627759725892495456}
 --- !u!114 &7924074141790973925 stripped
 MonoBehaviour:

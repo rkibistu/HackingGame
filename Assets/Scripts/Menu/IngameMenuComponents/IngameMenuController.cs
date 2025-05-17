@@ -20,6 +20,10 @@ public class IngameMenuController : MonoBehaviour {
     [SerializeField]
     private GameObject _objectivesPanel;
 
+    [Header("Controlable")]
+    [SerializeField]
+    private Slider _sfxVolumeSlider;
+
     private List<GameObject> _allPanels = new();
     private GameObject _currentPanel = null;
 
@@ -37,6 +41,15 @@ public class IngameMenuController : MonoBehaviour {
         DisableAllPanels();
         _currentPanel = _gamePanel;
         _currentPanel.SetActive(true);
+
+        // 
+        _sfxVolumeSlider.onValueChanged.AddListener(AudioControllerBasic.Instance.SetSFXVolume);
+        AudioControllerBasic.Instance.SetSFXVolume(_sfxVolumeSlider.value);
+    }
+
+    private void OnDestroy()
+    {
+        _sfxVolumeSlider.onValueChanged.RemoveListener(AudioControllerBasic.Instance.SetSFXVolume);
     }
 
     // Update is called once per frame
