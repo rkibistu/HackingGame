@@ -63,22 +63,24 @@
               "final": "false"
             },
             {
+              "input": "cat forkbomb.c",
+              "alternatives": [],
+              "outputType": "file",
+              "output": "",
+              "outputFile": "forkbomb.txt",
+              "required": "false",
+              "final": "false"
+            },
+            {
               "input": "cat credentials.txt",
               "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "credentials.txt",
               "required": "true",
-              "final": "true"
-            },
-            {
-              "input": "cat forkbomb.c",
-              "alternatives": [],
-              "outputType": "file",
-              "output": "",
-              "outputFile": "forkbomb.txt",
-              "required": "true",
-              "final": "true"
+              "final": "true",
+               "taskIdToComplete": "find-credentials",
+              "taskIdToStart": "login-website"
             }
           ]
         },
@@ -314,7 +316,8 @@
               "output": "",
               "outputFile": "sqlite3_output.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "select-exam-table"
             }
           ]
         }

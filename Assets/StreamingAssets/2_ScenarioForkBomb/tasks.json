@@ -11,7 +11,16 @@
     },
     {
       "id": "find-credentials",
-      "title": "Login to the university website",
+      "title": "Find the credentials.",
+      "description": "Open the terminal and look after the credentials. Use 'cat' to read the file.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "login-website",
+      "title": "Login to the university website.",
       "description": "Open the terminal and look after the credentials. Use 'cat' to read the file.",
       "reward": 10,
       "steps": [],
@@ -38,7 +47,7 @@
     },
     {
       "id": "check-database-file",
-      "title": "Check the database file",
+      "title": "Check the database file using 'sqlite3 --help'",
       "description": "Check the database file obtained by the fork bomb. Use 'sqlite3 --help' to see the options.",
       "reward": 10,
       "steps": [],
@@ -52,7 +61,8 @@
       "reward": 10,
       "steps": [],
       "done": false,
-      "active": false
+      "active": false,
+      "storyIdToStart": "end-story-bomb"
     }
   ]
 }
