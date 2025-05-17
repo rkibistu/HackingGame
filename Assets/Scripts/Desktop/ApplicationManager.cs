@@ -27,9 +27,13 @@ public class ApplicationManager : MonoBehaviour {
 
         _window.gameObject.SetActive(true);
         _window.SetAppAssociated(this);
+
+        _window.OnCloseButtonClicked.AddListener(Close);
     }
 
     public void Close() {
+        _window.OnCloseButtonClicked.RemoveListener(Close);
+
         _window.SetAppAssociated(null);
         _window.gameObject.SetActive(false);
     }
