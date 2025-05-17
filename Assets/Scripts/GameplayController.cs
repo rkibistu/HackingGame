@@ -13,6 +13,7 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private int _endOfLevelDelay = 3;
 
+
     public static GameplayController Instance { get; private set; }
 
     private GameProgressManager _gameProgressManager;
@@ -74,7 +75,8 @@ public class GameplayController : MonoBehaviour
 
     private IEnumerator ChangeSceneWithDelay()
     {
-        _gameProgressManager?.UpdateProgressLevel();
+        // Wait for the end of level panel to be displayed
+        _gameProgressManager?.UpdateProgressLevel(_levelIndex + 1);
         yield return new WaitForSeconds(_endOfLevelDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
