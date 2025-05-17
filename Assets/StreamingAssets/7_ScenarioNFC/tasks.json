@@ -1,0 +1,61 @@
+{
+  "tasks": [
+    {
+      "id": "check-door",
+      "title": "Go through the door to SmartBuy",
+      "description": "Go through the door to SmartBuy",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "scan-nfc-card",
+      "title": "Scan an NFC card to get later access.",
+      "description": "Scan an NFC card to get later access.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "nice-computers"
+    },
+    {
+      "id": "go-back-home",
+      "title": "Go back home",
+      "description": "Go back home through the door.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "time-to-get-out"
+    },
+    {
+      "id": "enter-proxmark",
+      "title": "Enter proxmark using 'pm3'",
+      "description": "Enter proxmark using 'pm3'",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "break-card",
+      "title": "Find the card's secrets.",
+      "description": "Find the card's secrets.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "clone-card",
+      "title": "Make a copy of the card using the binary dump file.",
+      "description": "Make a copy of the card using the binary dump file.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "scene7-ending"
+    }
+  ]
+}

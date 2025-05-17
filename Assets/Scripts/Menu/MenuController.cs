@@ -1,3 +1,4 @@
+using SlimUI.ModernMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,8 @@ public class MenuController : MonoBehaviour
     [Tooltip("The gameobject that contains the menu")]
     [SerializeField]
     private GameObject _menuContainer;
+    [SerializeField]
+    private UIMenuManager _uiMenuManger;
     [SerializeField]
     private UILevels _levelsController;
     //public static MenuController Instance { get; private set; }
