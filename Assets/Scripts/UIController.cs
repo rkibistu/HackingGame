@@ -32,6 +32,8 @@ public class UIController : MonoBehaviour
     TextMeshProUGUI _hintInteractiveText;
     [SerializeField]
     private GameObject _currentObjectivePanel;
+    [SerializeField]
+    private GameObject _endLevelPanel;
 
     [Header("MenuRelated")]
     [SerializeField]
@@ -137,7 +139,14 @@ public class UIController : MonoBehaviour
         return _taskPanel.activeInHierarchy;
     }
 
-
+    public void SetActiveEndLevelPanel(bool active)
+    {
+        _endLevelPanel?.SetActive(active);
+        if(active == true && _ingameMenu.IsOpen())
+        {
+            _ingameMenu.Toggle();
+        }
+    }
     public void SetActiveCurrentObjectivePanel(bool active)
     {
         _currentObjectivePanel.SetActive(active);

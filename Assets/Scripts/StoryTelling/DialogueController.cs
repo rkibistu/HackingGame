@@ -190,5 +190,10 @@ public class DialogueController : MonoBehaviour
 
         if(storyLine.gameobjectToEnable != null)
             GameplayController.Instance.EnablePopup(storyLine.gameobjectToEnable);
+
+        if(storyLine.endLevel != null && storyLine.endLevel == true)
+        {
+            GameplayController.Instance.EndLevel();
+        }
     }
 }

@@ -1,59 +1,93 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using WebserverAPI;
 
-public class GameplayController : MonoBehaviour {
+public class GameplayController : MonoBehaviour
+{
     [SerializeField]
     private int _levelIndex = 0;
+    [Tooltip("Time to wait before changing scene after the end of level apnel is displayed")]
+    [SerializeField]
+    private int _endOfLevelDelay = 3;
 
     public static GameplayController Instance { get; private set; }
 
-    protected virtual void Awake() {
+    private GameProgressManager _gameProgressManager;
+
+    protected virtual void Awake()
+    {
         if (Instance != null && Instance != this)
             Destroy(gameObject);
 
         Instance = this;
     }
 
-    protected virtual void Start() {
-
+    protected virtual void Start()
+    {
+        _gameProgressManager = GetComponent<GameProgressManager>();
     }
-    protected virtual void Update() {
+    protected virtual void Update()
+    {
         // Next line in dialogue
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)) {
-            if (DialogueController.Instance.IsStoryRunning) {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0))
+        {
+            if (DialogueController.Instance.IsStoryRunning)
+            {
                 DialogueController.Instance.Next();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.L)) {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
             Debug.Log("Unlock cursour from GamePlaycontroller. Debug");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
     }
 
-    public int GetCurrentLevelIndex() {
+    public int GetCurrentLevelIndex()
+    {
         return _levelIndex;
     }
 
-    public virtual void StartLevel() {
+    public virtual void StartLevel()
+    {
+    }
+    public virtual void EndLevel()
+    {
+        StartCoroutine(ChangeSceneWithDelay());
+        UIController.Instance.SetActiveEndLevelPanel(true);
     }
 
-    public void ExitToMainMenu() {
+    public void ExitToMainMenu()
+    {
 
     }
 
-    public void EnablePopup(string name) {
+    public void EnablePopup(string name)
+    {
         EnableAllChildsOfGameObject(name);
     }
-    private void EnableAllChildsOfGameObject(string name) {
+
+    private IEnumerator ChangeSceneWithDelay()
+    {
+        _gameProgressManager?.UpdateProgressLevel();
+        yield return new WaitForSeconds(_endOfLevelDelay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    private void EnableAllChildsOfGameObject(string name)
+    {
         var obj = GameObject.Find(name);
-        if (obj == null) {
+        if (obj == null)
+        {
             Debug.LogWarning("You tried to enable <" + name + "> using one of the jsons file, but a gameobject with this name doesn't exist.");
             return;
         }
-        foreach (Transform child in obj.transform) {
+        foreach (Transform child in obj.transform)
+        {
             child.gameObject.SetActive(true);
         }
     }
