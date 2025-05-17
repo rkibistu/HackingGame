@@ -12,9 +12,9 @@ public class GameplayScenario7 : GameplayController
     // Do every action that has to be done at the stat of the scene
     public override void StartLevel() {
 
-        AudioControllerBasic.Instance.PlaySound("knock-door");
+        //AudioControllerBasic.Instance.PlaySound("knock-door");
         DialogueController.Instance.PlayStory("intro");
-        TasksController.Instance.ActivateTask("check-door"); 
+        TasksController.Instance.ActivateTask("go-to-smartbuy"); 
     }
     
     
