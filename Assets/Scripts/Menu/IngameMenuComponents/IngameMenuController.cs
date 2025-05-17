@@ -126,7 +126,7 @@ public class IngameMenuController : MonoBehaviour {
 
         _root.SetActive(true);
     }
-    public bool IsOpen() { return gameObject.activeInHierarchy; }
+    public bool IsOpen() { return _root.activeInHierarchy; }
 
     public void ExitToMainMenu() {
         SceneManager.LoadScene("StartMenu");
