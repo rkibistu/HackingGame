@@ -30,27 +30,33 @@ namespace WebserverAPI
 
         }
 
-        public  void UpdateProgressLevel()
+        public  void UpdateProgressLevel(int nextLevel)
         {
             int progressLevel;
 
             var webclient = WebClientService.Instance;
 
-            progressLevel = webclient.ProgressLevel + 1;
-
-            webclient.UpdateProgressLevel(progressLevel, (success, message) =>
+            // check if the level passed is greater than the current progress level
+            if (nextLevel > webclient.ProgressLevel)
             {
-                if (success)
+                progressLevel = nextLevel;
+                webclient.UpdateProgressLevel(progressLevel, (success, message) =>
                 {
-                    // implement update progress level success logic here -> redirect to next game
-                    Debug.Log("Update progress successful: " + webclient.ProgressLevel);
-                }
-                else
-                {
-                    // implement update progress level failed logic here -> dk
-                    Debug.LogError("Update progress failed: " + message);
-                }
-            });
+                    if (success)
+                    {
+                        // implement update progress level success logic here -> redirect to next game
+                        Debug.Log("Update progress successful: " + webclient.ProgressLevel);
+                    }
+                    else
+                    {
+                        // implement update progress level failed logic here -> dk
+                        Debug.LogError("Update progress failed: " + message);
+                    }
+                });
+            }
+            
+
+            
 
 
         }
