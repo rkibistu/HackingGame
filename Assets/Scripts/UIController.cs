@@ -85,7 +85,14 @@ public class UIController : MonoBehaviour
         //This is just for test here
         if (Input.GetKeyDown(KeyCode.K))
         {
-            _menu.CompleteLevel(GameplayController.Instance.GetCurrentLevelIndex());
+            try
+            {
+                _menu.CompleteLevel(GameplayController.Instance.GetCurrentLevelIndex());
+            }
+            catch
+            {
+
+            }
         }
     }
 
