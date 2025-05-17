@@ -259,8 +259,8 @@
                             "outputType": "file",
                             "output": "",
                             "outputFile": "iwconfig_dongle_out.txt",
-                            "required": "true",
-                            "final": "true",
+                            "required": "false",
+                            "final": "false",
                             "taskIdToComplete": "use-wifi-dongle",
                             "taskIdToStart": "use-hcxdumptool"
                         }
@@ -351,8 +351,8 @@
                             "outputType": "file",
                             "output": "",
                             "outputFile": "iwconfig_dongle_out.txt",
-                            "required": "true",
-                            "final": "true",
+                            "required": "false",
+                            "final": "false",
                             "taskIdToComplete": "use-wifi-dongle",
                             "taskIdToStart": "use-hcxdumptool"
                         }
@@ -441,8 +441,8 @@
                             "outputType": "file",
                             "output": "",
                             "outputFile": "iwconfig_dongle_out.txt",
-                            "required": "true",
-                            "final": "true",
+                            "required": "false",
+                            "final": "false",
                             "taskIdToComplete": "use-wifi-dongle",
                             "taskIdToStart": "use-hcxdumptool"
                         }
@@ -516,6 +516,26 @@
                             "required": "true",
                             "final": "true",
                             "taskIdToComplete": "use-hashcat"
+                        },
+                        {
+                            "input": "iwconfig --help",
+                            "alternatives": [],
+                            "outputType": "inline",
+                            "output": "Output of command:\r\nUsage: iwconfig [INTERFACE **optional]\r\n\r\niwconfig\tGet information about network interfaces.\r\n",
+                            "outputFile": "",
+                            "required": "false",
+                            "final": "false"
+                        },
+                        {
+                            "input": "iwconfig",
+                            "alternatives": [],
+                            "outputType": "file",
+                            "output": "",
+                            "outputFile": "iwconfig_dongle_out.txt",
+                            "required": "false",
+                            "final": "false",
+                            "taskIdToComplete": "use-wifi-dongle",
+                            "taskIdToStart": "use-hcxdumptool"
                         }
                     ]
                 }
