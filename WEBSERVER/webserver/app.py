@@ -101,6 +101,10 @@ def register():
 
     return jsonify({'message': 'User registered successfully!'}), 201
 
+@app.route('/online', methods=['GET'])
+def online():
+    return jsonify({'message': 'Server is online!'}), 200
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()

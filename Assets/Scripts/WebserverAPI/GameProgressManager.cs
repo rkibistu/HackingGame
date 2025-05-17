@@ -26,8 +26,6 @@ namespace WebserverAPI
                     Debug.LogError("  Error on retrieving progress level " + message);
                 }
             });
-
-
         }
 
         public  void UpdateProgressLevel(int nextLevel)
