@@ -2,9 +2,18 @@
   "terminals": [
     {
       "name": "7_scenarioNFC",
+      "prompt": "kali:kali $>",
       "phases": [
         {
-          "name": "0",
+          "name": "scan_nfc",
+          "action": {
+            "description": "Scan NFC Card",
+            "required": "true",
+            "final": "true"
+          }
+        },
+        {
+          "name": "1",
           "commands": [
             {
               "input": "ls",
@@ -50,39 +59,22 @@
               "outputType": "file",
               "output": "",
               "outputFile": "proxmark_output.txt",
+              "changePrompt": "[usb] pm3 --> ",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "enter-proxmark",
+              "taskIdToStart": "break-card"
             }
           ]
         },
         {
-          "name": "1",
+          "name": "2",
           "commands": [
             {
-              "input": "ls",
-              "alternatives": [
-                "ls",
-                "ls -l",
-                "ls -a",
-                "ls -la",
-                "ls -al",
-                "ls -l -a",
-                "ls -a -l",
-                "ls -l -a -h",
-                "ls -a -l -h",
-                "ls -lh"
-              ],
-              "outputType": "inline",
-              "output": "Output of command:\r\n\r\n",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
-            {
-              "input": "whoami",
+              "input": "help",
               "alternatives": [],
               "outputType": "inline",
-              "output": "Output of command:\r\nanonymous\r\n",
+              "output": "Only hf module is loaded. Use `hf --help` to display the helper module of `hf`.\r\n\r\n ",
               "outputFile": "",
               "required": "false",
               "final": "false"
@@ -112,42 +104,15 @@
               "output": "",
               "outputFile": "hf_mf_autopwn.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "break-card",
+              "taskIdToStart": "clone-card"
             }
           ]
         },
         {
-          "name": "2",
+          "name": "3",
           "commands": [
-            {
-              "input": "ls",
-              "alternatives": [
-                "ls",
-                "ls -l",
-                "ls -a",
-                "ls -la",
-                "ls -al",
-                "ls -l -a",
-                "ls -a -l",
-                "ls -l -a -h",
-                "ls -a -l -h",
-                "ls -lh"
-              ],
-              "outputType": "inline",
-              "output": "Output of command:\r\nhf-mf-04013-dump.bin\r\n",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
-            {
-              "input": "whoami",
-              "alternatives": [],
-              "outputType": "inline",
-              "output": "Output of command:\r\nanonymous\r\n",
-              "outputFile": "",
-              "required": "false",
-              "final": "false"
-            },
             {
               "input": "hf --help",
               "alternatives": [],
@@ -158,13 +123,14 @@
               "final": "false"
             },
             {
-              "input": "hf mf cload -f hf-mf-04013-dump.bin",
+              "input": "hf mf cload -f hf-mf-04013-dump.eml",
               "alternatives": [],
               "outputType": "file",
               "output": "",
               "outputFile": "hf_mf_cload.txt",
               "required": "true",
-              "final": "true"
+              "final": "true",
+              "taskIdToComplete": "clone-card"
             }
           ]
         }

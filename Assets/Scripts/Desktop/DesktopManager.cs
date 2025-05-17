@@ -41,22 +41,8 @@ public class DesktopManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
 
             //Close focused applciation or desktop
-            var focusedApp = GetNextAppInStack();
-            if (focusedApp != null) {
-                //close current focused app
-                _taskbar.RemoveEntry(focusedApp);
-                focusedApp.Close();
-
-                //focus next app
-                focusedApp = GetNextAppInStack();
-                if(focusedApp != null) {
-                    Focus(focusedApp);
-                    _taskbar.Focus(focusedApp);
-                }
-            }
-            else {
+            if(IsAnyAppOpen() == false)
                 gameObject.SetActive(false);
-            }
         }
 
         //Check if any window was clicked
@@ -91,9 +77,30 @@ public class DesktopManager : MonoBehaviour {
         }
 
         app.Open();
+        app.OnWindowCloseButtonClicked.AddListener(CloseApplication);
         _taskbar.AddEntry(app);
         Focus(app);
         _runningApps.Add(app.ID, app);
+    }
+
+    private void CloseApplication()
+    {
+        var focusedApp = GetNextAppInStack();
+        if (focusedApp != null)
+        {
+            //close current focused app
+            _taskbar.RemoveEntry(focusedApp);
+            focusedApp.OnWindowCloseButtonClicked.RemoveListener(CloseApplication);
+            focusedApp.Close();
+
+            //focus next app
+            focusedApp = GetNextAppInStack();
+            if (focusedApp != null)
+            {
+                Focus(focusedApp);
+                _taskbar.Focus(focusedApp);
+            }
+        }
     }
 
     // This doesn't alter the stack, just return the focused app
@@ -136,6 +143,17 @@ public class DesktopManager : MonoBehaviour {
         return focusedApp;
     }
 
+    private bool IsAnyAppOpen()
+    {
+        if (_runningApps.Count <= 0)
+            return false;
+        foreach(var app in _runningApps.Values)
+        {
+            if (app.IsOpen == true)
+                return true;
+        }
+        return false;
+    }
 
 
 
