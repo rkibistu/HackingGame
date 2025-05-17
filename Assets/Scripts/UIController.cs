@@ -8,7 +8,8 @@ using UnityEngine;
  * 
  */
 
-public class UIController : MonoBehaviour {
+public class UIController : MonoBehaviour
+{
     [Header("Panels")]
     [SerializeField]
     [Tooltip("Intro paper, opened by letter under the door")]
@@ -23,7 +24,7 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private IngameMenuController _ingameMenu;
 
-   
+
     [Header("Elements")]
     [SerializeField]
     private GameObject _crosshair;
@@ -36,6 +37,8 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private List<GameObject> _deactivateWhileMenu;
 
+    public bool CanOpenIngameMenu { get => _canOpenIngameMenu; set { _canOpenIngameMenu = value; } }
+
     // This exist in the first scene of the game and it is not destroyed
     // This variable will be populated on scene load
     // It is used to work with menu
@@ -44,17 +47,24 @@ public class UIController : MonoBehaviour {
     private CursorLockMode _lastCursorLockMode;
     private bool _lastCursorVisibility;
 
+    //we don't want to open menu when an input field is focues
+    // So every inptufield ahs a script that change this variable when they are focused
+    private bool _canOpenIngameMenu = true;
+
     public static UIController Instance { get; private set; }
 
-    private void Awake() {
+    private void Awake()
+    {
         if (Instance != null && Instance != this)
             Destroy(gameObject);
 
         Instance = this;
     }
 
-    private void Update() {
-        if(Input.GetKeyUp(KeyCode.I)) {
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.I) && CanOpenIngameMenu == true)
+        {
             _ingameMenu.Toggle();
         }
 
@@ -62,40 +72,50 @@ public class UIController : MonoBehaviour {
         if (_ingameMenu.IsOpen())
             return;
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (IsActiveLetterPanel()) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (IsActiveLetterPanel())
+            {
                 SetActiveLetterPanel(false);
             }
         }
 
         //This is just for test here
-        if (Input.GetKeyDown(KeyCode.K)) {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
             _menu.CompleteLevel(GameplayController.Instance.GetCurrentLevelIndex());
         }
     }
 
-    public void SetMenuController(MenuController menu) {
+    public void SetMenuController(MenuController menu)
+    {
         _menu = menu;
     }
 
-    public void ShowHint(string hintText) {
+    public void ShowHint(string hintText)
+    {
         _hintInteractiveText.enabled = true;
         _hintInteractiveText.text = hintText;
     }
 
-    public void HideHint() {
+    public void HideHint()
+    {
         _hintInteractiveText.enabled = false;
     }
 
-    public void SetActiveStoryPanel(bool active) {
+    public void SetActiveStoryPanel(bool active)
+    {
         _storyPanel.SetActive(active);
     }
-    public bool IsActiveStoryPanel() {
+    public bool IsActiveStoryPanel()
+    {
         return _storyPanel.activeInHierarchy;
     }
 
-    public void SetActiveLetterPanel(bool active) {
-        if (active == true) {
+    public void SetActiveLetterPanel(bool active)
+    {
+        if (active == true)
+        {
             // We don't want story on the back oif a letter
             DialogueController.Instance.SkipCurrentStoryCompletely();
             _storyPanel.SetActive(false);
@@ -103,22 +123,27 @@ public class UIController : MonoBehaviour {
 
         _letterPanel.SetActive(active);
     }
-    public bool IsActiveLetterPanel() {
+    public bool IsActiveLetterPanel()
+    {
         return _letterPanel.activeInHierarchy;
     }
 
-    public void SetActiveTaskPanel(bool active) {
+    public void SetActiveTaskPanel(bool active)
+    {
         _taskPanel.SetActive(active);
     }
-    public bool IsActiveTaskPanel() {
+    public bool IsActiveTaskPanel()
+    {
         return _taskPanel.activeInHierarchy;
     }
 
 
-    public void SetActiveCurrentObjectivePanel(bool active) {
+    public void SetActiveCurrentObjectivePanel(bool active)
+    {
         _currentObjectivePanel.SetActive(active);
     }
-    public bool IsActiveCurrentObjectivePanel() {
+    public bool IsActiveCurrentObjectivePanel()
+    {
         return _currentObjectivePanel.activeInHierarchy;
     }
 }
