@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelIndex: 1
+  _endOfLevelDelay: 3
 --- !u!114 &6094353173798859594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +86,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d1abc5af8b1b6234fb9b2ac2441dafec, type: 3}
     volume: 1
     playLocation: {fileID: 0}
+  _audioMixer: {fileID: 24100000, guid: d28440cc5e33af9468bdc71503512b0d, type: 2}
+  _sfxMixerGroup: {fileID: -1680475899286980338, guid: d28440cc5e33af9468bdc71503512b0d, type: 2}
 --- !u!114 &1505703521944953826
 MonoBehaviour:
   m_ObjectHideFlags: 0

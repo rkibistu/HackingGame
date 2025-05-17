@@ -761,6 +761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aced6b54e7dffa740926f63931e0278c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _visualRoot: {fileID: 3583196445568996562}
+  _startOn: 0
   audioSource: {fileID: 2484075390405216018}
   tracks:
   - {fileID: 8300000, guid: 9db0c84a1ec5e374b84566eb727b1f83, type: 3}
@@ -882,6 +884,7 @@ GameObject:
   - component: {fileID: 7212141358215006094}
   - component: {fileID: 4824381702944113127}
   - component: {fileID: 8198185048038491932}
+  - component: {fileID: 3952772798294770316}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -972,6 +975,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &3952772798294770316
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583196445568996562}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3610944018145108864
 GameObject:
   m_ObjectHideFlags: 0

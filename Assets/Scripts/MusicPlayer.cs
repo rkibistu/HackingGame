@@ -4,6 +4,11 @@ using TMPro;
 
 public class MusicPlayer : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _visualRoot;
+    [SerializeField]
+    private bool _startOn = false;
+
     public AudioSource audioSource;
     public AudioClip[] tracks;
     public TMP_Text trackNameText;
@@ -24,7 +29,18 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         bandLevels = new float[vuBars.Length];
+
+        //Always playtrack so you ahve one track loaded when the menu button is pressed
         PlayTrack(currentTrackIndex);
+        if (_startOn == true)
+        {
+            _visualRoot.SetActive(true);
+        }
+        else
+        {
+            Pause();
+            _visualRoot.SetActive(false);
+        }
     }
 
     void Update()
@@ -77,6 +93,19 @@ public class MusicPlayer : MonoBehaviour
             trackNameText.text = audioSource.clip.name;
     }
 
+    public void Toggle()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+            _visualRoot.SetActive(true);
+        }
+        else
+        {
+            audioSource.Pause();
+            _visualRoot.SetActive(false);
+        }
+    }
     public void Play()
     {
         if (!audioSource.isPlaying)
