@@ -21,7 +21,7 @@
                 "ls -lh"
               ],
               "outputType": "inline",
-              "output": "Output of command:\r\ncredentials.txt\r\n",
+              "output": "Output of command:\r\ncredentials.txt\t forkbomb.c\r\n",
               "outputFile": "",
               "required": "false",
               "final": "false"
@@ -68,6 +68,15 @@
               "outputType": "file",
               "output": "",
               "outputFile": "credentials.txt",
+              "required": "true",
+              "final": "true"
+            },
+            {
+              "input": "cat forkbomb.c",
+              "alternatives": [],
+              "outputType": "file",
+              "output": "",
+              "outputFile": "forkbomb.txt",
               "required": "true",
               "final": "true"
             }
