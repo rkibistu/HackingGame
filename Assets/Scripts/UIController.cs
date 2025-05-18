@@ -81,19 +81,6 @@ public class UIController : MonoBehaviour
                 SetActiveLetterPanel(false);
             }
         }
-
-        try
-        {
-            //This is just for test here
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                _menu.CompleteLevel(GameplayController.Instance.GetCurrentLevelIndex());
-            }
-        }
-        catch
-        {
-
-        }
     }
 
     public void SetMenuController(MenuController menu)

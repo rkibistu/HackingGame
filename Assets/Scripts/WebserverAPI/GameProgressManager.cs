@@ -7,6 +7,7 @@ namespace WebserverAPI
 {
     public class GameProgressManager : MonoBehaviour
     {
+
         public  void GetProgressLevel()
         {
             var webclient = WebClientService.Instance;
@@ -17,8 +18,10 @@ namespace WebserverAPI
                 {
                     // nothing more to do here
                     Debug.Log("Progress retrieved successful: " + webclient.ProgressLevel);
-
+                    PlayerPrefs.SetInt("LevelIndex", webclient.ProgressLevel);
+                    PlayerPrefs.Save();
                     // based on progress level, redirect or display the appropriate game
+
                 }
                 else
                 {
@@ -28,14 +31,14 @@ namespace WebserverAPI
             });
         }
 
-        public  void UpdateProgressLevel(int nextLevel)
+        public  void UpdateProgressLevel(int nextLevel, bool forced = false)
         {
             int progressLevel;
 
             var webclient = WebClientService.Instance;
 
             // check if the level passed is greater than the current progress level
-            if (nextLevel > webclient.ProgressLevel)
+            if (nextLevel > webclient.ProgressLevel || forced == true)
             {
                 progressLevel = nextLevel;
                 webclient.UpdateProgressLevel(progressLevel, (success, message) =>
@@ -44,6 +47,8 @@ namespace WebserverAPI
                     {
                         // implement update progress level success logic here -> redirect to next game
                         Debug.Log("Update progress successful: " + webclient.ProgressLevel);
+                        PlayerPrefs.SetInt("LevelIndex", webclient.ProgressLevel);
+                        PlayerPrefs.Save();
                     }
                     else
                     {
