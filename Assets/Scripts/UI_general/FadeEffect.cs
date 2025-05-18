@@ -73,8 +73,6 @@ public class FadeEffect : MonoBehaviour
         Color currentColor = _image.color;
         currentColor.a = easedAlpha;
         _image.color = currentColor;
-
-        Debug.Log(easedAlpha + "  " + t + "  " + _fadeTimer);
    
         if (_fadeTimer <= 0f)
         {
