@@ -99,11 +99,12 @@
               "final": "false"
             },
             {
-              "input": "cp -v payload.txt /mnt/ducky",
+              "input": "cp -v payload.txt /mnt/ducky/",
               "alternatives": [
-                "cp payload.txt /mnt/ducky",
-                "cp payload.txt /mnt/ducky -v",
-                "cp payload.txt -v /mnt/ducky"
+                "cp payload.txt /mnt/ducky/",
+                "cp payload.txt /mnt/ducky/ -v",
+                "cp payload.txt /mnt/ducky/payload.txt -v",
+                "cp payload.txt -v /mnt/ducky/"
               ],
               "outputType": "inline",
               "output": "'payload.txt' -> './mnt/ducky/payload.txt'",
@@ -163,7 +164,9 @@
             },
             {
               "input": "./teamserver 127.0.0.1 123456",
-              "alternatives": [],
+              "alternatives": [
+                "teamserver 127.0.0.1 123456"
+              ],
               "outputType": "file",
               "output": "",
               "outputFile": "teamserver_output.txt",
