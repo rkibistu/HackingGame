@@ -65,7 +65,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.I) && CanOpenIngameMenu == true)
+        if (Input.GetKeyDown(KeyCode.I) && CanOpenIngameMenu == true)
         {
             _ingameMenu.Toggle();
         }
@@ -82,10 +82,17 @@ public class UIController : MonoBehaviour
             }
         }
 
-        //This is just for test here
-        if (Input.GetKeyDown(KeyCode.K))
+        try
         {
-            _menu.CompleteLevel(GameplayController.Instance.GetCurrentLevelIndex());
+            //This is just for test here
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                _menu.CompleteLevel(GameplayController.Instance.GetCurrentLevelIndex());
+            }
+        }
+        catch
+        {
+
         }
     }
 

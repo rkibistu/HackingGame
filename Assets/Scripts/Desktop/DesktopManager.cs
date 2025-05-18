@@ -40,9 +40,9 @@ public class DesktopManager : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
 
-            //Close focused applciation or desktop
-            if(IsAnyAppOpen() == false)
-                gameObject.SetActive(false);
+            //Close focused application or desktop
+            //if(IsAnyAppOpen() == false)
+            gameObject.SetActive(false);
         }
 
         //Check if any window was clicked
