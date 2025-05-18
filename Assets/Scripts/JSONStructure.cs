@@ -34,6 +34,8 @@ public class ScenarioJSONStructure : MonoBehaviour
         public string description;
         public bool required;
         public bool final;
+        public string taskIdToComplete;
+        public string taskIdToStart;
 
         // Changed/used in execution, not present in json
         public bool executed = false;

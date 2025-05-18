@@ -184,7 +184,6 @@ public class TasksController : MonoBehaviour
 
         if(_currentTask != null && _currentTask.description != null)
         {
-            Debug.Log(_currentTask.description);
             UpdateObjectiveDescriptionPanel(_currentTask.description);
         }
     }

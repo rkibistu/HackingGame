@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameplayScenario1 : GameplayController
 {
+    public static new GameplayScenario1 Instance { get; private set; }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Instance = this;
+    }
     protected override void Update() {
         base.Update();
 

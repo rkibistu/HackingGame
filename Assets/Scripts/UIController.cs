@@ -34,6 +34,8 @@ public class UIController : MonoBehaviour
     private GameObject _currentObjectivePanel;
     [SerializeField]
     private GameObject _endLevelPanel;
+    [SerializeField]
+    private GeneralFeedbackPanel _generalFeedbackPanel;
 
     [Header("MenuRelated")]
     [SerializeField]
@@ -148,5 +150,11 @@ public class UIController : MonoBehaviour
     public bool IsActiveCurrentObjectivePanel()
     {
         return _currentObjectivePanel.activeInHierarchy;
+    }
+
+    public void ShowAndSetGeneralFeedbackPanel(string content, int timeToShow = 5)
+    {
+        _generalFeedbackPanel.SetText(content);
+        _generalFeedbackPanel.DisplayLimited(timeToShow);
     }
 }
