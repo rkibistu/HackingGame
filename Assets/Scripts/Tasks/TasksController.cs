@@ -42,10 +42,6 @@ public class TasksController : MonoBehaviour
     //  Example usage in Start
     void Start()
     {
-        Debug.Log("here");
-        _obejctiveDescription.richText = false;
-
-
         _tasks = LoadTasks();
         PopulateJournal();
     }
