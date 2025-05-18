@@ -92,9 +92,11 @@ public class GameplayScenario3 : GameplayController
 
     private IEnumerator TeleportWithDelay(Transform destination)
     {
+        Debug.Log("Pre teleport!");
         PreTeleport();
         yield return new WaitForSeconds(_teleportDelay);
         _player.transform.position = destination.position;
+        Debug.Log("POST teleport!");
         PostTeleport();
     }
 
