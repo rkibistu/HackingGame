@@ -65,7 +65,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.I) && CanOpenIngameMenu == true)
+        if (Input.GetKeyDown(KeyCode.I) && CanOpenIngameMenu == true)
         {
             _ingameMenu.Toggle();
         }

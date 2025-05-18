@@ -42,6 +42,10 @@ public class TasksController : MonoBehaviour
     //  Example usage in Start
     void Start()
     {
+        Debug.Log("here");
+        _obejctiveDescription.richText = false;
+
+
         _tasks = LoadTasks();
         PopulateJournal();
     }
@@ -182,7 +186,11 @@ public class TasksController : MonoBehaviour
             }
         }
 
-        UpdateObjectiveDescriptionPanel(_currentTask.description);
+        if(_currentTask != null && _currentTask.description != null)
+        {
+            Debug.Log(_currentTask.description);
+            UpdateObjectiveDescriptionPanel(_currentTask.description);
+        }
     }
 
     // Load TaskList from file
@@ -231,6 +239,7 @@ public class TasksController : MonoBehaviour
     }
     private void UpdateObjectiveDescriptionPanel(string description)
     {
+       
         _obejctiveDescription.text = description;
     }
 
