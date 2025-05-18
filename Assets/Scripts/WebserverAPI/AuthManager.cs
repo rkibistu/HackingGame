@@ -11,6 +11,9 @@ namespace WebserverAPI
         [SerializeField]
         private UIMenuManager _menuManager;
 
+        [SerializeField]
+        private GameProgressManager _gameProcessManager;
+
         [Header("Error Fields")]
         [SerializeField] private TMP_Text errorLoginField;
         [SerializeField] private TMP_Text errorRegisterField;
@@ -32,7 +35,7 @@ namespace WebserverAPI
             string username = usernameLoginField.text;
             string password = passwordLoginField.text;
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) )
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 Debug.LogError("All fields are required.");
                 errorLoginField.text = "All fields are required.";
@@ -47,6 +50,7 @@ namespace WebserverAPI
                     // implement login success logic here -> redirect to first game
                     //Debug.Log("Login successful: " + message);
                     ClearAllInputFields();
+                    _gameProcessManager.GetProgressLevel();
                     _menuManager.SwitchToMainMenu();
                 }
                 else
@@ -58,7 +62,7 @@ namespace WebserverAPI
                 }
             });
 
-            
+
         }
 
         public void Register()
@@ -87,7 +91,8 @@ namespace WebserverAPI
                 }
                 else
                 {
-                    if (message.Contains("Username already exists!")){
+                    if (message.Contains("Username already exists!"))
+                    {
                         // implement logic to inform user that the username already exists
                         Debug.LogError("Username already exists: " + message);
                         ClearAllInputFields();

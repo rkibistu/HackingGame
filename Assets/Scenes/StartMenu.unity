@@ -14741,6 +14741,7 @@ GameObject:
   - component: {fileID: 4029689810951199}
   - component: {fileID: 4029689810951200}
   - component: {fileID: 4029689810951201}
+  - component: {fileID: 4029689810951202}
   m_Layer: 0
   m_Name: Main_Menu
   m_TagString: Untagged
@@ -15297,8 +15298,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuContainer: {fileID: 1615679046}
-  _uiMenuManger: {fileID: 0}
   _levelsController: {fileID: 637380081}
+  _gameProcessManager: {fileID: 0}
+--- !u!114 &4029689810951202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273326974686759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2a7a72f4d3a924aaae2ea09fd71096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4113673330039485
 Transform:
   m_ObjectHideFlags: 0
@@ -20023,6 +20036,18 @@ MonoBehaviour:
       - m_Target: {fileID: 114173851760721469}
         m_TargetAssemblyTypeName: 
         m_MethodName: ReturnMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 637380081}
+        m_TargetAssemblyTypeName: UILevels, Assembly-CSharp
+        m_MethodName: UpdateButtons
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

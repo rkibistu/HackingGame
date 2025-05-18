@@ -15,19 +15,9 @@ public class UILevels : MonoBehaviour
         UpdateButtons();
     }
 
-    public void SaveLevel(int levelIndex)
+    public void UpdateButtons()
     {
-        if (levelIndex > _levelsAccessible)
-        {
-            PlayerPrefs.SetInt("LevelIndex", levelIndex);
-            PlayerPrefs.Save();
-
-            UpdateButtons();
-        }
-    }
-
-    private void UpdateButtons()
-    {
+        Debug.Log("CALLED");
         _levelsAccessible = PlayerPrefs.GetInt("LevelIndex", 1);
         int i = 0;
         for (i = 0; i < _levelsAccessible; i++)
