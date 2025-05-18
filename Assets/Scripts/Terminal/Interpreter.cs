@@ -225,8 +225,14 @@ public class Interpreter : MonoBehaviour {
             if (action.name == actionName) {
 
                 if (AdvanceRequirementsMet(terminal.phases[terminal.currentPhase])) {
+                    if (action.action.taskIdToComplete != null)
+                        TasksController.Instance.ActivateTask(action.action.taskIdToComplete);
+                    if (action.action.taskIdToStart != null)
+                        TasksController.Instance.ActivateTask(action.action.taskIdToStart);
+
                     terminal.currentPhase++;
                     result = true;
+                    
                     //don t break/return because maybe the same action is needed to advance in multiuple terminals/phases
                 }
             }
