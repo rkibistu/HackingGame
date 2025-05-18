@@ -17,9 +17,13 @@ public class GameplayScenario3 : GameplayController
     private FadeEffect _fadeEffect;
     [SerializeField]
     private GameObject _outsideLight;
+    [Tooltip("How many ducky have to be placed before going home")]
+    [SerializeField]
+    private int _duckyTotalCount = 3;
 
     private bool _firstTeleport = true;
 
+    private int _duckyPlaceCOunt = 0;
     public static new GameplayScenario3 Instance { get; private set; }
 
     protected override void Awake()
@@ -52,6 +56,21 @@ public class GameplayScenario3 : GameplayController
         StartCoroutine(TeleportWithDelay(destination));
     }
 
+    public void Sleep()
+    {
+        StartCoroutine(SleepFadeEffect());
+    }
+
+    public void PlaceDucky()
+    {
+        _duckyPlaceCOunt++;
+        if(_duckyPlaceCOunt >= _duckyTotalCount)
+        {
+            Interpreter.Instance.AdvanceByAction("scatter-rubber-duckies");
+            TeleportHome();
+        }
+    }
+
     private void PreTeleport()
     {
         _fadeEffect.StartFadeIn();
@@ -77,5 +96,12 @@ public class GameplayScenario3 : GameplayController
         yield return new WaitForSeconds(_teleportDelay);
         _player.transform.position = destination.position;
         PostTeleport();
+    }
+
+    private IEnumerator SleepFadeEffect()
+    {
+        _fadeEffect.StartFadeIn();
+        yield return new WaitForSeconds(_teleportDelay);
+        _fadeEffect.StartFadeOut();
     }
 }
