@@ -177,7 +177,7 @@ public class DialogueController : MonoBehaviour
 
         string json = File.ReadAllText(path);
         StoryList taskList = JsonUtility.FromJson<StoryList>(json);
-        Debug.Log("Loaded tasks from: " + path);
+        Debug.Log("Loaded story from: " + path);
         return taskList;
     }
 

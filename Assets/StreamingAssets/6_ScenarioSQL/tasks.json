@@ -53,12 +53,22 @@
     },
     {
       "id": "use-sqlinjection",
-      "title": "Go back to the website and exploit it.",
-      "description": "",
+      "title": "Change prices",
+      "description": "Go back to the website and change the prices using SQL injection",
       "reward": 10,
       "steps": [],
       "done": false,
       "active": false
+    },
+    {
+      "id": "buy-something",
+      "title": "Buy something",
+      "description": "",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false,
+      "storyIdToStart": "scene-ending"
     }
   ]
 }

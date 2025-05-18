@@ -183,13 +183,12 @@ namespace ScenarioSQL {
                     PurchasableItem item = obj.GetComponent<PurchasableItem>();
                     if (Regex.IsMatch(item.TitleText, Regex.Unescape(targetName), RegexOptions.IgnoreCase)) {
                         item.Price = "price: " + price;
+                        TasksController.Instance.Mark("use-sqlinjection");
                     }
                 }
             }
   
             //6090%'; update products set price=49.99 where name like '%6090%'; #
-
-
             //6090 '; update products set price=49.99 where name like ' %6090% '; #
             //6090'; update products set price=49.99 where name like ' %6090% '; #
         }
@@ -246,7 +245,7 @@ namespace ScenarioSQL {
             float balance = GameplayScenario6.Instance.PersonalBalance;
             if(balance >= price) {
                 EnableAndSetFeedbackText("SUCCESS! You bought: " + item.TitleText + " at " + price + "$", Color.green);
-                //TasksController.Instance.Mark("use-sqlinjection");
+                TasksController.Instance.Mark("buy-something", true, true);
             }
             else {
                 EnableAndSetFeedbackText("You don't have enough money! Your balance is: " + balance + "$", Color.red);
