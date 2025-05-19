@@ -2,8 +2,8 @@
   "tasks": [
     {
       "id": "check-assignment",
-      "title": "Check the assignment",
-      "description": "Go to https://university.com and login to see the assignment.",
+      "title": "Check the assignment at 'https://university.ro'",
+      "description": "Go to https://university.ro and login to see the assignment.",
       "reward": 10,
       "steps": [],
       "done": false,
@@ -11,7 +11,16 @@
     },
     {
       "id": "find-credentials",
-      "title": "Login to the university website",
+      "title": "Find the credentials.",
+      "description": "Open the terminal and look after the credentials. Use 'cat' to read the file.",
+      "reward": 10,
+      "steps": [],
+      "done": false,
+      "active": false
+    },
+    {
+      "id": "login-website",
+      "title": "Login to the university website.",
       "description": "Open the terminal and look after the credentials. Use 'cat' to read the file.",
       "reward": 10,
       "steps": [],
@@ -20,7 +29,7 @@
     },
     {
       "id": "compile-fork-bomb",
-      "title": "Compile fork bomb payload",
+      "title": "Compile fork bomb payload using 'gcc --help'",
       "description": "You need to compile the fork bomb payload. Use 'gcc --help' to see the options.",
       "reward": 10,
       "steps": [],
@@ -39,7 +48,7 @@
     },
     {
       "id": "check-database-file",
-      "title": "Check the database file",
+      "title": "Check the database file using 'sqlite3 --help'",
       "description": "Check the database file obtained by the fork bomb. Use 'sqlite3 --help' to see the options.",
       "reward": 10,
       "steps": [],
@@ -54,23 +63,7 @@
       "steps": [],
       "done": false,
       "active": false,
-      "storyIdToStart": "scene-ending"
-    },
-    {
-      "id": "example",
-      "title": "Cexample?",
-      "description": "Mergi si vezi cine e la usa... Serios, ai nevoie de isntructiuni la asta?",
-      "reward": 10,
-      "steps": [
-        {
-          "id": "find-laptop",
-          "title": "Find the laptop",
-          "description": "a laptop, common",
-          "done": false
-        }
-      ],
-      "done": false,
-      "active": false
+      "storyIdToStart": "end-story-bomb"
     }
   ]
 }
