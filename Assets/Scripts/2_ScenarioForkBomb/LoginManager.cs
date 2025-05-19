@@ -55,6 +55,7 @@ public class LoginManager : MonoBehaviour
 
             if (enteredUsername == correctUsername && enteredPassword == correctPassword)
             {
+                TasksController.Instance.Mark("login-website");
                 TasksController.Instance.ActivateTask(_taskAfterSuccessLoginPageId);
                 ClearPanel();
                 _loginWebpage.SetActive(false);

@@ -14,6 +14,7 @@ public class LoginInteractions : MonoBehaviour
     {
         if (TasksController.Instance.CheckCurrentTask(_taskBeforeLoginPageId))
         {
+            TasksController.Instance.Mark("check-assignment");
             TasksController.Instance.ActivateTask(_taskAfterLoginPageId);
             DialogueController.Instance.PlayStory(_storyLoginId);
         }
