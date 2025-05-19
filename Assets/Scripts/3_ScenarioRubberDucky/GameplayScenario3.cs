@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class GameplayScenario3 : GameplayController
 {
     [SerializeField]
     private GameObject _player;
+    [SerializeField]
+    private CharacterController _playerCC;
     [SerializeField]
     private Transform _parkingTeleportPoint;
     [SerializeField]
@@ -34,6 +38,7 @@ public class GameplayScenario3 : GameplayController
 
     protected override void Update() {
         base.Update();
+
     }
 
     // Do every action that has to be done at the stat of the scene
@@ -95,7 +100,9 @@ public class GameplayScenario3 : GameplayController
         Debug.Log("Pre teleport!");
         PreTeleport();
         yield return new WaitForSeconds(_teleportDelay);
+        _playerCC.enabled = false;
         _player.transform.position = destination.position;
+        _playerCC.enabled = true;
         Debug.Log("POST teleport!");
         PostTeleport();
     }
@@ -106,4 +113,6 @@ public class GameplayScenario3 : GameplayController
         yield return new WaitForSeconds(_teleportDelay);
         _fadeEffect.StartFadeOut();
     }
+
+
 }

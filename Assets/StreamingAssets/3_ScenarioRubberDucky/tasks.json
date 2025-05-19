@@ -65,17 +65,17 @@
       "steps": [],
       "done": false,
       "active": false,
-      "storyIdToStart": "check-cobaltstrike",
-      "gameobjectToEnableOnActivation": "InfoPanelCobaltStrike"
+      "storyIdToStart": "check-cobaltstrike"
     },
     {
       "id": "check-client",
-      "title": "Check `http://teamserver` for successful beacons",
-      "description": "Check `http://teamserver` for successful beacons",
+      "title": "Check `http://127.0.0.1:8080` for successful beacons",
+      "description": "Check `http://127.0.0.1:8080` for successful beacons",
       "reward": 10,
       "steps": [],
       "done": false,
-      "active": false
+      "active": false,
+      "gameobjectToEnableOnActivation": "InfoPanelCobaltStrike"
     },
     {
       "id": "outro",
