@@ -169,4 +169,8 @@ public class UIController : MonoBehaviour
         Cursor.lockState = _lastCursorLockMode;
         Cursor.visible = _lastCursorVisibility;
     }
+
+    public bool IsIngameMenuOpen() {
+        return _ingameMenu.IsOpen();
+    }
 }
