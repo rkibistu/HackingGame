@@ -131,17 +131,19 @@ public class IngameMenuController : MonoBehaviour {
             Open();
     }
     public void Close() {
-        Cursor.lockState = _lastCursorLockMode;
-        Cursor.visible = _lastCursorVisibility;
+        //Cursor.lockState = _lastCursorLockMode;
+        //Cursor.visible = _lastCursorVisibility;
+        UIController.Instance.GoToLastStateCursor();
 
         _root.SetActive(false);
     }
     public void Open() {
-        _lastCursorLockMode = Cursor.lockState;
-        _lastCursorVisibility = Cursor.visible;
+        //_lastCursorLockMode = Cursor.lockState;
+        //_lastCursorVisibility = Cursor.visible;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
+        UIController.Instance.ActivateCursor();
 
         _root.SetActive(true);
     }

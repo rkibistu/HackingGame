@@ -13,6 +13,8 @@ public class GameplayController : MonoBehaviour
     [SerializeField]
     private int _endOfLevelDelay = 3;
 
+    private bool _isPopupEnabled = false;
+    private GameObject _enabledPopup = null;
 
     public static GameplayController Instance { get; private set; }
 
@@ -35,9 +37,15 @@ public class GameplayController : MonoBehaviour
         // Next line in dialogue
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0))
         {
+
             if (DialogueController.Instance.IsStoryRunning)
             {
                 DialogueController.Instance.Next();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) ) {
+            if (IsPopupEnabled()) {
+                DisablePopup();
             }
         }
 
@@ -70,7 +78,17 @@ public class GameplayController : MonoBehaviour
 
     public void EnablePopup(string name)
     {
+        //activezi cursor
+        //UIController.Instance.ActivateCursor();
+        Debug.Log(name);
+        _enabledPopup = GameObject.Find(name);
+        if (_enabledPopup)
+            _isPopupEnabled = true;
         EnableAllChildsOfGameObject(name);
+    }
+    public void DisablePopup() {
+        _enabledPopup?.SetActive(false);
+        _isPopupEnabled = false;
     }
 
     private IEnumerator ChangeSceneWithDelay()
@@ -80,7 +98,7 @@ public class GameplayController : MonoBehaviour
         yield return new WaitForSeconds(_endOfLevelDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-    private void EnableAllChildsOfGameObject(string name)
+    public void EnableAllChildsOfGameObject(string name)
     {
         var obj = GameObject.Find(name);
         if (obj == null)
@@ -92,5 +110,9 @@ public class GameplayController : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+    }
+
+    public bool IsPopupEnabled() {
+        return _isPopupEnabled;
     }
 }
