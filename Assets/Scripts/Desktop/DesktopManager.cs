@@ -40,6 +40,8 @@ public class DesktopManager : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
 
+            if (GameplayController.Instance.IsPopupEnabled())
+                return;
             //Close focused application or desktop
             //if(IsAnyAppOpen() == false)
             gameObject.SetActive(false);

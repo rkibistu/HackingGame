@@ -157,4 +157,16 @@ public class UIController : MonoBehaviour
         _generalFeedbackPanel.SetText(content);
         _generalFeedbackPanel.DisplayLimited(timeToShow);
     }
+
+    public void ActivateCursor() {
+        _lastCursorLockMode = Cursor.lockState;
+        _lastCursorVisibility = Cursor.visible;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    public void GoToLastStateCursor() {
+        Cursor.lockState = _lastCursorLockMode;
+        Cursor.visible = _lastCursorVisibility;
+    }
 }
