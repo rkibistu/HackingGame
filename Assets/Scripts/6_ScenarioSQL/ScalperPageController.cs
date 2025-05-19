@@ -223,6 +223,7 @@ namespace ScenarioSQL {
             if (_firstTimeSearch) {
                 DialogueController.Instance.SkipCurrentStoryCompletely();
                 DialogueController.Instance.PlayStory("scan-sqlmap");
+                TasksController.Instance.Mark("try-search");
                 TasksController.Instance.ActivateTask("scan-sqlmap");
                 _firstTimeSearch = false;
             }
@@ -233,7 +234,6 @@ namespace ScenarioSQL {
             bool taskCompleted = TasksController.Instance.CheckIfComplete(_taskIdToActivateHowToSql);
             if (taskCompleted == true && _firstTimeOnSiteAfterSqlmap == true) {
                 _firstTimeOnSiteAfterSqlmap = false;
-                _howToSqlPopup.SetActive(true);
             } 
         }
 
