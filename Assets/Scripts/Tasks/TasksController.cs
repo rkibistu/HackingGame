@@ -25,6 +25,9 @@ public class TasksController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _obejctiveDescription;
 
+    [SerializeField]
+    private Animator _checkmarkAnimator;
+
     private TaskList _tasks;
     private Dictionary<string, Task> _journalRows = new();
 
@@ -102,6 +105,8 @@ public class TasksController : MonoBehaviour
             {
                 RenewCurrentObjective();
             }
+            _checkmarkAnimator.gameObject.transform.position = new Vector3(0, 0, 0);
+            _checkmarkAnimator?.Play("Show");
         }
     }
     private void MarkStepAsComplete(Task parent, Step step, bool isActive)
