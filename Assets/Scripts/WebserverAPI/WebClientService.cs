@@ -27,7 +27,7 @@ namespace WebserverAPI
     {
         private static WebClientService _instance;
 
-        private string _baseUrl = "https://game.cyberman.ro/";
+        private string _baseUrl = "https://your-url/";
         private string _accessToken = string.Empty;
         private string _refreshToken = string.Empty;
 
